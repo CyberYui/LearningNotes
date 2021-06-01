@@ -318,14 +318,30 @@ ctrl+c
   >
   > * 在 redis 中为大V用户设定用户信息 , 以用户主键和属性值作为 key , 后台设定定时刷新策略即可
   >
-  >   * eg : user:id:3506728370:fans	→	12210947
-  >   * eg : user:id:3506728370:blogs  →     6164
-  >   * eg : user:id:3506728370:focuss →    83
+  >   * eg : user​ : id : 3506728370:fans	  →	12210947
+  >   * eg : user : id : 3506728370:blogs    →     6164
+  >   * eg : user​ : id : 3506728370:focuss   →    83
   >
-  > * ```
+  > * ```sql
   >   # 给定用户表id为3506728370的fans值设定为12210947
   >   set user:id:3506728370:fans 12210947
   >   ```
   >
-  > * 
+  > * 这样存储就有对象那味儿了, 理所当然, 我们可以用 JSON 格式去存储这个数据
+  >
+  > * ```json
+  >   set user:id:00789 {id:3506728371,blogs:789,fans:123456789}
+  >   ```
+  >
+  > * 都是放一组数据,这两种的区别是什么呢? 第一种是单值更新 , JSON 则是全内容更新
+  
+* Key 的设置约定
+
+  > * 数据库中的热点数据 key 命名惯例:
+  >
+  >   |      | <font color=#dd5568>表名</font>  | <font color=#8bb8fb>主键名</font> |  <font color=#488efa>主键值</font>   | <font color=#8dce06>字段名</font> |
+  >   | :--: | :------------------------------: | :-------------------------------: | :----------------------------------: | :-------------------------------: |
+  >   | eg1  | <font color=#dd5568>order</font> |   <font color=#8bb8fb>id</font>   | <font color=#488efa>29437595</font>  |  <font color=#8dce06>name</font>  |
+  >   | eg2  | <font color=#dd5568>equip</font> |   <font color=#8bb8fb>id</font>   | <font color=#488efa>390472345</font> |  <font color=#8dce06>type</font>  |
+  >   | eg3  | <font color=#dd5568>news</font>  |   <font color=#8bb8fb>id</font>   | <font color=#488efa>202004150</font> | <font color=#8dce06>title</font>  |
 
