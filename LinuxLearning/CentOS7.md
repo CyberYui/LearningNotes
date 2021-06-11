@@ -35,5 +35,37 @@
 * 创建系统U盘的软件为 rufus , 这是一个开源的 U盘 介质创建程序
 * 当有了带有 Linux 的介质之后 , 我们就可以进入安装了
 * 整机直接安装即可 , 如果要使用虚拟机推荐使用 VirtualBox
-* 
+* windows 10 自带一个虚拟机 Hyper-V , 可以通过在微软商店添加不同的 Linux 发行版
+* 一般使用 Docker 的话 , 就会用到 Hyper-V
+
+----------------
+
+#### 安装 CentOS
+
+-------------
+
+具体的安装可以参照下面这四个页面
+
+> https://www.zhihu.com/question/272024481
+>
+> https://www.runoob.com/linux/linux-install.html
+>
+> https://www.cnblogs.com/yaohong/p/7240387.html
+>
+> http://www.sa-log.com/276.html
+
+* 即通过安装设置好 语言 , 键盘布局 , 硬盘设置 , 时区 之后 , 就可以进入下一步了
+* 一般来说直接安装 Minimal Install 即可安装一个原生的 CentOS 了 , 使用命令行 shell 即可控制系统
+* 其他的一些版本会有图形界面 , 但是一般我们用命令行系统即可
+* 安装系统并不困难 , 让我们直接快进到使用 Linux 吧 ( 我这里安装的是 CentOS 7 )
+
+----------------
+
+### 2. 使用 Linux
+
+------------------
+
+> 还是以 CentOS 7 为例 , 我们开始进行使用 Linux
+
+
 
