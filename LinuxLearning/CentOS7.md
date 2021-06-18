@@ -67,5 +67,47 @@
 
 > 还是以 CentOS 7 为例 , 我们开始进行使用 Linux
 
+* 当我们拿到一台 Linux 主机的时候 , 第一件事必定是给它创建一个静态 ip 地址 , 这样我们在每次重启后 , Linux 主机的 ip 就不会自动分配了 , 否则可能会导致一些不必要的麻烦
 
+* 具体的设定可以查阅这里
+
+  > https://blog.csdn.net/u010521062/article/details/114067036
+
+-------------------------
+
+### yum 的使用
+
+* 在 CentOS 7 的级精简版中 , 你都可以使用 yum 进行安装软件操作
+
+* 常用的指令有 :
+
+  ```shell
+  # yum 针对软件包操作常用命令
+  # 使用 yum 查找软件包
+  yum search 软件包名
+  # 列出所有可安装的软件包
+  yum list
+  # 列出所有可更新的软件包
+  yum list updates
+  # 列出所有已安装的软件包
+  yum list installed
+  # 列出所有已安装但不在 Yum Repository 内的软件包
+  yum list extras
+  # 列出所指定的软件包
+  yum list 软件包名
+  # 使用YUM获取软件包信息
+  yum info 软件包名
+  # 列出所有软件包的信息
+  yum info
+  # 列出所有可更新的软件包信息
+  yum info updates
+  # 列出所有已安装的软件包信息
+  yum info installed
+  # 列出所有已安装但不在 Yum Repository 内的软件包信息
+  yum info extras
+  # 列出软件包提供哪些文件
+  yum provides 软件包名
+  ```
+
+  
 

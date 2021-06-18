@@ -18,7 +18,7 @@
   >
   > 在下载页面选择以下选项进入先前版本的相关页面 : 
   >
-  > ![MySQL_Linux_Download](\MySQL_Linux_Download.png)
+  > ![MySQL_Linux_Download](.\MySQL_Linux_Download.png)
   >
   > 一般会直接跳转到 5.7 版本的 MySQL 下载目录
   >
@@ -601,4 +601,7 @@
 
 * 以阿里云为例:
 
-* 
+
+
+
+more : https://blog.csdn.net/qq_43280818/article/details/115625306
