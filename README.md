@@ -16,7 +16,7 @@ The markdown editor client I using is Typora , and here are some of its shortcut
 
 As you can see its a chinese version , I'll make another version of it somedays.
 
-![typora1](\typora1.png)
+![typora1](typora1.png)
 
-![typora2](\typora2.jpg)
+![typora2](typora2.jpg)
 
