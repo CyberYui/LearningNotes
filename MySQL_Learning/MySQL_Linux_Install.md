@@ -265,25 +265,340 @@
   [root@iZ2vceob6zm3176giqpowfZ usr]# cd local/
   [root@iZ2vceob6zm3176giqpowfZ local]# ls
   aegis  bin  etc  games  include  lib  lib64  libexec  sbin  share  src
-  [root@iZ2vceob6zm3176giqpowfZ local]# mkdir MySQL
+  [root@iZ2vceob6zm3176giqpowfZ local]# mkdir mysql
   [root@iZ2vceob6zm3176giqpowfZ local]# ls
-  aegis  bin  etc  games  include  lib  lib64  libexec  MySQL  sbin  share  src
-  [root@iZ2vceob6zm3176giqpowfZ local]# cd MySQL
-  [root@iZ2vceob6zm3176giqpowfZ MySQL]# 
+  aegis  bin  etc  games  include  lib  lib64  libexec  mysql  sbin  share  src
+  [root@iZ2vceob6zm3176giqpowfZ local]# cd mysql
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# 
   ```
 
-* 个人习惯 , 笔者多把此类工具应用放在 /usr/local 目录中的特定文件夹下 ( 例如这里的 MySQL 文件夹 )
+* 个人习惯 , 笔者多把此类工具应用放在 /usr/local 目录中的特定文件夹下 ( 例如这里的 mysql文件夹 )
 
-* 回到之前解压 MySQL 解压包的路径中 , 复制相关文件到我们创建的 /usr/local/MySQL 文件夹下
+* 回到之前解压 MySQL 解压包的路径中 , 复制相关文件到我们创建的 /usr/local/mysql 文件夹下
 
   ```shell
   [root@iZ2vceob6zm3176giqpowfZ MySQL]# cd /home/MySQL/mysql-5.7.34-linux-glibc2.12-x86_64/
   [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# ls
   bin  docs  include  lib  LICENSE  man  README  share  support-files
-  [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# cp * /usr/local/MySQL/ -r
-  [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# ls /usr/local/MySQL/
+  [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# cp * /usr/local/mysql/ -r
+  [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# ls /usr/local/mysql/
   bin  docs  include  lib  LICENSE  man  README  share  support-files
   [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# 
   ```
 
-* 接下来我们需要修改 /usr/local/MySQL 目录的权限
+* 接下来我们需要修改 /usr/local/mysql 目录的权限 , 将其赋权给 mysql 用户
+
+  ```shell
+  # 将 MySQL 及其下所有的目录所有者和组均设为 mysql
+  chown -R mysql:mysql /usr/local/mysql/
+  # 查看是否设置成功,执行以下命令查看文件所有者和组,若均为 mysql 则成功了
+  cd /usr/local/
+  ll
+  # 结果若有类似内容则证明成功
+  drwxr-xr-x 10 mysql mysql 99 Jun 17 18:07 mysql
+  ```
+
+  > 其实是否需要创建 mysql 用户并不是很必要 , 只是一种为了保证安全性的习惯
+  >
+  > 我们知道 Windows 系统的用户切换很麻烦 , 在 Linux 中可以同时存在多个用户 , 他们可以有不同的权限
+  >
+  > 所以为了方便起见 , 我们会对不同的应用场景创建不同的用户和用户组
+  >
+  > 这样的好处是 , 当某一个应用的使用用户和用户组被渗透之后 , 不会导致整个 Linux 系统被渗透
+  >
+  > 如果你使用的是一个云服务器的 Linux 系统的话 , 你可能没法赋权目录给用户 , 跳过赋权过程即可
+
+* 接下来手动在 mysql 目录中创建 data 目录
+
+  ```shell
+  [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# cd /usr/local/mysql/
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# ls
+  bin  docs  include  lib  LICENSE  man  README  share  support-files
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# mkdir data
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# ls
+  bin  data  docs  include  lib  LICENSE  man  README  share  support-files
+  ```
+
+* data 目录将会在之后自动被放入数据库文件 , 实际的文件内容会被加密
+
+* 在初始化数据库之前 , 我们需要给我们所要使用的数据库创建一个配置文件 , 并写入配置信息
+
+  > 与 Windows 不同的是 , 我们在 Linux 中的配置文件不再是 *.conf 结尾的文件了
+  >
+  > 而是一个需要手动配置写入的 my.cnf 文件
+  >
+  > 有些版本的 MySQL 可能会带有这个文件 , 但是我们一般更推荐创建这个文件
+
+* 在 Linux 中 , 我们可以直接在某个目录去编辑一个不存在的文件 , 一旦我们给它存入了内容之后 , 保存时这个文件会自动被创建并写入刚刚我们编辑的内容
+
+  ```shell
+  # 首先确定此文件不存在,直接执行删除操作即可
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# rm -rf /etc/my.cnf
+  # 直接编辑新文件
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# vi /etc/my.cnf
+  # 文件内容如下 (具体的路径根据自己的实际情况):
+  [client]
+  port = 3306
+  socket = /tmp/mysql.sock
+  
+  [mysqld]
+  init-connect='SET NAMES utf8'
+  # 安装路径
+  basedir=/usr/local/mysql    
+  # 数据文件存储地址
+  datadir=/usr/local/mysql/data    
+  socket=/tmp/mysql.sock
+  # 允许的最大连接数
+  max_connections=200        
+  # 服务端使用的默认字符集,这里设置为8bit编码的latin1字符集
+  character-set-server=utf8       
+  # 创建新表的时候使用的默认存储引擎
+  default-storage-engine=INNODB
+  
+  # 检查是否修改成功了
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# cat /etc/my.cnf
+  [client]
+  port = 3306
+  socket = /tmp/mysql.sock
+  
+  [mysqld]
+  init-connect='SET NAMES utf8'
+  # 安装路径
+  basedir=/usr/local/mysql    
+  # 数据文件存储地址
+  datadir=/usr/local/mysql/data    
+  socket=/tmp/mysql.sock
+  # 允许的最大连接数
+  max_connections=200        
+  # 服务端使用的默认字符集,这里设置为8bit编码的latin1字符集
+  character-set-server=utf8       
+  # 创建新表的时候使用的默认存储引擎
+  default-storage-engine=INNODB
+  ```
+
+* 初始化 mysql 数据库 , 注意以此方法创建的 MySQL 数据库是没有密码的 , 第一次进入数据库后一定要自己设定一下密码
+
+  ```shell
+  /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
+  # 注意初始化的数据库root用户密码为空
+  ```
+
+* 接下来修改一下各个目录的权限所有者
+
+  ```shell
+  #把安装目录的目录的权限所有者改为root
+  chown -R root:root /usr/database/mysql5.7/      
+  #把data目录的权限所有者改为mysql
+  chown -R mysql:mysql /usr/database/mysql5.7/data/   
+  ```
+
+* 进入目录确认一下权限
+
+  ```shell
+  [root@iZ2vceob6zm3176giqpowfZ /]# cd /usr/local/
+  [root@iZ2vceob6zm3176giqpowfZ local]# ll
+  total 0
+  ....
+  drwxr-xr-x  10 root root 141 Jun 18 09:27 mysql
+  ....
+  [root@iZ2vceob6zm3176giqpowfZ local]# cd mysql/
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# ll
+  total 268
+  ....
+  drwxr-xr-x  5 mysql mysql    314 Jun 18 10:15 data
+  ....
+  
+  ```
+
+* 可以看到各级目录权限已经确定好了 , 接下来检查下我们的 mysql 是否能启动 , 进入 bin 目录查看权限
+
+* 权限如果是 <kbd>-rwxr-xr-x</kbd> 就代表无误了 , 如果不是请手动配置一下权限
+
+  ```shell
+  [root@iZ2vceob6zm3176giqpowfZ mysql]# cd bin
+  [root@iZ2vceob6zm3176giqpowfZ bin]# ls -lrt
+  total 1345036
+  ....
+  -rwxr-xr-x 1 root root 253993666 Jun 18 09:27 mysqld
+  ....
+  -rwxr-xr-x 1 root root  10453715 Jun 18 09:27 mysql
+  ....
+  -rwxr-xr-x 1 root root   9765668 Jun 18 09:27 mysql_install_db
+  ....
+  -rwxr-xr-x 1 root root     27836 Jun 18 09:27 mysqld_safe
+  ....
+  ```
+
+* 接下来启动 mysql
+
+  ```shell
+  # 安全模式测试启动
+  [root@iZ2vceob6zm3176giqpowfZ /]# /usr/local/mysql/bin/mysqld_safe --user=mysql &
+  [1] 215735
+  [root@iZ2vceob6zm3176giqpowfZ /]# Logging to '/usr/local/mysql/data/iZ2vceob6zm3176giqpowfZ.err'.
+  2021-06-18T03:09:12.161392Z mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql/data
+  # 没有报错,再次回车跳出测试,进入mysql目录下启动数据库
+  [root@iZ2vceob6zm3176giqpowfZ /]# cd /usr/local/mysql/bin/
+  [root@iZ2vceob6zm3176giqpowfZ bin]# ./mysql -u root -p
+  # 密码为空
+  Enter password: 
+  Welcome to the MySQL monitor.  Commands end with ; or \g.
+  Your MySQL connection id is 2
+  Server version: 5.7.34 MySQL Community Server (GPL)
+  
+  Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+  
+  Oracle is a registered trademark of Oracle Corporation and/or its
+  affiliates. Other names may be trademarks of their respective
+  owners.
+  
+  Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+  # 进入数据库成功,进入mysql数据库,设置root用户密码
+  mysql> use mysql;
+  Reading table information for completion of table and column names
+  You can turn off this feature to get a quicker startup with -A
+  
+  Database changed
+  mysql> update user set authentication_string=password('root') where user='root';
+  Query OK, 1 row affected, 1 warning (0.00 sec)
+  Rows matched: 1  Changed: 1  Warnings: 1
+  # 结束设置,退出mysql后重新进入
+  mysql> exit
+  Bye
+  [root@iZ2vceob6zm3176giqpowfZ bin]# ./mysql mysql -u root -p
+  Enter password: # 这里输入刚刚设定的密码,密码可能不显示
+  Reading table information for completion of table and column names
+  You can turn off this feature to get a quicker startup with -A
+  
+  Welcome to the MySQL monitor.  Commands end with ; or \g.
+  Your MySQL connection id is 8
+  Server version: 5.7.34 MySQL Community Server (GPL)
+  
+  Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+  
+  Oracle is a registered trademark of Oracle Corporation and/or its
+  affiliates. Other names may be trademarks of their respective
+  owners.
+  
+  Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+  
+  mysql> exit
+  Bye
+  # 进入成功,mysql安装完毕
+  ```
+
+* 接下来我们需要让 mysql 开机启动 , 并且我们要能够使用 service 服务命令控制 mysql 的开启和关闭
+
+  ```shell
+  # 复制启动脚本到系统的启动目录
+  # mysql 的启动脚本为:/usr/local/mysql/support-files/mysql.server
+  cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+  # 添加服务
+  chkconfig --add mysql  
+  # 显示服务列表
+  [root@iZ2vceob6zm3176giqpowfZ bin]# chkconfig --list
+  Note: This output shows SysV services only and does not include native
+        systemd services. SysV configuration data might be overridden by native
+        systemd configuration.
+  
+        If you want to list systemd services use 'systemctl list-unit-files'.
+        To see services enabled on particular target use
+        'systemctl list-dependencies [target]'.
+  aegis          	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+  mysql          	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+  # 开机启动
+  chkconfig --level 345 mysql on
+  # 测试添加的服务是否能用
+  service mysql status #查看状态
+  # 有以下内容表示mysql正在启动
+  MySQL running (215931)                                     [  OK  ]
+  # 关于服务的操作
+  service mysql start  #启动mysql服务
+  service mysql stop   #停止mysql服务
+  ```
+
+* 至此 , Linux 系统中的本机数据库就可以正常使用了 , 但是我们一般是把云主机当做服务器在用的 , 所以需要我们设置使 mysql 可以被外网访问
+
+* 登入 mysql 数据库 , 执行下面的命令
+
+  ```shell
+  [root@iZ2vceob6zm3176giqpowfZ bin]# ./mysql -u root -p
+  Enter password: 
+  Welcome to the MySQL monitor.  Commands end with ; or \g.
+  Your MySQL connection id is 9
+  Server version: 5.7.34 MySQL Community Server (GPL)
+  
+  Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+  
+  Oracle is a registered trademark of Oracle Corporation and/or its
+  affiliates. Other names may be trademarks of their respective
+  owners.
+  
+  Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+  # 进入 mysql 数据库
+  mysql> use mysql;
+  Reading table information for completion of table and column names
+  You can turn off this feature to get a quicker startup with -A
+  
+  Database changed
+  # 查看当前数据库 user 表的 host,user 列
+  mysql> select host,user from user;
+  +-----------+---------------+
+  | host      | user          |
+  +-----------+---------------+
+  | localhost | mysql.session |
+  | localhost | mysql.sys     |
+  | localhost | root          |
+  +-----------+---------------+
+  3 rows in set (0.00 sec)
+  # 可以看到 root 用户的 host 为 localhost,这表示只能本机连接
+  # 将其修改为 % 即可
+  mysql> update user set host='%' where user='root';
+  Query OK, 1 row affected (0.00 sec)
+  Rows matched: 1  Changed: 1  Warnings: 0
+  # 执行刷新权限命令
+  mysql> flush privileges;
+  Query OK, 0 rows affected (0.00 sec)
+  mysql> quit
+  Bye
+  ```
+
+* 接下来我们需要开放防火墙的相应端口 , 使得外网连接请求不会被防火墙屏蔽
+
+* 以 CentOS 为例 , 在开放端口之前我们首先需要打开系统的防火墙
+
+  ```shell
+  systemctl start firewalld
+  ```
+
+* 接下来开放指定端口 , 比如我们需要访问数据库 , 那就得开启 3306 端口 , 因为我们在配置文件中就是这么写的
+
+  ```shell
+  # --zone 表示作用域
+  # --add-port=3306/tcp 表示添加的端口/协议
+  # --permanent 使此设定永久生效
+  firewall-cmd --zone=public --add-port=3306/tcp --permanent
+  ```
+
+* 在 windows 中我们甚至还需要重启电脑完成操作 , 但是在 Linux 中我们只需要重启防火墙即可
+
+  ```shell
+  firewall-cmd --reload
+  ```
+
+* 查看端口号 , 检查系统开放的端口
+
+  ```shell
+  # 查看当前所有tcp端口
+  netstat -ntlp 
+  # 查看所有1935端口使用情况
+  netstat -ntulp |grep 1935 
+  ```
+
+* 如果你的电脑是本地机器的话 , 到这一步应该就能通过 Navicat 连接 MySQL 了
+
+* 但是如果是云服务器主机的话 , 还需要在相应的安全组中添加规则 , 使端口开放
+
+* 以阿里云为例:
+
+* 
