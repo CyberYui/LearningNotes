@@ -12,7 +12,7 @@
 
   > 一般来说我们下载的是最新版或者是 5.7 的版本 , 所以下载这两个版本的数据库即可
   >
-  > ![MySQL_Download_msi](\MySQL_Download_msi.png)
+  > ![MySQL_Download_msi](MySQL_Download_msi.png)
   >
   > <font color="#f863c8">**图片上是 8.0.25 版本的下载 , 我们还需要下一个 5.7 版本的 MySQL**</font>
   >
@@ -40,7 +40,7 @@
 
   > 一般来说我们下载的是最新版或者是 5.7 的版本 , 所以下载这两个版本的数据库即可
   >
-  > ![MySQL_Download](\MySQL_Download.png)
+  > ![MySQL_Download](MySQL_Download.png)
   >
   > <font color="#f863c8">**图片上是 8.0.25 版本的下载 , 我们还需要下一个 5.7 版本的 MySQL**</font>
   >
@@ -86,7 +86,7 @@
 
   * 修改前后的目录对比应该差不多是这样的
 
-    ![MySQL_zip_Install](\MySQLzipInstall.png)
+    ![MySQL_zip_Install](MySQLzipInstall.png)
 
   * **data** 目录会在之后存放我们的数据库 , mysql 在读取配置文件的相关配置之后就会知道这个目录在哪啦
 

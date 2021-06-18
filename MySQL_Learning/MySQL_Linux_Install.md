@@ -28,7 +28,7 @@
   >
   > 注意这里的下载版本只有 Archive 后缀 , 没有或者多出 Test Suite 都是不行的
   >
-  > ![MySQL_Linux_Download_1](\MySQL_Linux_Download_1.png)
+  > ![MySQL_Linux_Download_1](MySQL_Linux_Download_1.png)
   >
   > [PS] 下载的时候可能需要使用 VPN 等工具 , 下载页面会提示登录 , 选择左下角的 <font color="#b1e1d2">No thanks , just start my download</font>即可正常下载了
 
@@ -49,15 +49,15 @@
 
 * XShell 套件商业授权版是要收费的 , 我们只是用于个人用途 , 点击页面右侧的 Free Licensing Page
 
-  ![XShell_Download](\XShell_Download.png)
+  ![XShell_Download](XShell_Download.png)
 
 * 在进入的页面中输入你的名字和邮箱 , 我们需要 XShell 和 XFTP 两款软件 , 直接勾选 both 选项即可
 
-  ![XShell_Download_person](\XShell_Download_person.png)
+  ![XShell_Download_person](XShell_Download_person.png)
 
 * XShell 的使用也十分简单 , 当安装完成后 , 桌面会有相应的图标 , 它们分别长这样
 
-  ![XShell](\XShell.png) ![XFTP](\XFTP.png)
+  ![XShell](XShell.png) ![XFTP](XFTP.png)
 
 * 双击 Xshell 打开程序 , 我们要通过它建立和 Linux 系统的连接
 
@@ -98,23 +98,23 @@
 
 * [PS] 需要保证 Linux 系统中有 ssh 插件 , 一般我们安装好的 Linux 系统都有 , 直接在这里建立连接即可
 
-* 单机文件下方的新建 ![](\XShell_newCo.png) 图标 , 在打开的表单中修改和输入以下内容创建和 Linux 的连接
+* 单机文件下方的新建 ![](XShell_newCo.png) 图标 , 在打开的表单中修改和输入以下内容创建和 Linux 的连接
 
-  ![XShell_new](\XShell_new.png)
+  ![XShell_new](XShell_new.png)
 
 * 确定之后会自动打开命令行界面 , 也就是可以直接使用 shell 控制 Linux 系统了
 
-  ![XShell_connectLinux](\XShell_connectLinux.png)
+  ![XShell_connectLinux](XShell_connectLinux.png)
 
 * 接下来把我们刚刚下好的 <kbd>mysql-5.7.34-linux-glibc2.12-x86_64.tar.gz</kbd> 包放进 Linux
 
-* 打开刚刚连接了的 Linux 标签 , 从 XShell 上侧工具栏选择 XFTP 工具 ![XShell_xftp](\XShell_xftp.png) 
+* 打开刚刚连接了的 Linux 标签 , 从 XShell 上侧工具栏选择 XFTP 工具 ![XShell_xftp](XShell_xftp.png) 
 
 * 接下来 XFTP 界面会直接弹出并连接好 Linux , 并展示出你的 Windows 和 Linux 目录
 
 * 把包直接从左侧的 Windows 目录列表拖入右侧的 Linux 目录列表 , 会自动上传文件到指定位置
 
-  ![XFTP_dis](\XFTP_dis.png) 
+  ![XFTP_dis](XFTP_dis.png) 
 
 * 准备工作已经完成了 , 接下来返回 XShell 操作 Linux 系统
 
