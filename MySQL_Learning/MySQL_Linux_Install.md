@@ -225,7 +225,7 @@
 
 ------------------------------
 
-### 继续安装
+### 完成安装
 
 * 安装 MySQL 之前需要确保系统中有 libaio 的依赖
 
@@ -583,7 +583,7 @@
 * 在 windows 中我们甚至还需要重启电脑完成操作 , 但是在 Linux 中我们只需要重启防火墙即可
 
   ```shell
-  firewall-cmd --reload
+  ![MySQL_Linux_Ali_2](F:\LearningNotes\MySQL_Learning\MySQL_Linux_Ali_2.png)firewall-cmd --reload
   ```
 
 * 查看端口号 , 检查系统开放的端口
@@ -599,9 +599,22 @@
 
 * 但是如果是云服务器主机的话 , 还需要在相应的安全组中添加规则 , 使端口开放
 
-* 以阿里云为例:
+* 以阿里云为例 : 登入阿里云之后 , 点击右上角个人信息旁边的 <kbd>控制台</kbd> 选项 , 然后在面板中选择 <kbd>云服务器ECS</kbd> 
 
+  ![MySQL_Linux_Ali_1](MySQL_Linux_Ali_1.png) 
 
+  ![MySQL_Linux_Ali_2](MySQL_Linux_Ali_2.png) 
 
+* 在这里可以看到你运行中的云服务器 , 点击云服务器名进入实例详情
 
-more : https://blog.csdn.net/qq_43280818/article/details/115625306
+* 在上方的选项卡中选择 <kbd>安全组</kbd> 选项卡
+
+  ![MySQL_Linux_Ali_3](MySQL_Linux_Ali_3.png) 
+
+* 在这里点击安全组 ID 名 , 或者右侧操作中的 <font color="#4163fc">**配置规则**</font> 选项
+
+  ![MySQL_Linux_Ali_4](MySQL_Linux_Ali_4.png) 
+
+* 点击手动或快速添加 , 按照已有的配置 , 为其添加相应端口 , 我们这里要使用 MySQL , 则开放 3306 端口即可
+
+* 做完这些操作之后 , 就可以通过本机访问云服务器的 MySQL 了 , 我们的安装也就完成了
