@@ -2,6 +2,10 @@
 
 --------------------
 
+> 在日常开发中 , 我们或多或少都会接触 Linux 服务器 , 对于服务器的使用 , 一般我们会安装 MySQL , Java , Tomcat , Nginx 等开发工具 , 笔者作为一名半维护人员 , 或多或少地也接触到了这些内容 , 由此作出以下记录 , 一方面方便自己查阅 , 一方面希望能帮助到正在被 Linux 服务器困扰的小白 , 希望能帮到大家.
+>
+> 直入主题 , 接下来从安装 MySQL 开始 , 一步一步地搭建起一个基础的服务器开发环境
+
 ### 下载
 
 * [PS] 以 CentOS 7 为例 , 在此系统中安装解压版 MySQL
@@ -175,7 +179,7 @@
   mysql-5.7.34-linux-glibc2.12-x86_64  mysql-5.7.34-linux-glibc2.12-x86_64.tar.gz
   ```
 
-* 可以看到 mysql-5.7.34-linux-glibc2.12-x86_64 是一个目录 , 我们的包文件也还在
+* 可以看到 <kbd>mysql-5.7.34-linux-glibc2.12-x86_64</kbd> 是一个目录 , 我们的包文件也还在
 
   ---------------------------
 
@@ -227,7 +231,7 @@
 
 ### 完成安装
 
-* 安装 MySQL 之前需要确保系统中有 libaio 的依赖
+* 安装 MySQL 之前需要确保系统中有 <kbd>libaio</kbd> 的依赖
 
   ```shell
   # 搜索依赖
@@ -258,7 +262,7 @@
   id mysql
   ```
 
-* 为了能正常使用 mysql 我们需要将其放到 /usr/ 目录的文件夹下
+* 为了能正常使用 mysql 我们需要将其放到 <kbd>/usr/</kbd> 目录的文件夹下
 
   ```shell
   [root@iZ2vceob6zm3176giqpowfZ home]# cd /usr
@@ -272,9 +276,9 @@
   [root@iZ2vceob6zm3176giqpowfZ mysql]# 
   ```
 
-* 个人习惯 , 笔者多把此类工具应用放在 /usr/local 目录中的特定文件夹下 ( 例如这里的 mysql文件夹 )
+* 个人习惯 , 笔者多把此类工具应用放在 <kbd>/usr/local</kbd> 目录中的特定文件夹下 ( 例如这里的 mysql文件夹 )
 
-* 回到之前解压 MySQL 解压包的路径中 , 复制相关文件到我们创建的 /usr/local/mysql 文件夹下
+* 回到之前解压 MySQL 解压包的路径中 , 复制相关文件到我们创建的 <kbd>/usr/local/mysql</kbd> 文件夹下
 
   ```shell
   [root@iZ2vceob6zm3176giqpowfZ MySQL]# cd /home/MySQL/mysql-5.7.34-linux-glibc2.12-x86_64/
@@ -286,7 +290,7 @@
   [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# 
   ```
 
-* 接下来我们需要修改 /usr/local/mysql 目录的权限 , 将其赋权给 mysql 用户
+* 接下来我们需要修改 <kbd>/usr/local/mysql</kbd> 目录的权限 , 将其赋权给 mysql 用户
 
   ```shell
   # 将 MySQL 及其下所有的目录所有者和组均设为 mysql
@@ -308,7 +312,7 @@
   >
   > 如果你使用的是一个云服务器的 Linux 系统的话 , 你可能没法赋权目录给用户 , 跳过赋权过程即可
 
-* 接下来手动在 mysql 目录中创建 data 目录
+* 接下来手动在 mysql 目录中创建 <kbd>data</kbd> 目录
 
   ```shell
   [root@iZ2vceob6zm3176giqpowfZ mysql-5.7.34-linux-glibc2.12-x86_64]# cd /usr/local/mysql/
@@ -410,7 +414,7 @@
   
   ```
 
-* 可以看到各级目录权限已经确定好了 , 接下来检查下我们的 mysql 是否能启动 , 进入 bin 目录查看权限
+* 可以看到各级目录权限已经确定好了 , 接下来检查下我们的 mysql 是否能启动 , 进入 <kbd>bin</kbd> 目录查看权限
 
 * 权限如果是 <kbd>-rwxr-xr-x</kbd> 就代表无误了 , 如果不是请手动配置一下权限
 
@@ -583,7 +587,7 @@
 * 在 windows 中我们甚至还需要重启电脑完成操作 , 但是在 Linux 中我们只需要重启防火墙即可
 
   ```shell
-  ![MySQL_Linux_Ali_2](F:\LearningNotes\MySQL_Learning\MySQL_Linux_Ali_2.png)firewall-cmd --reload
+  firewall-cmd --reload
   ```
 
 * 查看端口号 , 检查系统开放的端口
@@ -640,11 +644,11 @@
 
 * 检查完本机的环境变量之后 , 可以看到并没有与 MySQL 相关的内容 , 我们手动添加一下即可
 
-* 添加环境变量的方式有两种 , 一种是通过 bashprofile 添加 , 这种添加仅对单一用户永久生效
+* 添加环境变量的方式有两种 , 一种是通过 <kbd>bashrc</kbd> 添加 , 这种添加仅对单一用户永久生效
 
-* 另一种是直接添加全局系统变量 profile , 这种添加则对所有用户永久生效
+* 另一种是直接添加全局系统变量 <kbd>profile</kbd> , 这种添加则对所有用户永久生效
 
-* 我们要随时随地可用 , 所以打开 Linux 系统的 profile 文件 , 配置全局系统变量即可
+* 我们要随时随地可用 , 所以打开 Linux 系统的 <kbd>profile</kbd> 文件 , 配置全局系统变量即可
 
   ```shell
   # 编辑profile文件
