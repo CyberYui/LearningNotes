@@ -6,7 +6,9 @@
 
 > 当我们需要一个服务器去部署自己的项目时 , 我们除了会使用 MySQL 以外 , 可能还会使用到 Tomcat 和 Nginx 等一系列的部署工具 , 本篇就从给 Linux 安装 Java 开始 , 搭建一个 Tomcat 服务器
 >
-> <font color="#f3b7b9">**[PS] 默认服务器已经安装了 mysql , 不会的话可以看一下我的相关教程**</font> 
+> - 你可能会问为什么要安装 Java , 因为 Tomcat 是基于 Java 环境的一个工具 , 就像安装 mysql 时我们得先有 libaio 一样 , Java 环境就是 Tomcat 的依赖环境
+>
+> <font color="#f3b7b9">**[PS] 默认服务器已经按照我的另一个演示安装了 mysql , 所以你可能会在本演示下多次看到相关内容 , 不会的话可以看一下我的相关演示内容 , 其链接如下**</font> 
 >
 > Linux 安装 MySQL 链接 : https://github.com/CyberYui/LearningNotes/blob/main/MySQL_Learning/MySQL_Linux_Install.md
 
@@ -14,13 +16,15 @@
 
 * 笔者在介绍如何给 Linux 系统安装 MySQL 的时候提到了通过使用 wget 的方式获取解压包的方法
 
-* 这次在安装 java 和 tomcat 的过程中 , 我们就使用不同的方式去下载解压包
+* 这次在安装 java 和 tomcat 的过程中 , 我们就使用两种不同的方式去下载解压包 , 从而熟悉这个过程
 
-* 首先在 Linux 系统中创建好我们想要下载解压版工具的目录 , 我们需要安装 Java 和 Tomcat
+  > 话不多说 , 开始我们的 Java 和 Tomcat 演示
 
-* 所以我们需要首先创建两个相关目录 , 我的习惯是把这些工具放到 home 目录中的同名目录下
+* 首先在 Linux 系统中创建好我们想要下载解压版工具的目录 , 我们需要 Java 和 Tomcat 的解压版
 
-* 也就是如果要安装 Java , 那我会先在 home 目录中创建 Java 目录 , 然后在里面保存我的 Java 安装包
+* 所以我们需要首先创建两个相关目录 , 我的习惯是把这些工具放到 <kbd>/home/</kbd> 目录中的软件同名目录下
+
+* 也就是如果要安装 Java , 那我会先在 <kbd>/home/</kbd> 目录中创建 <kbd>Java</kbd> 目录 , 然后在里面保存我的 Java 安装包
 
   ```shell
   [root@iZ2vceob6zm3176giqpowfZ /]# cd /home/
@@ -32,7 +36,7 @@
   Java  MySQL  Tomcat
   ```
 
-* 首先进入 Java 目录和 Tomcat 目录 , 把我们需要的解压包下载好 , 首先是 Java
+* 首先进入 <kbd>Java</kbd> 目录和 <kbd>Tomcat</kbd> 目录 , 把我们需要的解压包下载好 , 首先是 Java
 
 ### Java 的下载
 
@@ -44,9 +48,9 @@
 
 * https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
 
-* 在下面选择 Linux x64 Compressed Archive 版本 , Compressed Archive 表示压缩版
+* 在下面选择 <kbd>Linux x64 Compressed Archive</kbd> 版本 , *Compressed Archive* 表示压缩版
 
-* 你也可以通过下载 Linux x64 RPM Package 版本安装 , RPM 包版本就是我们常用的 Linux rpm 安装版
+* 你也可以通过下载 <kbd>Linux x64 RPM Package</kbd> 版本安装 , RPM 包版本就是我们常用的 Linux rpm 安装版
 
 * 笔者更喜欢使用压缩版 , 这里就介绍压缩版的安装方式
 
@@ -58,7 +62,7 @@
 
 * 点击下载会跳转到 Oracle 登录界面 , 点击登录之后没过多久就会显示下载内容 , 保存到你想保存的地方即可
 
-* 通过 XFTP 软件上传到云服务器中的 /home/Java 目录下
+* 通过 XFTP 软件上传到云服务器中的 <kbd>/home/Java</kbd> 目录下
 
   [PS] 关于 XShell 套件的安装和使用参照我之前的 mysql 安装教程即可 ( **即前言前提到的那个地址** )
 
@@ -70,11 +74,11 @@
 
 -------------------
 
-* 现阶段中我们常常使用 Tomcat 9 来部署内容 , 本篇也以此为例进行演示
+* 现阶段中我们常常使用 Tomcat9 来部署内容 , 本篇也以此为例进行演示
 
-* 首先进入我们创建好的 Tomcat 存档目录 , 下载 Tomcat 9 二进制版本到此位置
+* 首先进入我们创建好的 <kbd>Tomcat</kbd> 存档目录 , 下载 Tomcat 9 二进制版本到此位置
 
-* 这次我们通过 wget 方式下载解压版
+* 这次我们通过 wget 方式下载解压版包
 
   ```shell
   cd /home/Tomcat
@@ -102,7 +106,7 @@
 
     ![Tomcat_Linux_Download](Tomcat_Linux_Download.png) 
 
-  * 你可能感觉 <kbd>Mirrors</kbd> 中的下拉框没有变成你选择的那个是不是出问题了 , 检查下面的下载链接就可以知道了
+  * 你可能感觉 <kbd>Mirrors</kbd> 中的下拉框没有变成你选择的那个 , 这种情况是不是出问题了 , 检查下面的下载链接就可以知道了 , 如果你复制的下载链接前面的镜像不是你选择的那个 , 则证明没有选上
 
   * 在 9.0.XX 中的 <kbd>Binary Distributions</kbd> 中看到 <kbd>Core</kbd> 目录 , 我们需要在 Linux 系统中安装 , 所以下载 <kbd>tar.gz</kbd> 版本即可
 
@@ -147,11 +151,13 @@
   -bash: /usr/bin/java: No such file or directory
   ```
 
-* 提示 <kbd>No such file or directory</kbd> 表示我们已经卸载掉了 openjdk
+* 提示 <kbd>No such file or directory</kbd> 表示我们已经卸载掉了 openjdk , 一般来说我们不应该遇到这句话
 
-* 接下来安装我们需要的解压版 java
+* 但是不影响我们之后的安装 , 无视它即可 , 大不了到时候把所有不是我们需要的 java 相关文件夹卸掉即可
 
-* 首先进入 /home/Java 解压压缩包
+* 接下来安装我们需要的解压版 java , 比如我这里的 jdk1.8.0_291
+
+* 首先进入 <kbd>/home/Java</kbd> 目录解压压缩包
 
   ```shell
   # 进入目录
@@ -163,30 +169,36 @@
   jdk1.8.0_291  jdk-8u291-linux-x64.tar.gz
   ```
 
-* 接下来把  jdk1.8.0_291 复制到 /usr/local/java 目录中
+* 接下来把  jdk1.8.0_291 的内容复制到 <kbd>/usr/local/java</kbd> 目录中
 
   ```shell
   # 创建目录
-  [root@iZ2vceob6zm3176giqpowfZ Java]# cd /usr/local/
-  [root@iZ2vceob6zm3176giqpowfZ local]# ls
+  cd /usr/local/
+  # 检查文件目录
+  ls
+  # 结果
   aegis  bin  etc  games  include  lib  lib64  libexec  mysql  sbin  share  src
-  [root@iZ2vceob6zm3176giqpowfZ local]# mkdir java
-  [root@iZ2vceob6zm3176giqpowfZ local]# ls
+  # 创建 java 目录
+  mkdir java
+  # 再次检查文件目录
+  ls
+  # 结果看到多出了 java 目录
   aegis  bin  etc  games  include  java  lib  lib64  libexec  mysql  sbin  share  src
-  # 复制文件,首先进入jdk1.8.0_291
-  [root@iZ2vceob6zm3176giqpowfZ local]# cd /home/Java/jdk1.8.0_291/
+  # 复制文件,首先进入 jdk1.8.0_291 目录中
+  cd /home/Java/jdk1.8.0_291/
   # 递归复制内容到 /usr/local/java 中
-  [root@iZ2vceob6zm3176giqpowfZ jdk1.8.0_291]# cp * /usr/local/java/ -r
+  cp * /usr/local/java/ -r
   # 检查是否复制成功
-  [root@iZ2vceob6zm3176giqpowfZ jdk1.8.0_291]# ls /usr/local/java/
+  ls /usr/local/java/
+  # 可以看到文件夹里已经有了相关文件,复制内容成功了
   bin        javafx-src.zip  legal    man          src.zip
   COPYRIGHT  jmc.txt         lib      README.html  THIRDPARTYLICENSEREADME-JAVAFX.txt
   include    jre             LICENSE  release      THIRDPARTYLICENSEREADME.txt
   ```
 
-  > 软件安装地址允许自定义 , 但通常Linux系统安装软件推荐放在 /usr 目录下
+  > 软件安装地址允许自定义 , 但通常Linux系统安装软件推荐放在 <kbd>/usr</kbd> 目录下
 
-* 配置 Java 的环境变量 , 还是之前在演示 MySQL 的时候配置的 /etc/profile 文件
+* 配置 Java 的环境变量 , 修改的还是之前在演示 MySQL 的时候配置的 <kbd>/etc/profile</kbd> 文件
 
   ```shell
   # 使用 vi 编辑
@@ -198,7 +210,7 @@
   export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
   ```
 
-  >在Linux系统中使用 <kbd>:</kbd> 作为环境变量分隔符
+  >在Linux系统中使用 <kbd>:</kbd> 作为环境变量分隔符 , 它相当于 Windows 中的 <kbd>;</kbd> 
 
 * 基本安装完成 , 接下来检查一次
 
@@ -225,7 +237,7 @@
   javac 1.8.0_291
   ```
 
-* 至此 , Java 的安装已完成 , 接下来我们需要安装 Tomcat
+* 至此 , Java 的安装已完成 , 接下来我们安装 Tomcat
 
 -------------------
 
@@ -233,29 +245,35 @@
 
 * 笔者一般在使用 Tomcat 的时候不会特意去配置 Tomcat 的相关环境变量 , 所以这里我们也不演示配置环境变量了
 
-  [PS] 配置环境变量的方式和之前给 MySQL , Java 配置是类似的 , 可以自己手动尝试一下
+  > [PS] 配置环境变量的方式和之前给 MySQL , Java 配置是类似的 , 可以自己手动尝试一下
 
-* 首先还是解压我们之前放好在 /home/Tomcat 目录下的解压包
+* 首先还是解压我们之前放好在 <kbd>/home/Tomcat</kbd> 目录下的解压包
 
   ```shell
   # 进入目录检查文件是否存在
   cd /home/Tomcat/
+  # 检查文件目录
   ls
+  # 结果
   apache-tomcat-9.0.48.tar.gz
   # 解压解压版 tomcat9
   tar -zvxf apache-tomcat-9.0.48.tar.gz 
   ```
 
-* 同样 , 在 /usr/local 目录下创建一个将用于放置我们的 Tomcat 的目录
+* 同样 , 在 <kbd>/usr/local</kbd> 目录下创建一个将用于放置我们的 Tomcat 的目录
 
   ```shell
   # 进入目录检查是否已有tomcat文件夹
   cd /usr/local/
+  # 检查文件目录
   ls
+  # 结果
   aegis  bin  etc  games  include  java  lib  lib64  libexec  mysql  sbin  share  src
   # 没有,创建此文件夹
   mkdir tomcat
+  # 检查文件目录
   ls
+  # 结果发现有了刚刚创建的 tomcat 目录
   aegis  bin  etc  games  include  java  lib  lib64  libexec  mysql  sbin  share  src  tomcat
   ```
 
@@ -264,14 +282,14 @@
   ```shell
   # 首先进入解压好的 tomcat 文件夹下
   cd /home/Tomcat/apache-tomcat-9.0.48/
-  # 检查一次文件
+  # 检查文件目录
   ls
   # 结果
   bin           conf             lib      logs    README.md      RUNNING.txt  webapps
   BUILDING.txt  CONTRIBUTING.md  LICENSE  NOTICE  RELEASE-NOTES  temp         work
   # 递归复制 Tomcat 文件
   cp * /usr/local/tomcat/ -r
-  # 检查一次文件
+  # 检查文件目录
   ls /usr/local/tomcat/
   # 结果
   bin           conf             lib      logs    README.md      RUNNING.txt  webapps
@@ -283,7 +301,7 @@
   ```shell
   # 进入目录
   cd bin
-  # 查看文件
+  # 检查文件目录
   ls
   # 结果
   bootstrap.jar       commons-daemon-native.tar.gz  makebase.sh       tomcat-juli.jar
@@ -320,7 +338,7 @@
   # 开放 8080 端口
   firewall-cmd --zone=public --add-port=8080/tcp --permanent
   success
-  # 刷新防火墙
+  # 刷新防火墙规则
   firewall-cmd --reload
   success
   # 查看防火墙开启的端口
@@ -352,9 +370,9 @@
 
 * 有时候我们使用的可能是本地 Linux 主机 , 这种时候我们可能还需要配置一下启动项 , 让 Tomcat 能在开机的时候自动启动
 
-* 还记得之前 mysql 的启动是如何配置的吗 , 我们是将 mysql/support-files 目录中的 mysql.server 复制到了系统的启动项中 , 也就是 /etc/init.d/mysql 中 , 并且为其添加了服务
+* 还记得之前 mysql 的启动是如何配置的吗 , 我们是将 <kbd>mysql/support-files</kbd> 目录中的 mysql.server 复制到了系统的启动项中 , 也就是 <kbd>/etc/init.d/mysql</kbd> 中 , 并且为其添加了服务
 
-* Tomcat 也是同样 , 我们首先需要写好一个用于启动 tomcat 的脚本文件 , 然后将其放入 /etc/init.d/tomcat 中 , 并为其配备服务即可
+* Tomcat 也是同样 , 我们首先需要写好一个用于启动 tomcat 的脚本文件 <kbd>tomcat</kbd> , 然后将其放入 <kbd>/etc/init.d/</kbd> 中 , 并为其配备服务即可
 
 * 首先新建我们的服务脚本
 
@@ -376,32 +394,61 @@
 * tomcat 脚本文件内容如下
 
   ```shell
-  # !/bin/bash
-  # description: Tomcat 9 Start Stop Restart bash shell file
+  #!/bin/sh
+  # description: Tomcat9 auto Starts bash shell file
   # processname: tomcat9
   # chkconfig: 234 20 80
-  
-  CATALINA_HOME=/usr/local/tomcat
-  
-  case $1 in
-  	start)
-  		echo 'starting tomcat9 now...'
-  		sh $CATALINA_HOME/bin/startup.sh
-  		;;
-  	stop)
-  		echo 'stoping tomcat9 now...'
-  		sh $CATALINA_HOME/bin/shutdown.sh
-  		;;
-  	restart)
-  		echo 'shutdown exist tomcat9 now...'
-  		sh $CATALINA_HOME/bin/shutdown.sh
-  		echo 'starting our tomcat9 now....'
-  		sh $CATALINA_HOME/bin/startup.sh
-  	*)
-  		echo 'please use : tomcat {start|stop|restart}'
-  	;;
+  # Author: Cyber Yui
+  # /etc/init.d/tomcat
+  # Tomcat auto-start
+  RETVAL=0
+  export JRE_HOME=/usr/local/java/jre
+  export CATALINA_HOME=/usr/local/tomcat
+  export CATALINA_BASE=/usr/local/tomcat
+  start()
+  {
+          if [ -f $CATALINA_HOME/bin/startup.sh ];
+            then
+              echo $"Starting Tomcat"
+                  $CATALINA_HOME/bin/startup.sh
+              RETVAL=$?
+              echo " OK"
+              return $RETVAL
+          fi
+  }
+  stop()
+  {
+          if [ -f $CATALINA_HOME/bin/shutdown.sh ];
+            then
+              echo $"Stopping Tomcat"
+                  $CATALINA_HOME/bin/shutdown.sh
+              RETVAL=$?
+              sleep 1
+              ps -fwwu root | grep tomcat|grep -v grep | grep -v PID | awk '{print $2}'|xargs kill -9
+              echo " OK"
+              # [ $RETVAL -eq 0 ] && rm -f /var/lock/...
+              return $RETVAL
+          fi
+  }
+  case "$1" in
+   start) 
+          start
+          ;;
+   stop)  
+          stop
+          ;;                             
+   restart)
+           echo $"Restaring Tomcat"
+           $0 stop
+           sleep 1
+           $0 start
+           ;;
+   *)
+          echo $"Usage: $0 {start|stop|restart}"
+          exit 1
+          ;;
   esac
-  exit 0 
+  exit $RETVAL
   ```
 
   > chkconfig: 234 20 80 表示如下 : 
@@ -412,7 +459,7 @@
   >
   > 80 , 关闭的优先级
 
-* 保存好之后 , 我们将它放到 init.d 中
+* 保存好之后 , 我们将它放到 <kbd>/etc/init.d/</kbd> 中
 
   ```shell
   # 复制到启动目录
@@ -435,8 +482,26 @@
   tomcat         	0:off	1:off	2:on	3:on	4:on	5:on	6:off
   ```
 
-* 设置成功之后 , 我们还需要给这个文件配给权限 , 使得我们可以通过 <kbd>service</kbd> 命令使用它
+* 设置成功之后 , 我们还需要给这个文件配给权限 , 使得我们可以通过 **service** 命令使用它
 
-* 
+  ```shell
+  chmod u+x /etc/init.d/tomcat
+  ```
 
-* 如果日后我们不需要这个服务的时候
+* 接下来我们就可以使用 **service** 命令像控制 mysql 一样控制 tomcat 了
+
+* 如果日后我们不需要 tomcat 的时候 , 我们不仅需要删除 tomcat 应用 , 而且还需要卸载这个服务
+
+* 首先关闭 tomcat 服务自启动
+
+  ```shell
+  chkconfig tomcat off
+  ```
+
+* 删除 tomcat 服务在 chkconfig 上的管理
+
+  ```shell
+  chkconfig --del tomcat
+  ```
+
+* 至此 , 一次完整的 tomcat 在 Linux 系统上的安装演示就完成了
