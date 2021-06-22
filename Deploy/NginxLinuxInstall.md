@@ -119,12 +119,15 @@
 * 依次在 <kbd>/usr/local/nginx</kbd> 目录中执行以下三条命令 , 可能会看到警告之类的话语 , 无视它们先继续
 
   ```shell
+  # configure 是一个可执行脚本,为了以后的维护方便,使用 --prefix 选项配置
   ./configure --prefix=/usr/local/nginx
+  # 编译文件
   make
+  # 安装应用
   make install
   ```
 
-* 接下来配置以下 nginx.conf 文件
+* 接下来修改一下 nginx.conf 文件
 
   ```shell
   vi /usr/local/nginx/conf/nginx.conf
