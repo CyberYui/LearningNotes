@@ -618,3 +618,67 @@
 * 点击手动或快速添加 , 按照已有的配置 , 为其添加相应端口 , 我们这里要使用 MySQL , 则开放 3306 端口即可
 
 * 做完这些操作之后 , 就可以通过本机访问云服务器的 MySQL 了 , 我们的安装也就完成了
+
+### 额外的内容
+
+----------
+
+* 我们一般在使用 MySQL 的时候 , 需要进入其目录下才能运行 mysql 并操作
+
+* 为了让我们能直接通过命令去使用 MySQL 数据库 , 我们还需要给它配置环境变量
+
+* 同 Windows 一样 , Linux 也需要添加 MySQL 相关的环境变量到系统中 , 不同的是 Linux 中只需要修改文件
+
+  ```shell
+  # 通过以下命令查看Linux的所有环境变量
+  export
+  # 仅仅单独查看 PATH 环境变量
+  echo $PATH
+  # 结果
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+  ```
+
+* 检查完本机的环境变量之后 , 可以看到并没有与 MySQL 相关的内容 , 我们手动添加一下即可
+
+* 添加环境变量的方式有两种 , 一种是通过 bashprofile 添加 , 这种添加仅对单一用户永久生效
+
+* 另一种是直接添加全局系统变量 profile , 这种添加则对所有用户永久生效
+
+* 我们要随时随地可用 , 所以打开 Linux 系统的 profile 文件 , 配置全局系统变量即可
+
+  ```shell
+  # 编辑profile文件
+  vi /etc/profile
+  # 在末尾添加以下内容,最好加上一个注释便于日后维护
+  
+  # mysql
+  export PATH=/usr/local/mysql/bin:$PATH
+  ```
+
+* [PS] 这里最后的 $PATH 表示对原有 PATH 内容的引用 , 也就是我们添加的内容是添加而不是覆盖
+
+* 设置完成之后 , 需要手动应用一下环境变量 , 这样才能保证其生效
+
+  ```shell
+  # 手动应用
+  source /etc/profile
+  ```
+
+* 我们不可能一次添加完所有的环境变量 , 所以需要每次添加新环境变量的时候最好先清理旧有内容为出厂设置再修改
+
+* 清理原有 PATH 为出厂设置 , 也就是手动覆盖一下即可
+
+  ```shell
+  # 手动覆盖
+  export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+  # 检查是否生效
+  echo $PATH
+  # 结果
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+  # 添加完成之后重新应用
+  source /etc/profile
+  ```
+
+* 测试一下 , 可以通过在任意地方输入 <kbd>mysql -u root -p</kbd> 命令启动数据库了 , 完成配置
+
+[PS] 可能在使用 MySQL 数据库时会遇到一些问题 , 请注意 Linux 上的 MySQL 是区分大小写的 , 有需要请自行修改
