@@ -323,8 +323,120 @@
   # 刷新防火墙
   firewall-cmd --reload
   success
+  # 查看防火墙开启的端口
+  firewall-cmd --list-all 
+  # 结果
+  public (active)
+    target: default
+    icmp-block-inversion: no
+    interfaces: eth0
+    sources: 
+    services: cockpit dhcpv6-client ssh
+    # 可以看到 3306 和 8080 都是开启了的
+    ports: 3306/tcp 8080/tcp
+    protocols: 
+    masquerade: no
+    forward-ports: 
+    source-ports: 
+    icmp-blocks: 
+    rich rules: 
   ```
 
-* 仅仅这样是不够的 , 我们还需要打开云控制台安全组的 8080 端口 , 具体如何开启可以查阅笔者之前的 mysql 演示
+  > 作为云服务器 , 仅仅这样是不够的 , 我们还需要打开云控制台安全组的 8080 端口 , 具体如何开启可以查阅笔者之前的 mysql 演示内容
 
 * 当这些都配置完之后 , 就可以正常访问我们的 Linux 系统中的 Tomcat 啦
+
+#### 额外内容
+
+----------------------
+
+* 有时候我们使用的可能是本地 Linux 主机 , 这种时候我们可能还需要配置一下启动项 , 让 Tomcat 能在开机的时候自动启动
+
+* 还记得之前 mysql 的启动是如何配置的吗 , 我们是将 mysql/support-files 目录中的 mysql.server 复制到了系统的启动项中 , 也就是 /etc/init.d/mysql 中 , 并且为其添加了服务
+
+* Tomcat 也是同样 , 我们首先需要写好一个用于启动 tomcat 的脚本文件 , 然后将其放入 /etc/init.d/tomcat 中 , 并为其配备服务即可
+
+* 首先新建我们的服务脚本
+
+  ```shell
+  # 进入tomcat的解压版目录,创建我们需要的脚本文件
+  cd /home/Tomcat/
+  # 检查文件
+  ls
+  # 结果
+  apache-tomcat-9.0.48  apache-tomcat-9.0.48.tar.gz
+  # 修改并创建脚本文件
+  vi tomcat
+  # 检查文件
+  ls
+  # 结果
+  apache-tomcat-9.0.48  apache-tomcat-9.0.48.tar.gz  tomcat
+  ```
+
+* tomcat 脚本文件内容如下
+
+  ```shell
+  # !/bin/bash
+  # description: Tomcat 9 Start Stop Restart bash shell file
+  # processname: tomcat9
+  # chkconfig: 234 20 80
+  
+  CATALINA_HOME=/usr/local/tomcat
+  
+  case $1 in
+  	start)
+  		echo 'starting tomcat9 now...'
+  		sh $CATALINA_HOME/bin/startup.sh
+  		;;
+  	stop)
+  		echo 'stoping tomcat9 now...'
+  		sh $CATALINA_HOME/bin/shutdown.sh
+  		;;
+  	restart)
+  		echo 'shutdown exist tomcat9 now...'
+  		sh $CATALINA_HOME/bin/shutdown.sh
+  		echo 'starting our tomcat9 now....'
+  		sh $CATALINA_HOME/bin/startup.sh
+  	*)
+  		echo 'please use : tomcat {start|stop|restart}'
+  	;;
+  esac
+  exit 0 
+  ```
+
+  > chkconfig: 234 20 80 表示如下 : 
+  >
+  > 234 , 系统运行级别是 2 , 3 , 4 时都启动此服务
+  >
+  > 20 , 启动的优先级
+  >
+  > 80 , 关闭的优先级
+
+* 保存好之后 , 我们将它放到 init.d 中
+
+  ```shell
+  # 复制到启动目录
+  cp tomcat /etc/init.d/
+  # 配置服务
+  chkconfig --add tomcat
+  # 设定开机自启动
+  chkconfig tomcat on
+  # 查看启动状态
+  chkconfig --list|grep tomcat
+  
+  Note: This output shows SysV services only and does not include native
+        systemd services. SysV configuration data might be overridden by native
+        systemd configuration.
+  
+        If you want to list systemd services use 'systemctl list-unit-files'.
+        To see services enabled on particular target use
+        'systemctl list-dependencies [target]'.
+  
+  tomcat         	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+  ```
+
+* 设置成功之后 , 我们还需要给这个文件配给权限 , 使得我们可以通过 <kbd>service</kbd> 命令使用它
+
+* 
+
+* 如果日后我们不需要这个服务的时候
