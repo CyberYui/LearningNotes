@@ -1,4 +1,6 @@
-# Linux 系统中安装 Tomcat 解压版 ( 副 Java 安装 )
+# Linux 系统中安装 Tomcat 解压版 
+
+## <p align="right">( 附 Java 解压版安装 )</p>
 
 --------------
 
@@ -278,7 +280,51 @@
 
 * 接下来进入 bin 目录 , 启动 tomcat , Linux 中使用的是 .sh 文件
 
-  ```
+  ```shell
+  # 进入目录
+  cd bin
+  # 查看文件
+  ls
+  # 结果
+  bootstrap.jar       commons-daemon-native.tar.gz  makebase.sh       tomcat-juli.jar
+  catalina.bat        configtest.bat                setclasspath.bat  tomcat-native.tar.gz
+  catalina.sh         configtest.sh                 setclasspath.sh   tool-wrapper.bat
+  catalina-tasks.xml  daemon.sh                     shutdown.bat      tool-wrapper.sh
+  ciphers.bat         digest.bat                    shutdown.sh       version.bat
+  ciphers.sh          digest.sh                     startup.bat       version.sh
+  commons-daemon.jar  makebase.bat                  startup.sh
+  # 启动 tomcat
+  ./startup.sh
+  # 显示结果
+  Using CATALINA_BASE:   /usr/local/tomcat
+  Using CATALINA_HOME:   /usr/local/tomcat
+  Using CATALINA_TMPDIR: /usr/local/tomcat/temp
+  Using JRE_HOME:        /usr/local/java
+  Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+  Using CATALINA_OPTS:   
+  Tomcat started.
   ```
 
-  
+  > 如果 .sh 文件显示为灰色 , 无法执行的话 , 则是因为权限不足 , 使用命令给脚本文件增加执行权限
+  >
+  > ```shell
+  > # 给所有脚本文件增加执行权限
+  > chmod +x *.sh
+  > ```
+  >
+  > 如果希望查看启动详情 , 可以进入Tomcat 的 logs 目录查看 catalina.out 显示日志信息
+
+* 为了在外部能够访问到我们的 tomcat , 我们需要打开防火墙端口 , 记得刷新防火墙
+
+  ```shell
+  # 开放 8080 端口
+  firewall-cmd --zone=public --add-port=8080/tcp --permanent
+  success
+  # 刷新防火墙
+  firewall-cmd --reload
+  success
+  ```
+
+* 仅仅这样是不够的 , 我们还需要打开云控制台安全组的 8080 端口 , 具体如何开启可以查阅笔者之前的 mysql 演示
+
+* 当这些都配置完之后 , 就可以正常访问我们的 Linux 系统中的 Tomcat 啦
