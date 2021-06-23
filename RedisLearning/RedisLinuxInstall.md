@@ -265,4 +265,54 @@
   243268:M 22 Jun 2021 18:04:18.994 # Redis is now ready to exit, bye bye...
   ```
 
-* 
+* Redis 上述的启动方式算是临时服务 , 当开启服务后在当前窗口是无法再继续进行操作的 , 所以我们一般会将 Redis 服务设置为后台启动服务 , 避免 Linux 窗口连接的浪费
+
+* Redis 默认关闭后台服务 , 我们需要打开 redis.conf 文件编辑一下
+
+* 进入 <kbd>/usr/local/redis/bin/conf/</kbd> 目录 , 编辑该目录下的 redis.conf 文件
+
+  ```sh
+  cd /usr/local/redis/bin/conf/
+  vi redis.conf
+  # 修改约221行左右的如下内容
+  daemonize yes
+  ```
+
+  > 使用 <kbd>:set nu</kbd> 可以显示当前显示区域的行号 , 可以通过这种方式快速定位需要修改的地方
+
+* 接下来测试 redis 服务启动
+
+  ```shell
+  # 配置完毕,正常启动redis
+  ./redis-server conf/redis.conf
+  # 可以看到运行成功提示
+  244275:C 23 Jun 2021 08:42:14.720 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+  244275:C 23 Jun 2021 08:42:14.720 # Redis version=6.0.6, bits=64, commit=00000000, modified=0, pid=244275, just started
+  244275:C 23 Jun 2021 08:42:14.720 # Configuration loaded
+  # 检查一下进程服务,获取redis的进程服务
+  ps -ef|grep redis
+  # 结果显而易见,redis启动成功了
+  root      244276       1  0 08:42 ?        00:00:00 ./redis-server 127.0.0.1:6379
+  root      244282  223805  0 08:42 pts/1    00:00:00 grep --color=auto redis
+  
+  ```
+
+* 当我们不再需要 Redis 的时候 , 我们除了删除放在 <kbd>/home/Redis</kbd> 目录下的内容之外 , 还需要做以下操作
+
+  ```shell
+  # 删除解压版源文件
+  rm -rf /home/Redis
+  # 通过客户端连接到运行中的redis服务
+  cd /usr/local/redis/bin/
+  ./redis-cli -p 6379
+  # 关闭服务端连接
+  127.0.0.1:6379> shutdown
+  # 退出客户端
+  not connected> exit
+  # 以防万一,结束相关进程
+  pkill redis
+  # 删除安装目录
+  rm -rf /usr/local/redis
+  ```
+
+* 这样 , 一次完整的 Redis 安装演示就完成了
