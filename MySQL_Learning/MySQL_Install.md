@@ -2,6 +2,8 @@
 
 -----------------
 
+> 笔者常用的是压缩版本 , 无论是 Windows 还是 Linux , 都更趋向于使用压缩版安装 , 但是我会在本篇中添加上安装版本的安装方式 , 请不用担心
+
 ## msi 版本安装
 
 ### 下载
@@ -21,8 +23,154 @@
 ### 安装
 
 * 当我们下载完成之后 , 会获得一个将近 300MB~500MB 的 msi 文件 , 请注意如果你的安装包很小的话在你配置完安装路径之后会自动下载安装包 , 如果你的网络连接外网还是有些小问题的话 , 尽量不要使用这种方式 , 最好去找一个 msi 安装包
+
 * 双击 msi 文件打开安装程序 , 比如我这里的是 <kbd>mysql-installer-community-8.0.25.0.msi</kbd> 
+
+* 安装包打开后会自动安装 MySQL Installer , 这是 MySQL 针对 Windows 的安装版本管理工具
+
+* 一般我们只需要使用 MySQL Server 版本 , 但是这里的话 , 我们就从安装 Developer Default 版本演示
+
+  ![MySQL_Install_msi_1](MySQL_Install_msi_1.png) 
+
+  > 右侧显示了这个版本的介绍以及里面包括的软件内容 , 可以看到这里不仅仅有 MySQL Server
+
+* 点击 Next 进入下一步操作 , 安装管理会提示需要安装一些依赖内容 , 有了这些依赖内容才能去安装相应的软件 , 比如这样的提示
+
+  ![MySQL_Install_msi_2](MySQL_Install_msi_2.png) 
+
+  > 可以看到这里提示为了安装 MySQL for Visual Studio 1.2.9 , 需要安装 2015,2017 或者 2019 版本的 Visual Studio , 我们不需要这些内容 , 可以直接跳过 , 就算以后需要了也可以再从 MySQL Installer 里面安装
+
+* 不管检查依赖项 , 直接跳过此阶段 , 无视之后的警告
+
+  > 警告会提示你如果不安装依赖则相应的软件程序不会被安装 , 是否继续 , 确认继续操作即可
+
+* 接下来会显示即将安装的各个软件 , 点击  Execute 到下一步即可
+
+  ![MySQL_Install_msi_3](MySQL_Install_msi_3.png) 
+
+* 安装会自动进行 , 你可能会好奇软件的安装路径选择页面去哪了 , 不好意思 , 这样整体安装的方式是没法控制软件安装路径的 , 这也是我为什么会选择安装解压版的原因了
+
+  > 其实这个安装路径是可以修改的 , 只不过会麻烦一些 , 在之后我们讨论这个问题
+
+* 等待安装完成之后 , 点击 Next 进入下一步 , 可以看到这样的页面 , 这个页面提示你会有哪些应用需要设置配置信息
+
+  ![MySQL_Install_msi_4](MySQL_Install_msi_4.png) 
+
+  > 我们需要专心配置的是 MySQL Server 的配置文件 , 其余的先不作考虑 , 直接默认设置即可
+
+* 继续 Next , 开始配置 MySQL Server 的内容 , 需要修改的没有很多地方 , 我安装 MySQL 数据库的这台虚拟机是安装的 Windows Server 2019 系统 , 也就是打算拿来作为服务器的 , 所以会将 Development Computer 改成了 Server Computer , 一般自己使用就默认配置 , 即 Development Computer 即可
+
+  ![MySQL_Install_msi_5](MySQL_Install_msi_5.png) 
+
+* 为了演示 , 我这里还是选择了 Development Computer 类型安装 , 继续下一步操作
+
+* 在 Authentication Method 项中 , 会提示选择哪种密码认证方式
+
+  ![MySQL_Install_msi_6](MySQL_Install_msi_6.png) 
+
+* 选择推荐的强密码加密选项 , 继续下一步
+
+  > 一般我们在使用 MySQL 数据库的时候不会安装这种最新版本的数据库 , 而是会安装 5.7 这种常用版本的数据库 , 但是这里仅仅作为安装演示 , 直接全部拉满最新版内容即可
+
+* 设置好 MySQL 数据库中 root 用户的密码 , 我这里设成了 root , 提示密码强度为弱 , 无视继续下一步
+
+  ![MySQL_Install_msi_7](MySQL_Install_msi_7.png) 
+
+* 接下来设置一下 MySQL 服务的名称 , 默认勾选了开机自动启动服务 , 下面还可以设置以哪个 Windows 用户运行服务 , 我们修改一下服务名为 MySQL8 然后直接进入下一步操作
+
+  ![MySQL_Install_msi_8](MySQL_Install_msi_8.png) 
+
+* 接下来是日志设置 , 可以设置日志文件的存放位置以及记录的时间间隔 , 我们可以修改一下也可以不做修改直接使用默认内容
+
+  ![MySQL_Install_msi_9](MySQL_Install_msi_9.png) 
+
+* 接下来提示设置 服务ID 等内容 , 这部分直接默认设置即可 , 需要注意的是 , 下面的 Table Names Case 表示表名大小写的核查 , 一般默认值为 1 也就是不区分大小写 , 在 Linux 中安装的 MySQL 数据库是区分大小写的 , 这点需要注意 , 继续下一步 , 点击 Execute 开始执行 MySQL Server 的安装
+
+  ![MySQL_Install_msi_10](MySQL_Install_msi_10.png) 
+
+* 安装过程很迅速 , 并且会自动初始化数据库和添加服务 , 结束后点击 Finish 完成安装
+
+* 之后会配置 MySQL Router 以及 Samples and Examples 的设置
+
+* 在 MySQL Samples and Examples 的配置中需要输入一下刚刚安装的 MySQL 数据库的用户名和密码 , 点击 Check 成功之后就可以进入下一步了
+
+  ![MySQL_Install_msi_11](MySQL_Install_msi_11.png) 
+
+* 接下来点击完成 , 会跳出一个 CMD 窗口和 MySQL WorkBench 窗口
+
+* CMD 窗口输入 <kbd>\quit</kbd> 即可退出 , MySQL WorkBench 就是一个可视化的数据库管理软件 , 我们一般不使用它 , 自己按个 Navicat 使用即可 , 这样我们这台机器的 MySQL 8.0.25 就算安装成功了
+
+**[PS] 如何将安装版的 MySQL 数据库安装到其他盘符**
+
+> 我们知道安装版会将所有的 MySQL 软件安装到系统盘符 , 如果我们想要修改某个 MySQL 套件中的内容的话要怎么做呢 , 这里笔者演示一下我自己的方法
+
+* 首先在电脑中找到 MySQL Installer , 打开它 , 可以看到这样的界面 , 比如我们需要修改 MySQL Server 的安装路径 , 首先卸掉原有的 MySQL Server , 点选 Remove 选项
+
+  ![MySQL_Install_msi_12](MySQL_Install_msi_12.png) 
+
+* 在页面中勾选需要卸载的软件 , 比如我只要删除 MySQL Server 8.0.25 , 勾选它之后点击 Next
+
+  ![MySQL_Install_msi_13](MySQL_Install_msi_13.png) 
+
+* 选择删除数据库文件夹 , 如果只是更新数据库但是要保留数据文件的话记得取消勾选
+
+  ![MySQL_Install_msi_14](MySQL_Install_msi_14.png) 
+
+* 在接下来的页面中选择 Execute , 完成之后选择 Finish
+
+* 此时返回 MySQL Installer 界面 , 可以看到 MySQL Server 8.0.25 已经不见了
+
+* 接下来我们需要重新安装 MySQL Server , 我这次安装 5.7 版本的 , 点选 Add 选项
+
+  ![MySQL_Install_msi_15](MySQL_Install_msi_15.png) 
+
+* 在接下来的页面中依次展开树形结构
+
+* MySQL Servers → MySQL Server → MySQL Server 5.7 → MySQL Server 5.7.34 - X64
+
+  ![MySQL_Install_msi_16](MySQL_Install_msi_16.png) 
+
+* 点击绿色箭头将其添加进右侧选框中 , 并勾选自定义设置项 , 点击 Next 进入下一步操作
+
+  ![MySQL_Install_msi_17](MySQL_Install_msi_17.png) 
+
+* **[注意]** 这里需要停留一下 , 点选右侧的 MySQL Server 5.7.34 - X64 下方会小字显示 Advanced Options
+
+  ![MySQL_Install_msi_18](MySQL_Install_msi_18.png) 
+
+* 点选它 , 可以看到自定义数据库安装路径以及数据文件的文件夹安装路径
+
+  > 这也是我最不喜欢安装版的一点 , 放个目录隐藏这么深也是没谁了
+
+  ![MySQL_Install_msi_19](MySQL_Install_msi_19.png) 
+
+* 修改成自己想要的路径即可 , 我这台服务器没有挂载硬盘 , 所以只有 C 盘 , 故不修改进行下一步了
+
+* 系统提示没有安装 Microsoft Visual C++ 2013 Redistributable Package (x64)
+
+* 这次就不能直接下一步了 , 我们得自己安装一下这个微软运行库
+
+* 我在本目录中添加了微软运行库的合集安装 , 可以看到它 , 以下是链接
+
 * 
+
+* 安装完成之后回到 MySQL Installer 界面 , 点击 Back 回退一步之后再点击 Next
+
+* 可以看到 Next 按钮已经不是灰色了 , 点击即可进入下一步操作 , 点选 Execute 开始 MySQL 5.7 的下载
+
+  ![MySQL_Install_msi_20](MySQL_Install_msi_20.png) 
+
+* 下载会在 Progress 栏中显示进度 , 当到达 100% 之后本项前面会有相应标志 , 继续下一步即可
+
+  ![MySQL_Install_msi_21](MySQL_Install_msi_21.png) 
+
+* 接下来选择需要安装的内容 , 直接默认全部安装即可
+
+  ![MySQL_Install_msi_22](MySQL_Install_msi_22.png) 
+
+* 接下来的操作类似于 MySQL Server 8.0.25 的安装 , 在这里不做过多介绍了
+
+* 至此 , 如何安装一个安装版的 MySQL 就演示完毕了 , 希望能帮到正在看文档的你
 
 --------------
 
@@ -30,7 +178,7 @@
 
 ----------------------------
 
-> 因为我最常用的就是这个版本 , 所以从这个版本开始说起
+> 安装版会将数据库的配置全部设定好 , 基本不需要我们自己做什么配置 , 但是问题就在于一般安装版 MySQL 会自动安装到系统盘符以增加数据库的安全性和唯一性 , 要想修改必须删除之后重新单独安装 , 费事费力 , 很没有可操作性 , 相比之下 , 解压版虽然安装较为繁琐 , 但是由于每一步都是自己配置了的 , 所以日后使用和维护也更加方便 , 笔者最常用的就是解压版本的 MySQL 数据库 , 所以请尽量从这个版本安装
 
 ### 下载
 
