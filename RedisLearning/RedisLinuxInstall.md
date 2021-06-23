@@ -8,15 +8,15 @@
 
 ### 下载 Redis
 
-* 笔者之前在 MySQL 和 Tomcat 等工具的安装演示中 , 有提到过如何寻找一个软件的压缩版下载链接并通过 wget 下载它 , 这里也使用此方法下载 Redis 解压版包
+* 笔者之前在 MySQL 和 Tomcat 等工具的安装演示中 , 有提到过如何寻找一个软件的压缩版下载链接并通过 wget 下载它 , 这里也使用此方法下载 <font color="#d64366">**Redis**</font> 解压版包
 
-* 首先进入 Redis 官方下载页面 http://www.redis.cn/download.html
+* 首先进入 <font color="#d64366">**Redis**</font> 官方下载页面 http://www.redis.cn/download.html
 
-* 在下面获取到 **Redis 6.0.6** 的下载链接 http://download.redis.io/releases/redis-6.0.6.tar.gz
+* 在下面获取到 <font color="#d64366">**Redis 6.0.6**</font> 的下载链接 http://download.redis.io/releases/redis-6.0.6.tar.gz
 
   ![Redis_Linux_Installing](Redis_Linux_Installing.png) 
 
-  > [ps] 不用在乎这个版本是否是 Windows 版本 , 因为 Redis 是一个明确的 , 只专注于提供 Linux 版本的工具 , 当然它也有 Windows 版本 , 但是不是在这里下载的 , 所以我们直接复制这个下载地址即可
+  > [ps] 不用在乎这个版本是否是 Windows 版本 , 因为 <font color="#d64366">Redis</font> 是一个明确的 , 只专注于提供 Linux 版本的工具 , 当然它也有 Windows 版本 , 但是不是在这里下载的 , 所以我们直接复制这个下载地址即可
 
 * 进入 Linux 系统 , 创建放置解压版包的目录 , 并通过 <kbd>wget</kbd> 命令获取解压版包
 
@@ -44,7 +44,7 @@
   2021-06-22 17:08:47 (89.9 KB/s) - ‘redis-6.0.6.tar.gz’ saved [2228781/2228781]
   ```
 
-* 接下来解压此文件并将其内容递归复制到 <kbd>/usr/local/redis/</kbd> 目录下 , 没有此目录就创建一个 , 具体咋创建不说啦
+* 接下来解压此文件并将其内容递归复制到 <kbd>/usr/local/redis/</kbd> 目录下 , 没有此目录就创建一个 , 具体咋创建下面有
 
   ```shell
   # 解压并解包
@@ -70,7 +70,7 @@
 
 ------------
 
-* 和其他工具一样 , 在安装 Redis 之前我们需要安装相应的依赖环境
+* 和其他工具一样 , 在安装 <font color="#d64366">**Redis**</font> 之前我们需要安装相应的依赖环境
 
 * 首先是 gcc 编译环境 , 这个环境在之前 Nginx 的安装演示中安装过 , 不过没关系 , 我们再运行一遍 , 以防万一
 
@@ -78,13 +78,13 @@
   yum install gcc-c++
   ```
 
-* 有时候可能安装会提示已有此内容 , 可以更新一下 gcc 编译环境
+* 有时候可能安装会提示已有此内容 , 可以更新一下 gcc 编译环境 , 使其保持最新版 , 而且 <font color="#d64366">**Redis**</font> 对此是有要求的
 
   ```shell
   yum upgrad gcc-c++
   ```
 
-* 在这里我们需要查看一下 gcc 的版本 , redis 需要 gcc 达到 5.3 以上的版本
+* 在这里我们需要查看一下 gcc 的版本 , <font color="#d64366">**Redis**</font> 需要 gcc 达到 5.3 以上的版本
 
   ```shell
   # 查看 gcc 版本
@@ -126,7 +126,7 @@
 
 * 既然 gcc 版本已经满足了 , 那么就开始安装 Redis 吧
 
-* 首先进入 Redis 程序目录 <kbd>/usr/local/redis/</kbd> 并执行编译和安装命令
+* 首先进入 <font color="#d64366">**Redis**</font> 程序目录 <kbd>/usr/local/redis/</kbd> 并执行编译和安装命令
 
   ```shell
   # 进入 redis 目录
@@ -137,20 +137,20 @@
   make install
   ```
 
-* 这样配置之后 , Redis 会被安装到默认的 <kbd>/usr/local/bin/</kbd> 目录下 , 可以通过以下命令将其安装在指定位置
+* 这样配置之后 , <font color="#d64366">**Redis**</font> 会被安装到默认的 <kbd>/usr/local/bin/</kbd> 目录下 , 可以通过以下命令将其安装在指定位置
 
   ```shell
   # 安装 Redis 到指定位置
   make install PREFIX=/usr/local/redis
   ```
 
-* 这样会将 Redis 安装到 <kbd>/usr/local/redis/bin/</kbd> 目录下 , <kbd>/bin/</kbd> 目录是 Redis 安装时自动生成的
+* 这样会将 <font color="#d64366">**Redis**</font> 安装到 <kbd>/usr/local/redis/bin/</kbd> 目录下 , <kbd>/bin/</kbd> 目录是 Redis 安装时自动生成的
 
   > 你肯定想已经安到默认路径了但是想换到指定路径要怎么做 , 其实很简单
   >
-  > 首先 Redis 被默认安装到了 <kbd>/usr/local/bin/</kbd> 目录下 , 查看这个目录会看到很多以 <kbd>redis-</kbd> 开头的文件夹
+  > 首先 <font color="#d64366">Redis</font> 被默认安装到了 <kbd>/usr/local/bin/</kbd> 目录下 , 查看这个目录会看到很多以 <kbd>redis-</kbd> 开头的文件夹
   >
-  > 把它们全部删掉然后再将 Redis 安装到指定位置即可
+  > 把它们全部删掉然后再将 <font color="#d64366">Redis</font> 安装到指定位置即可
   >
   > ```shell
   > # 检查 /usr/local/bin/ 目录内容
@@ -187,7 +187,7 @@
   -rwxr-xr-x 1 root root 11224168 Jun 22 17:45 redis-server
   ```
 
-* 接下来 , 把 Redis 程序解压目录中的配置文件放入到 redis 所在的 conf 目录中 , 当然该创建的文件夹还是要创建的
+* 接下来 , 把 <font color="#d64366">**Redis**</font> 程序解压目录中的配置文件放入到 redis 所在的 conf 目录中 , 当然该创建的文件夹还是要创建的
 
   ```shell
   # 创建目录
@@ -202,7 +202,7 @@
   redis.conf
   ```
 
-* 测试启动 Redis , 进入 bin 目录 , 使用命令启动 Redis 服务
+* 测试启动 <font color="#d64366">**Redis**</font> , 进入 bin 目录 , 使用命令启动 <font color="#d64366">**Redis**</font> 服务
 
   ```shell
   # 进入 Redis 的 bin 目录
@@ -238,7 +238,7 @@
   243268:M 22 Jun 2021 18:02:07.496 * Ready to accept connections
   ```
 
-* 不管有多少警告和问题 , 总之 redis 已经 Ready to accept connections 了 , 我们新开一个 shell 窗口尝试去连接它
+* 不管有多少警告和问题 , 总之 <font color="#d64366">**Redis**</font> 表示自己已经 Ready to accept connections ( 准备好接收连接 ) 了 , 我们新开一个 shell 窗口尝试去连接它
 
   ```shell
   # 新开窗口执行命令
@@ -265,9 +265,9 @@
   243268:M 22 Jun 2021 18:04:18.994 # Redis is now ready to exit, bye bye...
   ```
 
-* Redis 上述的启动方式算是临时服务 , 当开启服务后在当前窗口是无法再继续进行操作的 , 所以我们一般会将 Redis 服务设置为后台启动服务 , 避免 Linux 窗口连接的浪费
+* <font color="#d64366">**Redis**</font> 上述的启动方式算是临时服务 , 当开启服务后在当前窗口是无法再继续进行操作的 , 所以我们一般会将 <font color="#d64366">**Redis**</font> 服务设置为后台启动服务 , 避免 Linux 窗口连接的浪费
 
-* Redis 默认关闭后台服务 , 我们需要打开 redis.conf 文件编辑一下
+* <font color="#d64366">**Redis**</font> 默认关闭后台服务 , 我们需要打开 redis.conf 文件编辑一下
 
 * 进入 <kbd>/usr/local/redis/bin/conf/</kbd> 目录 , 编辑该目录下的 redis.conf 文件
 
@@ -297,7 +297,7 @@
   
   ```
 
-* 当我们不再需要 Redis 的时候 , 我们除了删除放在 <kbd>/home/Redis</kbd> 目录下的内容之外 , 还需要做以下操作
+* 当我们不再需要 <font color="#d64366">**Redis**</font> 的时候 , 我们除了删除放在 <kbd>/home/Redis</kbd> 目录下的内容之外 , 还需要做以下操作
 
   ```shell
   # 删除解压版源文件
@@ -315,4 +315,4 @@
   rm -rf /usr/local/redis
   ```
 
-* 这样 , 一次完整的 Redis 安装演示就完成了
+* 这样 , 一次完整的 <font color="#d64366">**Redis**</font> 安装演示就完成了
