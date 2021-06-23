@@ -152,7 +152,7 @@
 
 * 我在本目录中添加了微软运行库的合集安装 , 可以看到它 , 以下是链接
 
-* 
+* https://github.com/CyberYui/LearningNotes/blob/main/MySQL_Learning/MSVBCRT.AIO.2021.06.09.exe
 
 * 安装完成之后回到 MySQL Installer 界面 , 点击 Back 回退一步之后再点击 Next
 
