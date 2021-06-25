@@ -413,7 +413,9 @@
     2021-06-16T10:30:35.063722Z 0 [ERROR] Aborting
     ```
   
-  * 至此应该基本问题都解决了 , 下面再使用 <kbd>net start mysql</kbd> 命令启动数据库 , 应该就成功了的
+  * 至此应该基本问题都解决了 , 通过 <kbd>mysqld --initialize-insecure</kbd> 再次初始化数据库
+  
+  * 下面再使用 <kbd>net start mysql</kbd> 命令启动数据库 , 应该就成功了的
   
   * 接下来进入数据库 , 首次进入数据库应该是没有密码的 , 输入密码阶段直接回车继续即可
   
@@ -422,6 +424,14 @@
     ```
   
   * 至此 , 我们的解压版 MySQL 已经安装成功了
+  
+  * 我们还需要修改一下 root 用户的密码
+  
+    ```shell
+    mysql > set password for root@localhost = password('root');
+    ```
+  
+  * 设置完成后 , 退出一下数据库测试 , 使用密码登入 , 成功即可
   
   * 可以使用命令行或者数据库可视化链接软件 ( 如 Navicat ) 链接数据库了
   
