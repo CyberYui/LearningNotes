@@ -391,9 +391,9 @@
 
   ```shell
   #把安装目录的目录的权限所有者改为root
-  chown -R root:root /usr/database/mysql5.7/      
+  chown -R root:root /usr/local/mysql/      
   #把data目录的权限所有者改为mysql
-  chown -R mysql:mysql /usr/database/mysql5.7/data/   
+  chown -R mysql:mysql /usr/local/mysql/data/   
   ```
 
 * 进入目录确认一下权限
@@ -463,7 +463,10 @@
   You can turn off this feature to get a quicker startup with -A
   
   Database changed
+  # 修改 root 用户的密码为 root
   mysql> update user set authentication_string=password('root') where user='root';
+  # 刷新一下权限
+  mysql> flush privileges;
   Query OK, 1 row affected, 1 warning (0.00 sec)
   Rows matched: 1  Changed: 1  Warnings: 1
   # 结束设置,退出mysql后重新进入
