@@ -450,5 +450,66 @@
 
 ### 布尔型 (Boolean)
 
-* 
+* 布尔类型有 true 和 false 两个值 , 分别表示 真 / 假
+* 布尔型可以和数字型相加 , 此时 true 的值为 1 , false 的值为 0
+
+#### ❤ Undefined 未定义型 和 Null 空值
+
+> 未定义型 也是一种数据类型
+
+* 如果一个变量声明未赋值 , 那它就是 undefined , 即未定义数据类型
+
+```javascript
+var str;
+console.log(str); // undefined
+var variable = undefined;
+console.log(variable + 'pink'); // undefinedpink -- 任何类型和 string 相连,最后都是 字符串型
+console.log(variable + 1); //NaN --- undefined 和数字相加最后的结果为 NaN
+var space = null; // 空值 --- undefined 和空值的区别
+console.log(space + 'pink'); // nullpink
+console.log(space + 1); // 1
+```
+
+* 一个声明后没有被赋值的变量会有一个默认值 undefined ( 注意它与其他数据类型的相连和相加结果 )
+* 一个声明并赋予 null 值的变量 , 里面存储的值为空 ( 在对象中还会用到它 )
+
+#### typeof 检测数据类型
+
+* 一个变量的实际数据类型并不能想当然地判断 , 需要我们通过可靠的程序去检测
+
+```javascript
+var age = 18;
+console.log(typeof var); // number
+var str = 'cyber';
+console.log(typeof(str)); // string --- 不论是空格还是括号包裹,都是可以的
+var flag = true;
+console.log(typeof flag); // boolean
+var vari = undefined;
+console.log(typeof vari); // undefined
+var timer = null;
+vonsole.log(typeof timer); // object
+// 一个有趣的例子
+var realage = prompt('Please press your age');
+console.log(realage);
+console.log(typeof(realage)); // string
+```
+
+* 事实上 , 我们不仅可以通过 typeof 的返回值判断变量的数据类型 , 还可以通过 chrome 浏览器的控制台输出判断
+
+```javascript
+console.log(18); // number -- 藏蓝色
+console.log('18'); // string -- 黑色
+console.log(true); // boolean -- 蓝色
+console.log(undefined); // undefined -- 浅灰色
+console.log(null); // null -- 浅灰色
+```
+
+#### △ 字面量
+
+* 字面量是在源代码中一个固定值的表示法 , 通俗来说 , 就是字面量表示如何表达这个值
+  * 数字字面量 : 8 , 9 , 10
+  * 字符串字面量 : '程序员' , '前端程序员'
+  * 布尔字面量 : true , false
+
+#### ★ 数据类型转换
 
