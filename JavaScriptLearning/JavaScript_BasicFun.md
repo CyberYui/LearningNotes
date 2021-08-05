@@ -204,6 +204,51 @@ console.log(!true); // false
 
 > 将其右侧表达式的结果颠倒 , 如果右侧表达式结果为 true , 逻辑非运算后结果变为 false
 
-#### ★ 相关练习 ( 笔面用 )
+#### 相关练习
+
+```javascript
+var num = 7;
+var str = "I love you my darling~"; // str.length=22
+
+console.log(num >5 && str.length >= num); // true
+console.log(num <5 && str.length >= num); // false
+console.log(!(num < 10)); // false
+console.log(!(num < 10 || str.length == num)); // false
+```
+
+-----------------------
+
+### ★ 逻辑中断 ( 短路运算 )
+
+* 当不是布尔值参与逻辑运算 , 而是值或者表达式参与逻辑运算的时候 , 其结果会有一些不同
+
+* 比如 123 && 456 的时候 , 这种是值或者表达式参与逻辑运算时 , 其结果是什么呢 ?
+
+  ★ **短路运算的原理 :** <font color="#f44d59">当有多个表达式 ( 值 ) 时 , 左边的表达式值可以确定结果时 , 就不再继续运算右边的表达式的值</font> 
+
+-----------------------------
+
+#### 逻辑与短路
+
+* 语法 : <font color="#f44d59">表达式1 && 表达式2</font> 
+
+* 如果第一个表达式的值为真 , 则返回 表达式2
+
+* 如果第一个表达式的值为假 , 则返回 表达式1
+
+  ```javascript
+  console.log(123 && 456); // 456
+  console.log(0 && 456); // 0
+  console.log(0 && 456 && 1+3 && 68465); // 0
+  ```
+
+* 表示假的值有 : <font color="#f44d59">**0**</font> , <font color="#f44d59">**' '**</font> , <font color="#f44d59">**null**</font> , <font color="#f44d59">**undefined**</font> , <font color="#f44d59">**NaN**</font> 
+
+* 除了上述的几种假值之外 , 其余的值均为真
+
+------------
+
+#### 逻辑或短路
 
 * 
+
