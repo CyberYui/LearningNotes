@@ -382,9 +382,9 @@ console.log('average is ' + average);
 * **代码验证** : 
 
   ```javascript
-  for (let i = 1; i <= 3; i++){
+  for (let i = 1; i <= 3; i++) {
       console.log('这是外层的第' + i + '次循环');
-      for (let j = 1; j <= 4; j++){
+      for (let j = 1; j <= 4; j++) {
           console.log('这是内层的第' + j + '次循环');
       }
   }
