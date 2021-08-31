@@ -117,6 +117,7 @@ if (条件1){
 let num = 10;
 var result = num > 5 ? 'yes' : 'nope'; // 返回 yes
 console.log(result);
+// 上述三元表达式功能类似于以下代码
 // if (num > 5){
 //     result = 'yes';
 // }else{
@@ -124,3 +125,91 @@ console.log(result);
 // }
 ```
 
+##### 案例 : 数字补0
+
+> 要求 : 
+>
+> 用户输入数字 , 如果数字小于10 , 则在前面补0 , 比如 01 , 09
+>
+> 如果数字大于 10 , 则不需要补 , 比如 20
+
+> 思路 :
+>
+> 通过一个判断就能解决 , >10 的情况以及 <10 的情况
+
+```javascript
+let time = prompt("plz press a number in 0~59");
+// 使用三元表达式返回值,一行代码搞定业务
+let result = time < 10 ? '0'+time : time;
+alert(result);
+```
+
+---------------------------------
+
+#### switch 语句
+
+* switch 语句也是一种多分支语句 , 用于基于不同条件执行不同的代码
+
+* 当要针对变量设置一系列的<font color=#f370de>特定值</font>的选项时 , 就可以使用 switch 语句
+
+* **语法结构** : switch 意为开关 , case 表示小例子或者选项的意思
+
+  ```javascript
+  switch(表达式) {
+      case value1:
+          // 表达式 等于 value1 时的执行语句;
+          break;
+      case value2:
+          // 执行语句2;
+          break;
+          ...
+      case valuen:
+          // 执行语句n;
+          break;
+      default:
+          // 执行最后的/没有匹配的语句;
+          // 这里可以不用break,因为switch句柄只会执行一轮
+  }
+  ```
+
+* **执行思路** : 
+
+* 表达式的值须和 case 之后的选项值相匹配
+
+* 如果匹配上 , 就执行该 case 中的语句 ; 
+
+* 如果没有匹配上 , 那么执行 default 里面的语句
+
+```javascript
+// 代码示例
+let yourCase = prompt('your case');
+switch (yourCase){
+    case 1:
+        console.log('case 1');
+        break;
+    case 2:
+        console.log('case 2');
+        break;
+    default:
+        alert('This is default');
+        break;
+}
+```
+
+##### Switch 的注意事项
+
+* 在开发时 , 一般将 switch 句柄中的表达式写为一个变量
+
+* 在匹配时 , 表达式的值和 case 后的值是全等 ( === ) 的匹配关系 , 即数值和数据类型都相等
+
+* break 并不是必须写的内容 , 但是为了防止依序执行程序导致选项无效 , 加上 break 可以实现执行跳转
+
+  > 依序执行程序 : 即如果当前的 case 里面没有 break 则不会退出 switch 句柄 , 而是继续执行下一个 case
+
+------------------------------
+
+#### switch 语句和 if-else类 语句的区别
+
+* 一般情况下 , 两者是可以相互替换的
+* **switch 语句** 通常用于处理 case 值较为确定的情况
+* **if-else** 语句更加灵活 , 常用于范围判断 ( 大于 , 等于某个范围的情况 )
