@@ -8,9 +8,17 @@
   </head>
   <body></body>
   <script>
-    let time = prompt("plz press a number in 0~59");
-    // 使用三元表达式返回值
-    let result = time < 10 ? "0" + time : time;
-    alert(result);
+    let sum = 0;
+    let average = 0;
+    let num = prompt("plz press num of class");
+    for (let i = 1; i <= num; i++) {
+      average = prompt(
+        "plz enter the score of the number of " + i + " student"
+      );
+      sum = sum + average;
+    }
+    console.log("sum is " + sum);
+    average = sum / num;
+    console.log("average is " + average);
   </script>
 </html>
