@@ -8,17 +8,25 @@
   </head>
   <body></body>
   <script>
-    let sum = 0;
-    let average = 0;
-    let num = prompt("plz press num of class");
-    for (let i = 1; i <= num; i++) {
-      average = prompt(
-        "plz enter the score of the number of " + i + " student"
-      );
-      sum = sum + average;
+    let starS = ""; // 用来保存乘法表
+    let strTe = ""; // 用来保存单个式子
+    for (let i = 1; i <= 9; i++) {
+      // 每一行的式子数刚刚好就是行数,使用j<=i来实现这个效果
+      for (let j = 1; j <= i; j++) {
+        // 每个式子都有 a*b=c 这样的形式
+        strTe = j + "x" + i + "=" + i * j;
+        // 当结果大于10后会多占用空格,所以为了格式化需要做这样一个判断
+        // if (i * j >= 10) {
+        //   starS = starS + strTe + " ";
+        // } else {
+        //   starS = starS + strTe + "  ";
+        // }
+        // 使用下面的代码也可以达到上述效果,且不需要判断,就是使用换行符
+        starS = starS + strTe + '\t';
+      }
+      // 每行换行
+      starS = starS + "\n";
     }
-    console.log("sum is " + sum);
-    average = sum / num;
-    console.log("average is " + average);
+    console.log(starS); // 打印乘法表
   </script>
 </html>
