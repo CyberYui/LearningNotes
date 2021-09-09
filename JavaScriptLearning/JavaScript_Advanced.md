@@ -657,11 +657,44 @@ console.log(sum);
   5. 如果显示余额 , 就直接显示
   6. 如果退出 , 就弹出退出提示
 
-
-
-
-
-
+```javascript
+let money = 100;
+let tempMoney = 0;
+while (money) {
+  let yourcase = prompt("Plz press the thing you want to do:\n1.Save money\n2.Take money\n3.Show your money\n4.Exit the ATM");
+  switch (yourcase) {
+    case "1":
+      tempMoney = prompt("Plz enter the money you save:");
+      money = money + parseFloat(tempMoney);
+      if (money < 0) {
+        alert("You are a poor guy now , go get your money!");
+      } else {
+        alert("You have " + money + " RMB now.");
+      }
+      break;
+    case "2":
+      tempMoney = prompt("Plz enter the money you take:");
+      money = money - parseFloat(tempMoney);
+      if (money < 0) {
+        alert("You are a poor guy now , go get your money!");
+      } else {
+        alert("You have " + money + " RMB now.");
+      }
+      break;
+    case "3":
+      if (money < 0) {
+        alert("You are a poor guy now , go get your money!");
+      } else {
+        alert("You have " + money + " RMB now.");
+      }
+      break;
+    case "4":
+      money = null;
+      alert("You have exit the ATM now.");
+      break;
+  }
+}
+```
 
 --------------------------------------
 
