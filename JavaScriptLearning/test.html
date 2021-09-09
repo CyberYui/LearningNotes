@@ -8,16 +8,14 @@
   </head>
   <body></body>
   <script>
-    let starS = "";
-    for (let i = 1; i <= 10; i++) {
-      for (let j = i; j <= 10; j++) {
-        starS = starS + "  ";
+    let sum = 0;
+    for (let i = 1; i <= 100; i++) {
+      if (i % 10 == 3) {
+        continue;
       }
-      for (let j = 11 - (2 * i - 1); j <= 10; j++) {
-        starS = starS + "★";
-      }
-      starS = starS + "\n";
+      console.log("i is " + i);
+      sum += i;
     }
-    console.log(starS);
+    console.log(sum);
   </script>
 </html>
