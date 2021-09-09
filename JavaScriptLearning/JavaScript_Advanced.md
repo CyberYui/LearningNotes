@@ -525,10 +525,137 @@ console.log(str_block);
 * **执行思路** : 
 
   1. 先执行条件表达式 , 若结果为 true , 则执行循环体代码 ; 如果为 false , 则退出循环 , 执行后面的代码
-  2. 执行循环体代码
+  2. 执行循环体代码 , 需要注意的是 , 操作表达式 ( 计数器加减 ) 是写在循环体中的
   3. 循环体代码执行完毕之后 , 程序会继续判断执行条件表达式 , 如果条件仍为 true , 则会继续执行循环体 , 直到循环条件为 false 时 , 整个循环过程才会结束
 
+  ```javascript
+  let num = 1;
+  while (num <= 100){
+      console.log('This is the ' + num + ' times');
+      num++; // 千万别写成死循环
+  } // 正好100句
+  ```
 
+* 优势 :
+
+  * 相比于 for 循环 , while 循环能够进行更为复杂的判断 , 比如字符串是否相等
+
+    ```javascript
+    let message = prompt('Do you love me?');
+    // while能判断一些更为复杂的情况
+    while (message !== 'Yes'){
+        message = prompt('Do you love me?');
+    }
+    alert('I love you too ~~');
+    ```
+
+------------------------
+
+#### do-while 循环
+
+* do-while 循环其实是 while 循环的变体 , 其循环结构为 : 
+
+  ```javascript
+  // do-while loop
+  do {
+      // 循环体
+  } while (条件表达式)
+  ```
+
+* **执行思路** : 
+
+  1. 与 while 不同的是 , do-while 会先执行一次循环体 , 之后再进行判断 , 若判断为真则继续迭代 , 否则跳出循环
+  2. 也就是 do-while 循环必定会执行一次循环体
+
+  ```javascript
+  let i = 1;
+  do {
+      console.log('This is the ' + i + ' times');
+      i++;
+  } while ( i <= 10 )
+  // 同样的,do-while也可以进行一些特殊的判断条件
+  let message = '';
+  do {
+      message = prompt('Do you love me?');
+  } while ( message !== 'Yes' )
+  alert('I love you too~~');
+  ```
+
+-------------------
+
+#### 循环小结
+
+* 循环有 for , while , do-while 循环三种 , 最重要的是 for 循环 , 它是工作中最常用的
+* 三种循环大部分情况下可以相互替代 , 在循环条件只是与数字相关时 , 更推荐用 for 循环
+* while 和 do-while 循环可以做更加复杂的判断 , 比 for 循环灵活
+* while 和 do-while 的区别在于循环的执行顺序不同 , do-while 总会先执行一次循环体 , while 可能不执行
+
+---------------
+
+#### continue 和 break
+
+* **continue**关键字用于<font color="#c4332f">**立即跳出本次循环**</font> , 继续进行之后的循环 ( 循环体中 continue 后的代码会被跳过 )
+
+  ```javascript
+  for ( let i = 1; i <= 5; i++){
+      if (i == 3){
+          // 遇见continue,直接跳过之后的循环体
+          continue;
+      }
+      console.log('This is the ' + i + ' times');
+  }
+  ```
+
+* 案例 : 求 1~100 之间 , 除了能被 7 整除之外的数代码如下
+
+  ```javascript
+  for ( let i = 1; i <= 100; i++){
+      if ( i % 7 == 0){
+          continue;
+      }
+      console.log(i);
+  }
+  ```
+
+* **break**关键字用于<font color="#c4332f">**跳出整个循环**</font> ( 直接结束循环 )
+
+* 比如按照顺序输出 1~100 的数 , 当输出的数为 33 时 , 直接跳出循环
+
+  ```javascript
+  for ( let i = 1; i <= 100; i++){
+      if ( i == 33 ){
+          console.log(i);
+          break;
+      }
+      console.log(i);
+  }
+  ```
+
+--------------------
+
+### 案例
+
+* 求整数 1~100 的累加值 , 但要求跳过所有个位为3的数
+
+```javascript
+let sum = 0;
+for ( let i = 1; i <= 100; i++){
+    if ( i % 10 == 3 ){
+        continue;
+    }
+    console.log('i is ' + i);
+    sum += i;
+}
+console.log(sum);
+```
+
+* 可以创建一个简单的文字 ATM 机 , 要求为 : 
+  1. 里面原本有 100 块
+  2. 有四种情况 , 取钱 , 存钱 , 显示余额 , 退出
+  3. 如果存钱 , 就输入存的钱 , 之后提示余额
+  4. 如果取钱 , 就输入取的钱 , 之后提示余额
+  5. 如果显示余额 , 就直接显示
+  6. 如果退出 , 就弹出退出提示
 
 
 
