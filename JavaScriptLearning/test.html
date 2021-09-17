@@ -8,43 +8,20 @@
   </head>
   <body></body>
   <script>
-    let money = 100;
-    let tempMoney = 0;
-    while (money) {
-      let yourcase = prompt(
-        "Plz press the thing you want to do:\n1.Save money\n2.Take money\n3.Show your money\n4.Exit the ATM"
-      );
-      switch (yourcase) {
-        case "1":
-          tempMoney = prompt("Plz enter the money you save:");
-          money = money + parseFloat(tempMoney);
-          if (money < 0) {
-            alert("You are a poor guy now , go get your money!");
-          } else {
-            alert("You have " + money + " RMB now.");
-          }
-          break;
-        case "2":
-          tempMoney = prompt("Plz enter the money you take:");
-          money = money - parseFloat(tempMoney);
-          if (money < 0) {
-            alert("You are a poor guy now , go get your money!");
-          } else {
-            alert("You have " + money + " RMB now.");
-          }
-          break;
-        case "3":
-          if (money < 0) {
-            alert("You are a poor guy now , go get your money!");
-          } else {
-            alert("You have " + money + " RMB now.");
-          }
-          break;
-        case "4":
-          money = null;
-          alert("You have exit the ATM now.");
-          break;
-      }
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    // 从0开始就不要再等于10了,否则得有11个元素才行
+    for (let i = 0; i < 10; i++) {
+      console.log(arr[i]);
     }
+    // 多加一步,计算数组的平均数
+    let sum = 0;
+    let average = 0;
+    for (let i = 0; i < arr.length; i++) {
+      sum += arr[i];
+    }
+    average = sum / arr.length;
+    console.log("The average of array is : " + average);
+    // 输出多个变量,用逗号分隔即可
+    console.log(sum, average);
   </script>
 </html>
