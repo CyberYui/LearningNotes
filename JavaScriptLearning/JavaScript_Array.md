@@ -102,7 +102,83 @@ var arr = [1,2,3,4,5];
 #### 案例A-求数组最大值
 
 > 按照冒泡排序的思路 , 通过一个元素不断打擂台从而确定此元素是最大值
+>
+> 求一个数组元素中的最小值同理
 
 ```javascript
+let arr = [12,58,46,33,11,18,99,55,44,125];
+let maxNum = 0;
+for(let i = 0; i < arr.length; i++){
+    if(arr[i] > maxNum){
+        maxNum = arr[i];
+    }else{
+        continue;
+    }
+}
+console.log('The max number of this array is :' + maxNum);
 ```
 
+#### 案例B-数组转换为分割字符串
+
+> 在日常处理 JSON 格式内容的时候 ( 比如爬虫或者读取数据内容 ) , 经常需要分割字符串并将其内容保存在一个数组中 , 这里的这个案例能很好地帮助我们思考这种行为之后的行为
+
+```javascript
+// 假如我们切割出了这样一段文字,我们需要对其进行处理
+let arr = ['red','green','black','blue','yellow'];
+let str = '';
+let sep = '!';
+for(let i = 0; i < arr.length; i++){
+    str += arr[i] + sep;
+}
+console.log(str);
+```
+
+### ★数组新增元素
+
+* 当我们发现一个已有数组无法满足需求的时候 , 想要不修改其内容的情况下添加新内容 , 有以下方法可以实现这个效果
+
+-------------------
+
+#### **通过修改 length 长度添加元素**
+* length 属性是可读写的~
+
+  ```javascript
+  let arr = ['red','green','black'];
+  console.log(arr.length);
+  // 手动修改数组长度
+  arr.length = 5;
+  console.log(arr); // 结果为 ['red','green','black',empty x 2]
+  console.log(arr[4]); // undefined
+  ```
+
+-------------------
+
+#### **通过索引号增加元素**
+
+* 换句话说 , 就是直接追加元素 , 如果索引是已经有内容的 , 内容会被替换
+
+  ```javascript
+  let arr = ['red','green','black'];
+  arr[3] = 'pink';
+  console.log(arr); // ['red','green','black','pink']
+  arr = 'Final'; // 直接赋值给数组会将数组变成一个字符串变量
+  ```
+
+  > 这种直接追加的方式更为常用
+
+* 我们有时候可以通过循环创建数组 , 之后需要添加内容的话直接修改下循环计数器即可
+
+  ```javascript
+  // 给数组里依次填入数字,只使用循环计数器即可实现
+  let arr = [];// 要给数组添加100个数字,直接输入要疯掉
+  for(let i = 0; i < 100; i++){
+      arr[i] = i + 1;
+  }
+  console.log(arr);
+  ```
+
+------------
+
+#### 案例C-筛选数组
+
+* 
