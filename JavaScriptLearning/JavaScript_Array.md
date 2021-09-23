@@ -181,4 +181,34 @@ console.log(str);
 
 #### 案例C-筛选数组
 
-* 
+* 要求就是将一个数组中大于或者小于 N 的数筛选出来,形成一个新的数组
+
+  ```javascript
+  // 方法1
+  let arr = [2,0,6,1,77,0,52,0,25,7,94,55,33,12,8];
+  let resultArr = [];
+  let counter = 0;
+  for(let i = 0; i < arr.length; i++){
+      if(arr[i] > 10){
+          resultArr[counter] = arr[i];
+          counter++;
+      }else{
+          continue;
+      }
+  }
+  console.log(resultArr);
+  // 方法2
+  // 我们知道数组的长度会自动变化,借此可以省略计数器
+  let arr = [2,0,6,1,77,0,52,0,25,7,94,55,33,12,8];
+  let resultArr = [];
+  for(let i = 0; i < arr.length; i++){
+      if(arr[i] > 10){
+          resultArr[resultArr.length] = arr[i];
+      }else{
+          continue;
+      }
+  }
+  ```
+
+  
+

@@ -8,20 +8,17 @@
   </head>
   <body></body>
   <script>
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    // 从0开始就不要再等于10了,否则得有11个元素才行
-    for (let i = 0; i < 10; i++) {
-      console.log(arr[i]);
-    }
-    // 多加一步,计算数组的平均数
-    let sum = 0;
-    let average = 0;
+    let arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7, 94, 55, 33, 12, 8];
+    let resultArr = [];
+    let counter = 0;
     for (let i = 0; i < arr.length; i++) {
-      sum += arr[i];
+      if (arr[i] > 10) {
+        resultArr[counter] = arr[i];
+        counter++;
+      } else {
+        continue;
+      }
     }
-    average = sum / arr.length;
-    console.log("The average of array is : " + average);
-    // 输出多个变量,用逗号分隔即可
-    console.log(sum, average);
+    console.log(resultArr);
   </script>
 </html>
