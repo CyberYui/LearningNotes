@@ -6,13 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body style="background-color: black">
+    <!-- 设置一下背景色,护眼保平安 -->
+  </body>
   <script>
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    let newArr = [];
-    for (let i = arr.length - 1; i >= 0; i--) {
-      newArr[newArr.length] = arr[i];
+    let arr = [1, 5, 2, 4, 6, 3, 9, 8, 7, 10, 15, 14, 12, 13, 11];
+    let tempNum;
+    for (let j = 0; j < arr.length - 1; j++) {
+      tempNum = arr[0];
+      for (let i = 1; i < arr.length - j; i++) {
+        if (arr[i] <= tempNum) {
+          tempNum = arr[i];
+        } else {
+          arr[i - 1] = arr[i];
+          arr[i] = tempNum;
+        }
+      }
     }
-    console.log(newArr);
+    console.log(arr);
   </script>
 </html>

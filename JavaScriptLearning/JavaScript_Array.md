@@ -250,21 +250,73 @@ console.log(str);
 
   ```javascript
   // 一般调用冒泡排序,仅仅针对一个数组进行操作
-  let arr = [1,5,2,4,6,3,9,8,7,10,15,14,12,13,11];
-  function(arr[]){
-      // 临时用于交换数的变量
-      let maxNum,tempNum;
-      maxNum = 0;
-      for(let i = 0; i < arr.length; i++){
-          if(arr[i] > ){
-              maxNum = arr[i];
-              temp = arr[i];
-          }else{
-              
-          }
+  let arr = [1, 5, 2, 4, 6, 3, 9, 8, 7, 10, 15, 14, 12, 13, 11];
+  //*******************************冒泡排序开始*******************************
+  
+  // 临时用于交换数的变量,声明在外面就不需要每次循环都创建它了
+  let tempNum;
+  // 每次都会对比两个数,这样算下来每次只需要执行比数组长度少一的轮次即可 
+  for (let j = 0; j < arr.length - 1; j++) {
+    // 临时变量在每轮循环都初始化
+    tempNum = arr[0];
+    // 每一轮都会摆好一个数,且在最后,而此时外层循环变量刚刚好会加一
+    // 由此可知内层需要比较的次数即数组长度减去轮数即可
+    for (let i = 1; i < arr.length - j; i++) {
+      // 临时变量存的是前一个数,这里直接从第二个数即索引为一的元素开始比较
+      if (arr[i] >= tempNum) {
+        // 若元素大于临时变量,则保存此元素内容给临时变量
+        // 第二个元素要是大于第一个元素,那么也不需要换位置了,直接下一步即可
+        tempNum = arr[i];
+      } else {
+        // 若元素小于临时变量,由于临时变量存的是前一个数的值,则交换这两个位置的元素
+        arr[i - 1] = arr[i];
+        arr[i] = tempNum;
       }
-      
+    }
   }
+  
+  //*******************************冒泡排序结束*******************************
+  
+  // 输出数组检查结果
+  console.log(arr);
+  ```
+  
+* 上面的注释可能太多了,这里是没有注释的版本
+
+  ```javascript
+  let arr = [1, 5, 2, 4, 6, 3, 9, 8, 7, 10, 15, 14, 12, 13, 11];
+  let tempNum;
+  for (let j = 0; j < arr.length - 1; j++) {
+    tempNum = arr[0];
+    for (let i = 1; i < arr.length - j; i++) {
+      if (arr[i] >= tempNum) {
+        tempNum = arr[i];
+      } else {
+        arr[i - 1] = arr[i];
+        arr[i] = tempNum;
+      }
+    }
+  }
+  console.log(arr);
   ```
 
-  
+* 同理实现由小到大排列 , 把判断条件的大于等于改成小于等于即可
+
+  ```javascript
+  let arr = [1, 5, 2, 4, 6, 3, 9, 8, 7, 10, 15, 14, 12, 13, 11];
+  let tempNum;
+  for (let j = 0; j < arr.length - 1; j++) {
+    tempNum = arr[0];
+    for (let i = 1; i < arr.length - j; i++) {
+      if (arr[i] <= tempNum) {
+        tempNum = arr[i];
+      } else {
+        arr[i - 1] = arr[i];
+        arr[i] = tempNum;
+      }
+    }
+  }
+  console.log(arr);
+  ```
+
+* [PS] : 冒泡排序只是一种最简单的算法 , 其实排序甚至其他有关数组的算法还有很多 , 之后可以在算法部分专门看这些内容 , 而不是再回来写到数组这里
