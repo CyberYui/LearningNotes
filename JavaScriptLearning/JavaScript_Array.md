@@ -209,6 +209,26 @@ console.log(str);
       }
   }
   ```
-
   
+* 删除指定元素的案例和这个思路差不多 , 只是条件改变了
 
+  > 需要注意的就是<font color="#6fe2ff">**通过 length 可以实现消除额外计数器的效果**</font> 
+
+#### 案例D-翻转数组
+
+* 顾名思义 , 就是把一个数组元素的个数翻过来存放 , 类似于栈的操作 , 后进先出
+
+  ```javascript
+  let arr = [1,2,3,4,5,6,7,8,9,10];
+  let newArr = [];
+  // 长度和索引差一,少一个就要添上等于的条件
+  for(let i = arr.length - 1; i >= 0; i--){
+      // newArr长度是不断增加的
+      newArr[newArr.length] = arr[i];
+  }
+  console.log(newArr);
+  ```
+
+### ★数组排序-冒泡排序
+
+* 
