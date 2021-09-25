@@ -10,19 +10,14 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    let arr = [1, 5, 2, 4, 6, 3, 9, 8, 7, 10, 15, 14, 12, 13, 11];
-    let tempNum;
-    for (let j = 0; j < arr.length - 1; j++) {
-      tempNum = arr[0];
-      for (let i = 1; i < arr.length - j; i++) {
-        if (arr[i] <= tempNum) {
-          tempNum = arr[i];
-        } else {
-          arr[i - 1] = arr[i];
-          arr[i] = tempNum;
-        }
+    function calcuAve(start, end) {
+      let aveNum = 0;
+      for (let i = start; i <= end; i++) {
+        aveNum += i;
       }
+      aveNum = aveNum / (end - start + 1);
+      console.log(aveNum);
     }
-    console.log(arr);
+    calcuAve(2,6);
   </script>
 </html>
