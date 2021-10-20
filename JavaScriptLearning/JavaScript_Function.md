@@ -255,5 +255,18 @@
   console.log(result);
   ```
 
+-----------------
+
+#### 案例C-素数判断
+
+* 用户输入一个数 , 判断这个数是否为素数 ( 即质数 , 只能被 1 和自身整除的数 ) , 并返回结果
+
+  ```javascript
+  // prime number 素数,质数
+  function isPrime(a){
+      
+  }
+  ```
+
   
 
