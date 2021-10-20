@@ -121,7 +121,7 @@
 
 * 但是 , 在 JavaScript 中 , 是没有这种规定的 , 我们建议延续 Java 的习惯 , 形参和实参个数相匹配
 
-#### △形参实参匹配问题
+#### △ 形参实参匹配问题
 
 * 对于下面这一段代码
 
@@ -141,6 +141,14 @@
   | 实参个数 > 形参个数 |             只取到形参的个数              |
   | 实参个数 < 形参个数 | 多的形参定义为 undefined , 返回结果为 NaN |
 
+#### 小结
+
+* 函数既可以带参数也可以不带参数
+* 声明函数的时候 , 函数名括号里面的是形参 , 形参的默认值为 undefined
+* 调用函数的时候 , 函数名括号里面的是实参
+* 多个参数之间用逗号分隔
+* 形参的个数和实参的个数可以不匹配 , 但是尽量保证一一对应
+
 --------------------
 
 #### 案例A-求平均数
@@ -159,4 +167,93 @@
   calcuAve(2,6); // 4
   ```
 
+
+---------------
+
+### 函数的返回值
+
+* 我们使用函数的时候 , 往往是为了完成一系列有区别 , 但不完全相同的重复工作 , 这时候 , 在函数中写一些死语句就很不靠谱了 , 我们需要让函数能够处理我们给定的变量 , 并将处理的结果给我们 , 此时 , 我们就需要函数的返回值了
+* 在实际中 , 我们希望函数将值返回给调用者 , 此时 , 就需要使用 return 语句来返回了
+
+#### return 语句
+
+* 函数返回内容的格式
+
+  ```javascript
+  // 函数只是实现某种功能,最终的结果通过return语句返回给调用者
+  function functionName(){
+      // 函数处理完毕,返回需要返回的结果
+      return resultNeeded;
+  }
+  // 变量调用函数,并保存返回值
+  let result1 = functionName();
+  ```
+
+* 以下是一个简单的返回值的例子
+
+  ```javascript
+  function getSomething(a,b){
+      return a + b;
+      // return终止函数
+      alert('这句话永远都不会被执行');
+  }
+  let getSome = getSomething(1,2);
+  console.log(getSome); // 3
+  ```
+
+#### ★ return 语句特点
+
+* **[ return 终止函数 ]** 在上面的例子中 , return 语句之后有一句 alert 语句 , 这句话永远都不会被执行 , 这是因为执行完 return 语句之后 , 函数就算是执行完毕了 , 因此 return 语句之后的内容都不会被执行
+* <font color="#fa9406">**return 只能返回一个值**</font> , 如果用逗号隔开多个值 , 以最后一个值为准进行返回 
+* **如果想返回多个值的话 , 就需要使用数据结构了 , 你可以使用数组 , 使用 map 或者使用对象等结构返回内容** 
+* 如果一个函数没有 return 语句 , 那么它也有返回值 , 其返回值为 undefined 
+
+#### break continue return 的区别
+
+* break : 结束当前的循环体 ( 如 for , while )
+* continue : 跳出本次循环 , 继续执行下次循环 ( 如 for , while )
+* return : 不仅可以退出循环 , 还能够返回 return 语句中的值 , 同时还可以结束当前的函数体内的代码
+
+---------------
+
+#### 案例B-求最大值
+
+* 函数操作给定的两个实参 , 据此计算出两个数的最大值并返回 ( 复习三元表达式 )
+
+  ```javascript
+  // a>b吗?若大于则返回a,否则返回b
+  function getMaxNum(a,b){
+      if(a > b){
+          return a;
+      }else{
+          return b;
+      }
+  }
+  // 其实可以使用三元运算符,一行代码就能解决问题
+  function getMaxNumFixed(a , b){
+      // a>b吗?若大于则返回a,否则返回b
+      return a > b ? a : b;
+  }
+  ```
+
+* 更进一步 , 若要在一个数组中求最大值的话 , 我们不仅需要函数 , 还需要循环
+
+  ```javascript
+  let myArr = [5,2,99,101,67,77,98,55,123];
+  function getMaxNum(arr){
+      let maxNum = arr[0];
+      // 从第0个数存起,则从第一个数比起
+      for(let i = 1; i < arr.length; i++){
+          if(arr[i] > maxNum){
+              maxNum = arr[i];
+          }
+      }
+      return maxNum;
+  }
+  // 实际中我们经常使用一个变量来接受函数的返回结果
+  let result = getMaxNum(myArr);
+  console.log(result);
+  ```
+
   
+

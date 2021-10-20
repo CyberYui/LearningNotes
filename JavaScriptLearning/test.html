@@ -10,14 +10,17 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    function calcuAve(start, end) {
-      let aveNum = 0;
-      for (let i = start; i <= end; i++) {
-        aveNum += i;
+    let myArr = [5, 2, 99, 141, 67, 77, 98, 55, 173];
+    function getMaxNum(arr) {
+      let maxNum = arr[0];
+      // 从第0个数存起,则从第一个数比起
+      for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > maxNum) {
+          maxNum = arr[i];
+        }
       }
-      aveNum = aveNum / (end - start + 1);
-      console.log(aveNum);
+      return maxNum;
     }
-    calcuAve(2,6);
+    console.log(getMaxNum(myArr));
   </script>
 </html>
