@@ -270,3 +270,9 @@
 
   
 
+---------------
+
+### △Arguments 的使用
+
+* 当我们不确定有多少个参数传递的时候 , 可以使用 <font color="#d0bfea">arguments</font> 来获取 , 在 JS 中 , arguments 实际上是当前函数的一个<font color="#d0bfea">内置对象</font> 
+* 所有函数都内置了一个 arguments 对象 , <font color="#d0bfea">arguments 对象中存储了传递的所有实参</font> 
