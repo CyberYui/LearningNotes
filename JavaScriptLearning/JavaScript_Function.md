@@ -264,10 +264,21 @@
   ```javascript
   // prime number 素数,质数
   function isPrime(a){
-      
+      if(a <= 1){
+          alert('Not a normal number !');
+      }else{
+          for( let i = 2; i < a; i++){
+              if ( a % i != 0){
+                  continue;
+              }else{
+                  alert('Not a prime number !');
+              }
+          }
+          alert('Prime number !');
+      }
   }
   ```
-
+  
   
 
 ---------------
