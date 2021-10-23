@@ -285,10 +285,101 @@
   console.log(isPrime(num));
   ```
   
+* **[ 延伸 ]** : 求两个数的最大公约数
+
+* 任意给定两个数 , 判断这两个数的最大公约数
+
+* 思路很简单 , 利用更相减损法 , 即首先判断两个数是否为偶数 , 若是则用 2 先约简一次 , 若是奇数则跳过此步
+
+* 之后用较大的数减较小的数 , 接着把所得的差与较小的数比较 , 并以大数减小数 , 持续此操作 , 直到减数和差相等为止
+
+  ```javascript
+  // 首先判断是否为奇数或偶数,先写一个对任意数判断的情况
+  function isOdd(a) {
+    if (a < 1) {
+      // 如果输入了错误的数则抛出异常
+      throw SyntaxError();
+    } else {
+      if (a % 2 == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  // 接下来利用这个函数进行计算最大公约数
+  function maxDivisor(a, b) {
+    // 判断a的奇偶性
+    if (isOdd(a) == true) {
+      // 是奇数,不做任何事
+    } else {
+      a = a / 2;
+    }
+    // 判断b的奇偶性
+    if (isOdd(b) == true) {
+      // 是奇数,不做任何事
+    } else {
+      b = b / 2;
+    }
+    // 计算最大公约数
+    while (a != b) {
+      // 总归要执行减法,所以判断谁大就可以了,以免减出负数
+      if (a < b) {
+        b = b - a;
+      } else {
+        a = a - b;
+      }
+    }
+    // 最后二者相等,输出哪个都一样
+    return a;
+  }
+  console.log(maxDivisor(319, 377)); // 29
+  ```
+
+  
 
 ---------------
 
 ### △Arguments 的使用
 
 * 当我们不确定有多少个参数传递的时候 , 可以使用 <font color="#d0bfea">arguments</font> 来获取 , 在 JS 中 , arguments 实际上是当前函数的一个<font color="#d0bfea">内置对象</font> 
-* 所有函数都内置了一个 arguments 对象 , <font color="#d0bfea">arguments 对象中存储了传递的所有实参</font> 
+
+* 需要注意的是 , **有且仅有所有函数内置了** arguments 对象 , 并且 <font color="#d0bfea">arguments 对象中</font><font color="#86eb40">**存储了传递过来的所有实参**</font> 
+
+  ```javascript
+  function newFn(){
+      // Arguments(3) [1,2,5,...]
+      console.log(arguments);
+      // 3
+      console.log(arguments.length);
+      // 5
+      console.log(arguments[2]);
+  }
+  fn(1,2,5);
+  ```
+
+* Arguments 展示的形式是一个 <font color="#e1d78d">伪数组</font> , 因此可以对其进行遍历
+
+* 但是要明确的是 <font color="#e604b2">**伪数组 并不是真正意义上的数组**</font> 
+
+* **伪数组** 具有以下的特点 :
+
+  * 具有 length 属性 , 因此可以按照数组的方式进行遍历 arguments 的内容
+  * 按索引方式进行存储
+  * 不具有数组的 push() , pop() 等方法
+
+* ★ 由此可见 , <font color="#91d108">有了 arguments 之后我们不再需要给函数写形参了</font> 
+
+#### 案例D-利用函数求任意个数的最小公倍数
+
+* 之前案例中刚刚好计算了最大公约数 , 利用它就能很方便地进行最小公倍数的计算了
+
+* 原则 : <font color="#34dc99">**两个数的乘积等于二者的最大公约数和最小公倍数的乘积**</font> 
+
+  ```javascript
+  // 为了避免出问题,把之前写的求最大公约数的代码贴下来
+  // PreCode Start
+  ```
+
+  
+

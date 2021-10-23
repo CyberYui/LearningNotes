@@ -10,23 +10,44 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    let num = 9;
-    // prime number 素数,质数
-    function isPrime(a) {
-      if (a <= 1) {
-        return a + ' is not a normal number !';
+    // 首先判断是否为奇数或偶数,先写一个对任意数判断的情况
+    function isOdd(a) {
+      if (a < 1) {
+        // 如果输入了错误的数则抛出异常
+        throw SyntaxError();
       } else {
-        for (let i = 2; i < a; i++) {
-          if (a % i != 0) {
-            continue;
-          } else {
-            console.log('The minimum number of conventions of ' + a + ' is : ' + i);
-            return a + ' is not a prime number !';
-          }
+        if (a % 2 == 1) {
+          return true;
+        } else {
+          return false;
         }
-        return a + ' is a prime number !';
       }
     }
-    console.log(isPrime(num));
+    // 接下来利用这个函数进行计算最大公约数
+    function maxDivisor(a, b) {
+      // 判断a的奇偶性
+      if (isOdd(a) == true) {
+        // 是奇数,不做任何事
+      } else {
+        a = a / 2;
+      }
+      // 判断b的奇偶性
+      if (isOdd(b) == true) {
+        // 是奇数,不做任何事
+      } else {
+        b = b / 2;
+      }
+      // 计算最大公约数
+      while (a != b) {
+        if (a < b) {
+          b = b - a;
+        } else {
+          a = a - b;
+        }
+      }
+      // 最后二者相等,输出哪个都一样
+      return a;
+    }
+    console.log(maxDivisor(319, 377)); // 29
   </script>
 </html>
