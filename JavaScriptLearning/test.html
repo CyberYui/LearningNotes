@@ -48,6 +48,10 @@
       // 最后二者相等,输出哪个都一样
       return a;
     }
-    console.log(maxDivisor(319, 377)); // 29
+    function minCommonMultiple(a, b) {
+      // 先求两个数的乘积,再用乘积除以最大公约数
+      return (a * b) / maxDivisor(a, b);
+    }
+    console.log(minCommonMultiple(9, 12)); // 36
   </script>
 </html>

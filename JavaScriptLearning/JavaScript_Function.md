@@ -370,7 +370,7 @@
 
 * ★ 由此可见 , <font color="#91d108">有了 arguments 之后我们不再需要给函数写形参了</font> 
 
-#### 案例D-利用函数求任意个数的最小公倍数
+#### 案例D-利用函数求两个数的最小公倍数
 
 * 之前案例中刚刚好计算了最大公约数 , 利用它就能很方便地进行最小公倍数的计算了
 
@@ -378,8 +378,56 @@
 
   ```javascript
   // 为了避免出问题,把之前写的求最大公约数的代码贴下来
-  // PreCode Start
+  // ************* PreCode Start *************
+  // 首先判断是否为奇数或偶数,先写一个对任意数判断的情况
+  function isOdd(a) {
+    if (a < 1) {
+      // 如果输入了错误的数则抛出异常
+      throw SyntaxError();
+    } else {
+      if (a % 2 == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+  // 接下来利用这个函数进行计算最大公约数
+  function maxDivisor(a, b) {
+    // 判断a的奇偶性
+    if (isOdd(a) == true) {
+      // 是奇数,不做任何事
+    } else {
+      a = a / 2;
+    }
+    // 判断b的奇偶性
+    if (isOdd(b) == true) {
+      // 是奇数,不做任何事
+    } else {
+      b = b / 2;
+    }
+    // 计算最大公约数
+    while (a != b) {
+      // 总归要执行减法,所以判断谁大就可以了,以免减出负数
+      if (a < b) {
+        b = b - a;
+      } else {
+        a = a - b;
+      }
+    }
+    // 最后二者相等,输出哪个都一样
+    return a;
+  }
+  // ************* PreCode End *************
+  // 利用结果求出两个数的最小公倍数
+  function minCommonMultiple(a, b){
+      // 先求两个数的乘积,再用乘积除以最大公约数
+      return (a * b) / maxDivisor(a, b);
+  }
+  console.log(minCommonMultiple(9, 12)); // 36
   ```
 
-  
+#### 案例E-翻转数组
+
+* 使用函数将一个数组翻转过来 , 并且不使用栈这个数据结构 , 仅仅是将一个数组按序颠倒
 
