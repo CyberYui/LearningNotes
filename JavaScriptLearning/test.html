@@ -10,17 +10,23 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    let myArr = [5, 2, 99, 141, 67, 77, 98, 55, 173];
-    function getMaxNum(arr) {
-      let maxNum = arr[0];
-      // 从第0个数存起,则从第一个数比起
-      for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > maxNum) {
-          maxNum = arr[i];
+    let num = 9;
+    // prime number 素数,质数
+    function isPrime(a) {
+      if (a <= 1) {
+        return a + ' is not a normal number !';
+      } else {
+        for (let i = 2; i < a; i++) {
+          if (a % i != 0) {
+            continue;
+          } else {
+            console.log('The minimum number of conventions of ' + a + ' is : ' + i);
+            return a + ' is not a prime number !';
+          }
         }
+        return a + ' is a prime number !';
       }
-      return maxNum;
     }
-    console.log(getMaxNum(myArr));
+    console.log(isPrime(num));
   </script>
 </html>

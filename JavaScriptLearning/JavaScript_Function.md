@@ -262,23 +262,28 @@
 * 用户输入一个数 , 判断这个数是否为素数 ( 即质数 , 只能被 1 和自身整除的数 ) , 并返回结果
 
   ```javascript
+  let num = 9;
   // prime number 素数,质数
-  function isPrime(a){
-      if(a <= 1){
-          alert('Not a normal number !');
-      }else{
-          for( let i = 2; i < a; i++){
-              if ( a % i != 0){
-                  continue;
-              }else{
-                  alert('Not a prime number !');
-              }
-          }
-          alert('Prime number !');
+  function isPrime(a) {
+    if (a <= 1) {
+      return a + ' is not a normal number !';
+    } else {
+      for (let i = 2; i < a; i++) {
+        if (a % i != 0) {
+          continue;
+        } else {
+          // the divisor 约数
+          console.log('The divisor of ' + a + ' is : ' + i);
+          return a + ' is not a prime number !';
+        }
       }
+      return a + ' is a prime number !';
+    }
   }
+  // The divisor of 9 is : 3
+  // 9 is not a prime number !
+  console.log(isPrime(num));
   ```
-  
   
 
 ---------------
