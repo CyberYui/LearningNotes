@@ -461,9 +461,26 @@
 
   ```javascript
   function bubbleSort(arr){
-      // 还是一样,使用两层循环完成
+      // 还是一样,使用两层循环完成,首先定义出来用于交换元素的临时变量
+      let temp = 0;
+      // 第一层循环控制交换轮数,轮数比元素个数小1
+      for(let i = 0; i < arr.length - 1; i++){
+          // 第二层循环控制每次的交换次数,交换的是哪个元素,刚刚好利用序号,也就是i
+          for(let j = 0; j < arr.length - i - 1 ; j++){
+              // 如果前一个数大于后一个数,就交换这两个数
+              if(arr[j] > arr[j + 1]){
+                  temp = arr[j];
+                  arr[j] = arr[j + 1];
+                  arr[j + 1] = temp;
+              }
+          }
+      }
+      // 最终返回排好序的数组
+      return arr;
   }
+  let arr = [7,6,9,8,4,5,1,2,3];
+  console.log(bubbleSort(arr));
   ```
-
+  
   
 

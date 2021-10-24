@@ -10,62 +10,21 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    // 首先判断是否为奇数或偶数,先写一个对任意数判断的情况
-    function isOdd(a) {
-      if (a < 1) {
-        // 如果输入了错误的数则抛出异常
-        throw SyntaxError();
-      } else {
-        if (a % 2 == 1) {
-          return true;
-        } else {
-          return false;
+    function bubbleSort(arr){
+    // 还是一样,使用两层循环完成
+    let temp = 0;
+    for(let i = 0; i < arr.length - 1; i++){
+        for(let j = 0; j < arr.length - i - 1 ; j++){
+            if(arr[j] > arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
         }
-      }
     }
-    // 接下来利用这个函数进行计算最大公约数
-    function maxDivisor(a, b) {
-      // 判断a的奇偶性
-      if (isOdd(a) == true) {
-        // 是奇数,不做任何事
-      } else {
-        a = a / 2;
-      }
-      // 判断b的奇偶性
-      if (isOdd(b) == true) {
-        // 是奇数,不做任何事
-      } else {
-        b = b / 2;
-      }
-      // 计算最大公约数
-      while (a != b) {
-        if (a < b) {
-          b = b - a;
-        } else {
-          a = a - b;
-        }
-      }
-      // 最后二者相等,输出哪个都一样
-      return a;
-    }
-    function minCommonMultiple(a, b) {
-      // 先求两个数的乘积,再用乘积除以最大公约数
-      return (a * b) / maxDivisor(a, b);
-    }
-    console.log(minCommonMultiple(9, 12)); // 36
-    console.log("****************************************");
-    let arr1 = [1, 2, 3, 4, 5];
-    let arr2 = [1, 2, 3, 4, 5, 6];
-    function invertArr(arr) {
-      let temp = 0;
-      for (let i = 0; i < arr.length / 2; i++) {
-        temp = arr[i];
-        arr[i] = arr[arr.length - 1 - i];
-        arr[arr.length - 1 - i] = temp;
-      }
-      return arr;
-    }
-    console.log(invertArr(arr1));
-    console.log(invertArr(arr2));
+    return arr;
+}
+let arr = [7,6,9,8,4,5,1,2,3];
+console.log(bubbleSort(arr));
   </script>
 </html>
