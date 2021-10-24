@@ -431,3 +431,25 @@
 
 * 使用函数将一个数组翻转过来 , 并且不使用栈这个数据结构 , 仅仅是将一个数组按序颠倒
 
+* 和之前存给新数组不一样 , 我们这次直接在形参中通过一个临时变量来进行一个数组本身的内容替换
+
+  ```javascript
+  let arr1 = [1, 2, 3, 4, 5];
+  let arr2 = [1, 2, 3, 4, 5, 6];
+  function invertArr(arr) {
+    // 临时变量用于交换数字防止当前元素数据丢失
+    let temp = 0;
+    // 通过仅迭代数组的一半,来实现数组自身的翻转
+    for (let i = 0; i < (arr.length / 2); i++) {
+      temp = arr[i];
+      arr[i] = arr[arr.length - 1 - i];
+      arr[arr.length - 1 - i] = temp;
+    }
+    return arr;
+    }
+  console.log(invertArr(arr1));
+  console.log(invertArr(arr2));
+  ```
+
+  
+

@@ -53,5 +53,19 @@
       return (a * b) / maxDivisor(a, b);
     }
     console.log(minCommonMultiple(9, 12)); // 36
+    console.log("****************************************");
+    let arr1 = [1, 2, 3, 4, 5];
+    let arr2 = [1, 2, 3, 4, 5, 6];
+    function invertArr(arr) {
+      let temp = 0;
+      for (let i = 0; i < arr.length / 2; i++) {
+        temp = arr[i];
+        arr[i] = arr[arr.length - 1 - i];
+        arr[arr.length - 1 - i] = temp;
+      }
+      return arr;
+    }
+    console.log(invertArr(arr1));
+    console.log(invertArr(arr2));
   </script>
 </html>
