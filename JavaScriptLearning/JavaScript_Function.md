@@ -436,7 +436,11 @@
   ```javascript
   let arr1 = [1, 2, 3, 4, 5];
   let arr2 = [1, 2, 3, 4, 5, 6];
-  function invertArr(arr) {
+  // 翻转倒置的单词有invert和reverse,由此还能引申到revert
+  // invert 侧重指(在数或量上呈)反向变化的,上下颠倒的,倒置的
+  // reverse 侧重于顺序,方向上的相反,即逆向的,逆序的,背面的
+  // revert 则是回复,恢复原状的意思,和翻转无关,有点类似重复一次的意思
+  function reverseArr(arr) {
     // 临时变量用于交换数字防止当前元素数据丢失
     let temp = 0;
     // 通过仅迭代数组的一半,来实现数组自身的翻转
@@ -447,9 +451,11 @@
     }
     return arr;
     }
-  console.log(invertArr(arr1));
-  console.log(invertArr(arr2));
+  console.log(reverseArr(arr1));
+  console.log(reverseArr(arr2));
   ```
 
-  
+#### 案例F-封装冒泡排序
+
+* 
 
