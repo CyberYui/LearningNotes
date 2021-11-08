@@ -215,8 +215,8 @@
 * 基本安装完成 , 接下来检查一次
 
   ```shell
-  # 修改内容
-  vi /etc/profile
+  # 检查内容
+  cat /etc/profile
   # 重置一次环境变量
   export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
   # 手动应用内容 
