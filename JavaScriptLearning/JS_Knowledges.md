@@ -15,7 +15,63 @@
 #### 作用域
 
 * 通常 , 一段代码中使用到的变量或者函数的名称并不总是有效和可用的
+
 * 限定这个名字 <font color="#f1b06f">可用性的代码范围</font> 就是这个名字的 <font color="#f1b06f">**作用域**</font> 
+
 * 作用域提高了程序逻辑的局部性 , 增强了程序的可控性和可靠性 , 减少了大规模程序中的命名冲突等问题
+
 * 简而言之 , 作用域就是 <font color="#ff9393">**变量或函数等名称在某个范围内起作用和效果**</font> 
+
+* ES6 之前 , JS 的作用域分为 **全局作用域** 和 **局部作用域** 
+
+* 全局作用域 : 整个 script 标签 或者是一个单独的 js 文件 , 都是一个全局作用域
+
+* 局部作用域 : 在函数内部就是局部作用域 , 即这段 ( 或这行 ) 代码只在函数内部起效果和作用 
+
+  ```javascript
+  // Global Scope
+  var num = 10;
+  console.log(num);
+  function newFn(){
+      // Local Scope
+      var num = 20;
+      console.log(num);
+  }
+  newFn();
+  ```
+
+* 在同一个作用域中变量名会有命名冲突
+
+#### 变量作用域
+
+* 在 JS 中 , 根据作用域的不同 , 变量会分为两种 : **全局变量** 和 **局部变量** 
+
+* 全局变量 : 在全局作用域下的变量 , 全局可用
+
+* ★ [PS] 如果在函数内部没有声明 , 直接使用或赋值的变量也是一个全局变量
+
+* 局部变量 : 在局部作用域下的变量 , 仅局部可用
+
+* ★ [PS] 函数的形参也可以当做一个局部变量来使用
+
+  ```javascript
+  // Global Variable
+  var num = 10;
+  console.log(num);
+  function newFn(aru){
+      // aru is a Local Variable
+      // Local Variable
+      var num = 20;
+      // Another Global Variable
+      num2 = 100;
+      console.log(num);
+  }
+  newFn();
+  ```
+
+* 从执行效率来看
+
+* 全局变量只有浏览器关闭的时候才会销毁 , 比较占内存资源
+
+* 局部变量在程序执行完毕之后就会被销毁 , 比较节约内存资源
 
