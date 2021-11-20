@@ -10,21 +10,23 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    function bubbleSort(arr){
-    // 还是一样,使用两层循环完成
-    let temp = 0;
-    for(let i = 0; i < arr.length - 1; i++){
-        for(let j = 0; j < arr.length - i - 1 ; j++){
-            if(arr[j] > arr[j + 1]){
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
+    var a = 1;
+    function fn1() {
+      var a = 2;
+      var b = "22";
+      fn2();
+      function fn2() {
+        var a = 3;
+        fn3();
+        function fn3() {
+          var a = 4;
+          // a = 4
+          console.log(a);
+          // b = 22
+          console.log(b);
         }
+      }
     }
-    return arr;
-}
-let arr = [7,6,9,8,4,5,1,2,3];
-console.log(bubbleSort(arr));
+    fn1();
   </script>
 </html>
