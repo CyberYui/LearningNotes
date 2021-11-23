@@ -195,6 +195,8 @@
 
 #### 预解析
 
+> 预解析是面试的时候可能会问道的基本点
+
 * 预解析分为 变量预解析 ( 变量提升 ) 和 函数预解析 ( 函数提升 )
 
 * <1> 变量提升 : 就是把所有的变量声明提升到当前的作用域最前面 , 这仅仅提升变量的声明 , 而不提升赋值操作
@@ -227,11 +229,178 @@
   > }
   > ```
 
-* <2> 函数提升 : 就是把所有的函数声明提升到当前作用域的最前面 , 这仅仅提升变量的声明 , 而不提升函数内容 , 不调用函数
+* <2> 函数提升 : 就是把所有的函数声明提升到当前作用域的最前面 , 这仅仅提升变量的声明 , 而不提升函数调用内容 , 也就是预解析并不调用函数
 
   > 现在就能解释之前的 <kbd>3rd Question</kbd> , 我们可以这样解释它
   >
   > ```javascript
+  > fn();
+  > function fn(){
+  >     console.log(11);
+  > }
+  > // OR
+  > function fn(){
+  >     console.log(11);
+  > }
+  > fn();
+  > // 上述代码相当于执行了以下代码
+  > // 首先进行函数声明
+  > function fn(){
+  >     console.log(11);
+  > }
+  > // 调用函数的内容会被下放
+  > fn();
   > ```
   >
-  > 
+  > <kbd>4th Question</kbd> 是用了函数表达式的情况 , 但是 <kbd>3rd Question</kbd> 是正常的函数声明和调用 , 这两者是有区别的
+
+* 总结 : 
+
+* 1. 我们 JS 引擎运行 JS 分为两步内容 : 即 预解析 + 代码执行
+
+     <1> 预解析 : JS 引擎会把 JS 里面所有的 var 还有 function 提升到当前作用域的最前面
+
+     <2> 代码执行 : 按照代码书写的顺序从上往下依序执行
+
+  2. 预解析分为 变量提升 和 函数提升
+
+     <1> 变量提升 : 把所有的变量声明提升到当前作用域的最前面 , **不提升赋值操作** 
+
+     <2> 函数提升 : 把所有的函数声明提升到当前作用域的最前面 , **不调用函数** 
+
+##### 案例-B
+
+* 请判断以下代码的结果
+
+  ```javascript
+  var num = 10;
+  fun();
+  
+  function fun(){
+      console.log(num);
+      var num = 20;
+  }
+  ```
+
+  > 代码会先进行预解析 , 然后再执行 , 需要注意的是如何在作用域里 , 以及在哪个作用域里进行变量提升和函数提升
+
+  ```javascript
+  // 实际执行的内容相当于以下代码
+  var num;
+  function fun(){
+      var num;
+      console.log(num);
+      num = 20;
+  }
+  num = 10;
+  fun();
+  // result : undefined -- 函数里仅仅进行了变量声明,没有赋值
+  ```
+
+##### 案例-C
+
+* 请判断以下代码的结果
+
+  ```javascript
+  var num = 10;
+  function fn(){
+      console.log(num);
+      var num = 20;
+      console.log(num);
+  }
+  fn();
+  ```
+
+  > 和之前一样 , 预解析然后再进行代码执行操作
+
+  ```javascript
+  // 实际执行的内容相当于以下代码
+  var num;
+  function fn(){
+      var num;
+      console.log(num);
+      num = 20;
+      console.log(num);
+  }
+  num = 10;
+  fn();
+  // result : 
+  // undefined -- 函数里开始仅仅进行了变量声明,没有赋值
+  // 20 -- 函数里之后进行了变量赋值,值为 20
+  ```
+
+##### 案例-D
+
+* 请判断以下代码的结果
+
+  ```javascript
+  var a = 18;
+  f1();
+  function f1(){
+      var b = 9;
+      console.log(a);
+      console.log(b);
+      var a = '123';
+  }
+  ```
+
+  > 和之前一样 , 预解析然后再进行代码执行操作
+
+  ```javascript
+  // 实际执行的内容相当于以下代码
+  var a;
+  function f1(){
+      var b;
+      var a;
+      b = 9;
+      console.log(a); // undefined
+      console.log(b); // 9
+      a = '123';
+  }
+  a = 18;
+  // 调用函数时没有传参,按照函数声明为准
+  f1();
+  // result : 
+  // undefined -- 函数里开始仅仅进行了变量a的声明,但是没有赋值
+  // 9 -- 函数里之后对变量b进行了变量赋值,值为 9
+  ```
+
+##### 案例-E
+
+* 请判断以下代码的结果
+
+  ```javascript
+  f1();
+  console.log(c);
+  console.log(b);
+  console.log(a);
+  function f1(){
+      var a = b = c = 9;
+      console.log(a);
+      console.log(b);
+      console.log(c);
+  }
+  ```
+
+  > 和之前一样 , 预解析然后再进行代码执行操作
+
+  ```javascript
+  // 实际执行的内容相当于以下代码
+  function f1(){
+      // var a = b = c = 9; 相当于下面的代码
+      // var a = 9; b = 9; c = 9;
+      // 即 b和c 是直接赋值,没有var声明,当全局变量看
+      var a; // 局部变量
+      a = b = c = 9;
+      console.log(a); // 9
+      console.log(b); // 9
+      console.log(c); // 9
+  }
+  // 调用函数时没有传参,按照函数声明为准
+  f1();
+  console.log(c); // 9
+  console.log(b); // 9
+  console.log(a); // Uncaught ReferenceError: a is not defined
+  ```
+
+  
