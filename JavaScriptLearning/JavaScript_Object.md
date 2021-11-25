@@ -120,14 +120,26 @@
   console.log(num);
   ```
 
-  > 变量单独声明并赋值 , 使用的时候需要直接写变量名 , 每个变量是单独存在的
+  > 变量单独声明并赋值 , 使用的时候需要直接写变量名 , 每个变量是 **单独存在** 的
   >
   > 属性是在对象里面的 , 并不需要像变量一样声明 , 但是使用的时候必须用 <kbd>obj.att</kbd> 的方式调用
 
 * 函数和方法相同的地方是 , 他们都是用来实现某种功能 , 做某种事情的
 
   ```javascript
-  function 
+  // function
+  function fn(){
+      console.log('function');
+  }
+  // object
+  var obj = {
+      age: 18,
+      catch: function(){
+          console.log('catch!');
+      }
+  }
   ```
 
-  
+  > 函数是 单独声明 并且单独调用的 , 通过 <kbd>functionName()</kbd> 的方式 **单独存在** 和调用
+  >
+  > 方法存在于对象里面 , 调用的时候必须用 <kbd>obj.fun()</kbd> 的方式调用
