@@ -103,7 +103,7 @@
 
 ------------------------
 
-#### 变量方法等对比
+##### 变量方法等对比
 
 * **变量 , 属性 , 函数 , 方法的区别**
 
@@ -143,3 +143,93 @@
   > 函数是 单独声明 并且单独调用的 , 通过 <kbd>functionName()</kbd> 的方式 **单独存在** 和调用
   >
   > 方法存在于对象里面 , 调用的时候必须用 <kbd>obj.fun()</kbd> 的方式调用
+
+--------------------------
+
+#### 利用new Obj创建对象
+
+* 我们可以使用 <kbd>new Object()</kbd> 的形式创建对象
+
+  > 这种方法和我们之前创建数组的原理一致 , 即类似于 `new Array()` 的形式
+
+* 具体我们可以这样去编写代码
+
+  ```javascript
+  var obj = new Object(); // 创建一个空对象
+  obj.uname = '张三'; // 通过追加属性的方式去添加内容
+  obj.age = 18;
+  obj.sex = '男';
+  obj.sayHello = function(){
+      console.log('Hello');
+  }
+  // 调用对象属性或方法是一样的
+  console.log(obj.uname);
+  console.log(obj['age']); // 注意这种形式的调用
+  obj.sayHello(); // 注意对象方法的调用也是在调用函数
+  ```
+
+  > 上面的例子中我们使用了追加属性的方法去添加了对象的属性和方法
+  >
+  > 利用 等号 = 赋值 的方式添加追加内容
+  >
+  > 每个属性的方法之间会用分号结束 , 而不是像创建对象的时候那样去用逗号隔开
+
+---------------------
+
+#### ★利用构造函数
+
+* 在之前 , 我们可以使用下面这两种方法去创建对象
+
+  ```javascript
+  // 利用字面量创建对象
+  var naruto = {
+      name: 'naruto',
+      age: 22,
+      sayYoo: function(){
+          console.log('Hello there~');
+      }
+  }
+  // 利用 new Object() 的形式创建对象
+  var car = new Object();
+  car.name = 'Das Auto';
+  car.size = 'Small';
+  car.sayYoo = function(){
+      console.log('Yoo there~');
+  }
+  ```
+
+* 这两种创建对象的方法 , 每次只能创建一个对象
+
+* 如果我们想要创建多个属性有共同点的对象的话 , 就可以利用构造函数
+
+* 我们将重复的对象代码写在函数里面 , 这样函数内容不是普通的逻辑代码 , 而是对象 , 因此称为构造函数
+
+* <font color="#f8332f">**构造函数 : **</font>是一种特殊的函数 , 主要用来初始化对象 , 即为对象成员变量附初始值 , 它总与 new 运算符一起使用 , 我们可以把对象中一些公共的属性和方法抽取出来 , 然后封装到这个函数里面 . 
+
+* 我们一般使用下面的格式来声明构造函数
+
+  ```javascript
+  function constructFunction(){
+      // 当前的对象用this来代替
+      this.attName = value;
+      this.functionName = function(){}
+  }
+  // 在调用的时候,需要用下面的格式
+  new constructFunction();
+  ```
+
+* ★我们一般用**首字母大写**来规范构造函数的命名
+
+  ```javascript
+  // 构造函数既然有属性,就需要传参
+  function Star(sname, size, age){
+      this.name = sname;
+      this.size = size;
+      this.age = age;
+      // 不需要return
+  }
+  // 在使用的时候要传参完成变量的赋值操作
+  var mars = new Star('Mars', 'Little', 7000);
+  ```
+
+  > <font color="#8ee8e4">构造函数不需要 return 就可以返回结果</font> 
