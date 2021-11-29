@@ -230,6 +230,12 @@
   }
   // 在使用的时候要传参完成变量的赋值操作
   var mars = new Star('Mars', 'Little', 7000);
+  console.log(typeof mars); // Obj
+  console.log(mars['name']);
+  console.log(mars.size);
+  // 这样,只要我们new一下就会有新对象了
+  var sun = new Star('Sun', 'Bigggg', 90000);
+  console.log(sun.name);
   ```
-
+  
   > <font color="#8ee8e4">构造函数不需要 return 就可以返回结果</font> 
