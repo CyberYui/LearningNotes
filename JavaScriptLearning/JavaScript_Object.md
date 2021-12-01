@@ -227,15 +227,21 @@
       this.size = size;
       this.age = age;
       // 不需要return
+      this.sing = function(sang){
+          console.log(sang + '♪~~~~');
+      }
   }
   // 在使用的时候要传参完成变量的赋值操作
   var mars = new Star('Mars', 'Little', 7000);
   console.log(typeof mars); // Obj
   console.log(mars['name']);
   console.log(mars.size);
+  mars.sing('冰雨'); // ★调用对象内部函数
   // 这样,只要我们new一下就会有新对象了
   var sun = new Star('Sun', 'Bigggg', 90000);
   console.log(sun.name);
   ```
   
   > <font color="#8ee8e4">构造函数不需要 return 就可以返回结果</font> 
+  >
+  > 调用构造函数 , 必须使用 new , 在上面的例子中 , 我们只需要 new Star() 调用构造函数就会创建新对象
