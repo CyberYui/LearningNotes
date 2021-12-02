@@ -10,24 +10,19 @@
     <!-- 设置一下背景色,护眼保平安 -->
   </body>
   <script>
-    // 构造函数既然有属性,就需要传参
-    function Star(sname, size, age) {
-      this.name = sname;
-      this.size = size;
-      this.age = age;
-      // 不需要return
-      this.sing = function (sang) {
-        console.log(sang + "♪~~~~");
-      };
+    function Heros(name, type, health, attack) {
+      this.name = name;
+      if (type == 1) {
+        this.type = "Power Hero";
+      } else {
+        this.type = "Shooter Hero";
+      }
+      this.health = health;
+      this.attack = attack;
     }
-    // 在使用的时候要传参完成变量的赋值操作
-    var mars = new Star("Mars", "Little", 7000);
-    console.log(typeof mars); // Obj
-    console.log(mars["name"]);
-    console.log(mars.size);
-    mars.sing("冰雨"); // ★调用对象内部函数
-    // 这样,只要我们new一下就会有新对象了
-    var sun = new Star("Sun", "Bigggg", 90000);
-    console.log(sun.name);
+    var hy = new Heros("后羿", 2, 500, "射手");
+    var zz = new Heros("庄周", 1, 900, "战士");
+    console.log(hy.name);
+    console.log(zz.type);
   </script>
 </html>
