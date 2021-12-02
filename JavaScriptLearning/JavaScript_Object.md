@@ -245,3 +245,30 @@
   > <font color="#8ee8e4">构造函数不需要 return 就可以返回结果</font> 
   >
   > 调用构造函数 , 必须使用 new , 在上面的例子中 , 我们只需要 new Star() 调用构造函数就会创建新对象
+  
+* 比如我们有这样的需求 , 我们现在有两个英雄 , 每个英雄有一些公共部分的内容
+  
+* 姓名 name , 类型 type , 血量 health , 攻击方式 attack
+  
+* 根据这种公共属性 , 我们可以创建出如下的对象构造函数
+  
+  ```javascript
+  function Heros(name, type, health, attack){
+      this.name = name;
+      if(type == 1){
+          this.type = 'Power Hero';
+      }else{
+          this.type = 'Shooter Hero';
+      }
+      this.health = health;
+      this.attack = attack;
+  }
+  var hy = new Heros('后羿', 2, 500, '射手');
+  var zz = new Heros('庄周', 1, 900, '战士');
+  console.log(hy.name);
+  console.log(zz.type);
+  ```
+  
+  
+  
+  
