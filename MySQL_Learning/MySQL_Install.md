@@ -308,7 +308,7 @@
     >
     > 如果在使用某些命令的时候电脑报错了 , 记得去搜索提示的相关错误查找解决方法
   
-  * 以管理员身份打开控制台 , 输入以下命令 , 让 mysql 通过我们的配置文件自行安装 , 并产生一个名叫 MySQL 的 windows 服务
+  * 在 MySQL 的 bin 目录下以管理员身份打开控制台 , 输入以下命令 , 让 mysql 通过我们的配置文件自行安装 , 并产生一个名叫 MySQL 的 windows 服务
 
   * 一般直接输入这样的命令即可
 
@@ -429,6 +429,18 @@
   
     ```shell
     mysql > set password for root@localhost = password('root');
+    ```
+  
+    > 在 8.0 以上的版本中 , 这条命令可能不会起作用 , 这时尝试使用这一条命令
+    >
+    > ```shell
+    > mysql> alter user 'root'@'localhost' identified by 'root';
+    > ```
+  
+  * 输入完成之后 , 我们需要刷新一下权限 , 从而完成密码设置
+  
+    ```shell
+    mysql> flush privileges;
     ```
   
   * 设置完成后 , 退出一下数据库测试 , 使用密码登入 , 成功即可
