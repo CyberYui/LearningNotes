@@ -425,6 +425,31 @@
 * 用户通过输入数字从而进行操作
 
   ```javascript
+  // 首先要求用户选择自己需要的操作,这项其实可以直接写到函数里面
+  var mod = prompt(
+      "Please choose the calculate mod you want :\n1. plus\n2. minus\n3. multiply\n4. divide\n5. quit"
+    );
+  // 根据选项进行函数操作
+  function calculator(mod) {
+    var num1 = prompt("Please input the first number");
+    var num2 = prompt("Please input the second number");
+    // 使用多重循环进行计算,这里可能会有计算错误,还需要修改
+    if (mod == 1) {
+      alert(num1 + num2);
+    } else if (mod == 2) {
+      alert(num1 - num2);
+    } else if (mod == 3) {
+      alert(num1 * num2);
+    } else if (mod == 4) {
+      alert(num1 / num2);
+    } else if (mod == 5) {
+      alert("Bye");
+    } else {
+      alert("Please input the correct number");
+    }
+  }
+  // 调用函数,使用刚刚用户输入的数字进行计算
+  calculator(mod);
   ```
 
 ------------
