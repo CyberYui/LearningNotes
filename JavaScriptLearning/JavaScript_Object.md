@@ -382,6 +382,32 @@
 * 写一个函数 , 实现对数字数组的排序 ( 不要使用冒泡排序了 )
 
   ```javascript
+  function fastsort(arr){
+    // 递归停止条件
+    if (arr.length <= 1){
+      // 当数组长度不足时直接输出数组,即单数自行排序
+      return arr;
+    }
+    // 确定数据开始中心,即第一项元素
+    let pivot = arr[0];
+    // 定义左右数组,便于进行递归操作
+    let left = [];
+    let right = [];
+    // 开始排序,当当前元素小于中心值时,放入左数组,否则放入右数组
+    for (let i = 1; i < arr.length; i++){
+      if (arr[i] < pivot){
+        left.push(arr[i]);
+      } else {
+        right.push(arr[i]);
+      }
+    }
+    // 一次比较之后,会确定最中间的元素,左边是比它小的,右边是比它大的
+    // 接下来利用concat方法连接左数组,中间数和右数组三项
+    // 但是由于左右数组在一次比较之后没有单独排序,所以要实行递归操作
+    // 这样,在fastsort(left)和fastsort(right)中会对左右数组进行类似操作
+    // 直到数组为一项,则会进入递归的停止条件,返回数组(即单数数组)
+    return fastsort(left).concat(pivot, fastsort(right));
+  }
   ```
 
 ----------
