@@ -483,3 +483,66 @@
 ### Math对象
 
 - Math 不是一个构造函数 , 因此我们不需要用 new 关键字来调用它 , 而是可以直接使用其里面的属性和方法
+
+  > 具体的相关方法可以直接查询网络文档 , 如果想要知道原理则需要去查看方法的代码
+
+  ```javascript
+  console.log(Math.PI); // 输出圆周率
+  console.log(Math.max(1,99,33)); // 输出传入参数组的最大值
+  ```
+
+  > 每种方法的输出结果以及边界值都有在文档中给出
+
+- 跟数学相关的运算 ( 如求绝对值 , 取整 , 最大值等 ) 均可以使用 Math 中的成员
+
+  ```javascript
+  Math.PI // 圆周率
+  Math.floor() // 下取整
+  Math.ceil() // 上取整
+  Math.round() // 四舍五入就近取整 注意-3.5的结果是-3,这个取值默认按坐标轴取近的,但唯独.5是取大的
+  Math.abs() // 绝对值 (absolute value)
+  Math.max() // 求最大值
+  Math.min() // 求最小值
+  // 尝试一下这些方法
+  console.log(Math.abs('-1')); // 隐式转换,会把字符串型-1转换为数字型然后进行计算
+  console.log(Math.round(-4.6)); // -5,按坐标轴取近的
+  ```
+
+- Math 对象中常用的是取随机数的方法 , 即 `random()` 方法
+
+--------------
+
+### 案例A
+
+- 封装一个你自己的数学对象 , 里面需要有 PI , 最大值和最小值方法
+
+  ```javascript
+  var myMath = {
+    PI: 3.14159265354,
+    max: function () {
+      // 使用arguments来获取不存在的实参
+      var max = arguments[0];
+      for (var i = 1; i < arguments.length; i++) {
+        if (arguments[i] > max) {
+          max = arguments[i];
+        }
+      }
+      return max;
+    },
+    min: function () {
+      // 使用arguments来获取不存在的实参
+      var min = arguments[0];
+      for (var i = 1; i < arguments.length; i++) {
+        if (arguments[i] < min) {
+          min = arguments[i];
+        }
+      }
+      return min;
+    }
+  };
+  // 使用自己的对象方法
+  console.log(myMath.PI);
+  console.log(myMath.min(99,15,1,2));
+  ```
+
+  
