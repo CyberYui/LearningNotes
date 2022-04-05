@@ -499,7 +499,7 @@
   Math.PI // 圆周率
   Math.floor() // 下取整
   Math.ceil() // 上取整
-  Math.round() // 四舍五入就近取整 注意-3.5的结果是-3,这个取值默认按坐标轴取近的,但唯独.5是取大的
+  Math.round() // 四舍五入就近取整 注意-3.5的结果是-3,这个取值默认按坐标轴取近的,但唯独.5例外,它是取轴值大的
   Math.abs() // 绝对值 (absolute value)
   Math.max() // 求最大值
   Math.min() // 求最小值
