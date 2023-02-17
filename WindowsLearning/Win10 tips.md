@@ -75,3 +75,28 @@
 ### Windows-10 远程桌面
 
 * 通过使用**运行**命令 <kbd>mstsc</kbd> 可以快速调出 Windows 远程桌面应用
+
+-------------
+
+### Windows-10/11 查看无线网络命令
+
+- 通过使用以下**命令**可以快速显示出本机连接过的所有WiFi以及其属性
+
+  ```shell
+  # 查看所有连接过的无线网络
+  netsh wlan show profiles
+  # 查看所有连接过的无线网络的密码
+  netsh wlan show profile * key=clear
+  # 查看指定的无线网络的密码
+  netsh wlan show profile name="name" key=clear
+  # 直接执行以下命令
+  for /f "skip=9 tokens=1,2 delims=:" %i in ('netsh wlan show profiles') do @echo %j | findstr -i -v echo | netsh wlan show profiles %j key=clear
+  ```
+
+- 或者复制以下命令并保存为<kbd>.bat</kbd>文件 , 执行完毕之后 , 会自动在桌面生成 **WiFi.txt** 文件并自动打开
+
+  ```shell
+  for /f "skip=10 tokens=1,2 delims=:" %i in ('netsh wlan show profiles') do 
+  @for /f "tokens=1-2 delims=:" %k in ('netsh wlan show profiles %j key ^=
+   clear ^|findstr /i "关键内容"') do @echo %%j,%%l>> %USERPROFILE%\desktop\WiFi.txt
+  %USERPROFILE%\desktop\WiFi.txt
