@@ -180,6 +180,8 @@
   > Embedding 的放置位置为 `根目录\embeddings` 文件夹
   >
   > Embedding 的下载还是在 C站, 即筛选时将 `Model types` 选择为 `Textual Inversion` 即可
+  >
+  > 大部分情况下可能 C站 找不到想要的 embedding, 可以在 [Hugging Face](https://huggingface.co/) 里面去搜索
 
 - Embedding 在界面中不会直接展示, 使用时需要点击 ![image-20230522212747071](./images/image-20230522212747071.png) 按钮来展开对应内容
 
@@ -370,7 +372,9 @@
 
 ### 拓展安装
 
-#### !After Detailer(未学习)
+- 在安装拓展之前请注意, 有的拓展安装完成之后, 可能只会在其安装时的语言中显示, 例如我之前安装的After Detailer就是在英文界面中安装的, 但是转换为中文界面就不显示这个插件, 其实尽量使用英文界面就好
+
+#### !After Detailer
 
 [adetailer: adetailer for stable diffusion (gitee.com)](https://gitee.com/zhkgo/adetailer)
 
@@ -408,13 +412,13 @@
   
   > 下载拓展之后, 你不需要额外再去下载对应的模型了, 你会在下一次启动 SD 的时候看到对应的插件内容和模型
   
-  ## ControlNet Inpainting
+#### ControlNet Inpainting
 
-  You can use the ControlNet inpaint extension if you have ControlNet installed and a ControlNet inpaint model.
+- 如果你已经安装了ControlNet并且拥有ControlNet inpaint模型, 你可以使用ControlNet inpaint扩展
 
-  On the ControlNet tab, select a ControlNet inpaint model and set the model weights.
+- 在ControlNet选项卡上，选择一个ControlNet inpaint模型并设置模型权重
 
-  ## Model
+- 相关模型见下表 :
 
   | Model                 | Target                | mAP 50                    | mAP 50-95                 |
   | --------------------- | --------------------- | ------------------------- | ------------------------- |
@@ -426,35 +430,7 @@
   | person_yolov8n-seg.pt | 2D / realistic person | 0.782 (bbox) 0.761 (mask) | 0.555 (bbox) 0.460 (mask) |
   | person_yolov8s-seg.pt | 2D / realistic person | 0.824 (bbox) 0.809 (mask) | 0.605 (bbox) 0.508 (mask) |
   
-  The yolo models can be found on huggingface [Bingsu/adetailer](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2FBingsu%2Fadetailer).
-  
-  ### User Model
-  
-  Put your [ultralytics](https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fultralytics%2Fultralytics) model in `webui/models/adetailer`. The model name should end with `.pt` or `.pth`.
-  
-  It must be a bbox detection or segment model and use all label.
-
-  ### Dataset
-  
-  Datasets used for training the yolo models are:
-  
-  #### Face
-  
-  - [Anime Face CreateML](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fmy-workspace-mph8o%2Fanime-face-createml)
-  - [xml2txt](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2F0oooooo0%2Fxml2txt-njqx1)
-  - [AN](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fsed-b8vkf%2Fan-lfg5i)
-  - [wider face](https://gitee.com/link?target=http%3A%2F%2Fshuoyang1213.me%2FWIDERFACE%2Findex.html)
-  
-  #### Hand
-  
-  - [AnHDet](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2F1-yshhi%2Fanhdet)
-  - [hand-detection-fuao9](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fcatwithawand%2Fhand-detection-fuao9)
-  
-  #### Person
-  
-  - [coco2017](https://gitee.com/link?target=https%3A%2F%2Fcocodataset.org%2F%23home) (only person)
-  - [AniSeg](https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fjerryli27%2FAniSeg)
-  - [skytnt/anime-segmentation](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2Fdatasets%2Fskytnt%2Fanime-segmentation)
+  > yolo 模型可以在 huggingface 的相关页面找到, 链接: [Bingsu/adetailer](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2FBingsu%2Fadetailer) 
 
 
 -------------------
@@ -488,7 +464,9 @@
 - 超网络是一种在不接触任何权重的情况下微调模型的概念 , 简单说就是用一个网络来生成另一个网络的参数 , 多个网络逐步迭代演变 , 最后形成由多个网络复合或进化成的超网络
 - 其工作原理是 : 用一个 Hypernetwork 输入训练集数据 , 然后输出对应模型的参数 , 最好的输出就是这些参数能够使得在测试数据集上取得更加好的效果 , 也就是说 , Hypernetwork 会对整个模型微调 , 使得无论什么 tag 都能起作用
 
-### 模型简易训练教程
+### 模型简易训练教程(未学习)
+
+- 
 
 ---------------
 
