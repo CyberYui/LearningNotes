@@ -370,26 +370,44 @@
 
 ### 拓展安装
 
-#### After Detailer(未学习)
+#### !After Detailer(未学习)
 
 [adetailer: adetailer for stable diffusion (gitee.com)](https://gitee.com/zhkgo/adetailer)
 
-- !After Detailer is a extension for stable diffusion webui, similar to Detection Detailer, except it uses ultralytics instead of the mmdet.
+- !After Detailer是一个针对Stable Diffusion WebUI的扩展, 类似于Detection Detailer, 但它使用的是Ultralytics而不是MMDet
 
-  ## Install
+  > Ultralytics 和 MMDet 的解释如下(未完成)
 
-  (from Mikubill/sd-webui-controlnet)
+- 安装时按照以下步骤进行 :
 
-  1. Open "Extensions" tab.
-  2. Open "Install from URL" tab in the tab.
-  3. Enter `https://github.com/Bing-su/adetailer.git` to "URL for extension's git repository".
-  4. Press "Install" button.
-  5. Wait 5 seconds, and you will see the message "Installed into stable-diffusion-webui\extensions\adetailer. Use Installed tab to restart".
-  6. Go to "Installed" tab, click "Check for updates", and then click "Apply and restart UI". (The next time you can also use this method to update extensions.)
-  7. Completely restart A1111 webui including your terminal. (If you do not know what is a "terminal", you can reboot your computer: turn your computer off and turn it on again.)
+  1. 打开webUI的 `拓展` 标签页
+  
+     > 为了以防万一, 这里尽量直接开启全局代理, 并在整合包中设置好代理服务器设置, 比如这样: 
+     >
+     > <img src="./images/image-20230526114915246.png" alt="image-20230526114915246" style="zoom:85%;" />
+     >
+     > [注] 这个操作需要重启整合包的整体客户端
+  
+  2. 点击 `可下载` 标签 , 首先点击 `加载扩展列表` 加载一次扩展列表
 
-  You **DON'T** need to download any model from huggingface.
+  3. 当下发插件列表正常显示后, 在搜索框中直接搜索detailer, 即可看到 !After Detailer 拓展, 我这里是安装好的显示
 
+     ![image-20230526115129495](./images/image-20230526115129495.png)
+
+     > 一般来说通过 `从网址安装` 标签页里将 `https://github.com/Bing-su/adetailer.git` 输入到扩展的 git 仓库网址对应的空格处来下载 , 但是能直接下就不用这样麻烦了
+
+  4. 点击拓展后面对应的操作列的 `安装` 按钮
+
+  5. 等待几秒钟之后你会看到安装完成的提示, 并且此处重新刷新拓展列表后搜索该拓展会显示成已安装状态
+  
+  6. 返回 `已安装` 标签页, 点击 `检查更新` 按钮, 系统自动刷新安装插件列表, 然后点击 `应用更改并重载前端` 按钮
+  
+     > 这样安装之后就可以在下次正常更新相关插件了
+  
+  7. 完整退出一次你的整合包客户端, 有必要的话可以直接重启一次电脑来完成这项操作
+  
+  > 下载拓展之后, 你不需要额外再去下载对应的模型了, 你会在下一次启动 SD 的时候看到对应的插件内容和模型
+  
   ## ControlNet Inpainting
 
   You can use the ControlNet inpaint extension if you have ControlNet installed and a ControlNet inpaint model.
@@ -407,33 +425,33 @@
   | hand_yolov8n.pt       | 2D / realistic hand   | 0.767                     | 0.505                     |
   | person_yolov8n-seg.pt | 2D / realistic person | 0.782 (bbox) 0.761 (mask) | 0.555 (bbox) 0.460 (mask) |
   | person_yolov8s-seg.pt | 2D / realistic person | 0.824 (bbox) 0.809 (mask) | 0.605 (bbox) 0.508 (mask) |
-
+  
   The yolo models can be found on huggingface [Bingsu/adetailer](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2FBingsu%2Fadetailer).
-
+  
   ### User Model
-
+  
   Put your [ultralytics](https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fultralytics%2Fultralytics) model in `webui/models/adetailer`. The model name should end with `.pt` or `.pth`.
-
+  
   It must be a bbox detection or segment model and use all label.
 
   ### Dataset
-
+  
   Datasets used for training the yolo models are:
-
+  
   #### Face
-
+  
   - [Anime Face CreateML](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fmy-workspace-mph8o%2Fanime-face-createml)
   - [xml2txt](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2F0oooooo0%2Fxml2txt-njqx1)
   - [AN](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fsed-b8vkf%2Fan-lfg5i)
   - [wider face](https://gitee.com/link?target=http%3A%2F%2Fshuoyang1213.me%2FWIDERFACE%2Findex.html)
-
+  
   #### Hand
-
+  
   - [AnHDet](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2F1-yshhi%2Fanhdet)
   - [hand-detection-fuao9](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fcatwithawand%2Fhand-detection-fuao9)
-
+  
   #### Person
-
+  
   - [coco2017](https://gitee.com/link?target=https%3A%2F%2Fcocodataset.org%2F%23home) (only person)
   - [AniSeg](https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fjerryli27%2FAniSeg)
   - [skytnt/anime-segmentation](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2Fdatasets%2Fskytnt%2Fanime-segmentation)
