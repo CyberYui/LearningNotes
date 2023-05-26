@@ -137,7 +137,7 @@
 
 ### StableDiffusion模型
 
-- 在最上面的 `Stable Diffusion 模型`, 如下图 :
+- 在最上面的 `Stable Diffusion 模型`, WebUI中为下图所示内容 :
 
   ![image-20230525165335436](./images/image-20230525165335436.png)
 
@@ -151,7 +151,9 @@
 
 ### VAE
 
-- 紧跟大模型之后的 `外挂VAE模型`, 即 [图片] 这里
+- 紧跟大模型之后的 `外挂VAE模型`, WebUI中为下图所示内容 :
+
+  ![image-20230526100640994](./images/image-20230526100640994.png)
 
 - VAE 即 Variational autoencoder, 变分自编码器, 作用为滤镜+微调, 其相关原理见后续详解内容
 
@@ -241,6 +243,65 @@
   3. **Hypernetwork 有触发词时一定要使用触发词** 
   4. **新手/第一次使用 Hypernetwork 模型时尽量不要混用** 
 
+### 图像放大算法(Upscaler)
+
+- 与传统的放大算法不同, AI 放大算法是通过大量数据训练的模型
+
+- 其原理是首先对高质量图像进行人工破坏, 以模拟现实世界中的图像损失, 然后, 将损坏的图像缩小到较小尺寸, 接着训练一个神经网络模型来恢复原始图像
+
+- 由于大量的训练数据被嵌入到模型中, 从而使得它能够填补缺失的信息, 这就像人们在记住一个人的面孔时不需要仔细研究每个细节, 我们主要关注一些关键特征
+
+- 图像放大算法目前可以大致分为以下两种类型
+
+  - 传统的图像放大算法 (如最邻近和 Lanczos 等)
+
+    > 传统放大算法是一种根据图像分辨率 (像素值) 通过数学运算推导并插值的思路
+    > 这种传统类型存在一个最大的缺点, 即当图像缺失, 损坏或存在意外噪点时, 它会将所有这些因素都计算在内, 导致无法正确进行采样
+
+  - AI 图像放大算法  (包括 ESRGAN 及其衍生版本等)
+
+    > AI 图像放大算法正如其名称所示, 是一种模型学习技术, 是当前 WebUI 中主流的放大算法
+    >
+    > 它学习如何将高质量的数据集先降级/损坏, 然后进一步缩小它们, 最后将它们恢复到原始图像
+    >
+    > 简而言之, 这个模型被训练成能够高效地消除各种图像劣化, 例如在图像放大时出现的锯齿等, 从而实现高质量化
+
+- 一般来说 SD 无法直接生成大分辨率的图像, 这是由于当图像倍数放大后, 其对应原生噪点图计算难度会以指数倍上涨, 为了在保证图像整体效果的前提下提高其分辨率, 一般需要借助放大算法, 即高清修复操作
+
+- WebUI中为下图所示内容 :
+
+  ![image-20230526100745875](./images/image-20230526100745875.png)
+
+- 放大算法在秋叶大佬的整合包中一般会自带一些, 但是在实际使用时, 我们可能遇到某些模型的预览图使用了一些额外的放大算法, 这需要我们自行去安装相关算法
+
+#### 第三方放大算法安装
+
+> 记得科学上网, 后续不再赘述这个前提
+
+- 第三方放大算法模型目前可从以下网站获取并添加到 WebUI 中
+
+  ```
+  https://upscale.wiki/wiki/Model_Database
+  ```
+
+  > 该网站介绍了各种不同的 Upscaler,  但是有一个注意事项, 是这里可能有版权问题
+
+- 以下载 4x-UltraSharp 算法为例, 登入上面网站, 然后查找下载模型, 查找到之后是这样的 :
+
+  ![image-20230526102209814](./images/image-20230526102209814.png)
+
+- 这里可以通过查看后面的样图来确定效果, 即 Sample 相关的链接可以看到效果图
+
+- 点击放大算法名称的这个链接, 一般会直接进入下载页面, 在此处找到类似于 `4x-UltraSharp.pth` 这样的模型文件, 下载它即可, 这里注意一下第五列, 即上图显示值为 `ESRGAN` 的这一列, 比如这里标志是 ESRGAN , 则需要将其放入以下目录 :
+
+  ```
+  根目录/models/ESRGAN
+  ```
+
+- 安装完成后, 我们重启 WebUI, 即可看到新的放大算法模型已经被正常加载了
+
+  > ESRGAN ("old Architecture") Models , 即基于老架构的放大算法模型
+
 ### 查询图片参数
 
 - AI生成图片会自动保存全部参数到原图中, 可以在WebUI的 “图片信息” 一栏内通过解析原图查看到
@@ -306,6 +367,76 @@
   - `darkness, light, green, heat` - 4 items - `darkness`, `light`, `green`, `heat`
   - `darkness, "light, green", heat` - 错误示例 - 4 items - `darkness`, `"light`, `green"`, `heat`
   - `darkness,"light, green",heat` - 正确示例 - 3 items - `darkness`, `light, green`, `heat`
+
+### 拓展安装
+
+#### After Detailer(未学习)
+
+[adetailer: adetailer for stable diffusion (gitee.com)](https://gitee.com/zhkgo/adetailer)
+
+- !After Detailer is a extension for stable diffusion webui, similar to Detection Detailer, except it uses ultralytics instead of the mmdet.
+
+  ## Install
+
+  (from Mikubill/sd-webui-controlnet)
+
+  1. Open "Extensions" tab.
+  2. Open "Install from URL" tab in the tab.
+  3. Enter `https://github.com/Bing-su/adetailer.git` to "URL for extension's git repository".
+  4. Press "Install" button.
+  5. Wait 5 seconds, and you will see the message "Installed into stable-diffusion-webui\extensions\adetailer. Use Installed tab to restart".
+  6. Go to "Installed" tab, click "Check for updates", and then click "Apply and restart UI". (The next time you can also use this method to update extensions.)
+  7. Completely restart A1111 webui including your terminal. (If you do not know what is a "terminal", you can reboot your computer: turn your computer off and turn it on again.)
+
+  You **DON'T** need to download any model from huggingface.
+
+  ## ControlNet Inpainting
+
+  You can use the ControlNet inpaint extension if you have ControlNet installed and a ControlNet inpaint model.
+
+  On the ControlNet tab, select a ControlNet inpaint model and set the model weights.
+
+  ## Model
+
+  | Model                 | Target                | mAP 50                    | mAP 50-95                 |
+  | --------------------- | --------------------- | ------------------------- | ------------------------- |
+  | face_yolov8n.pt       | 2D / realistic face   | 0.660                     | 0.366                     |
+  | face_yolov8s.pt       | 2D / realistic face   | 0.713                     | 0.404                     |
+  | mediapipe_face_full   | realistic face        | -                         | -                         |
+  | mediapipe_face_short  | realistic face        | -                         | -                         |
+  | hand_yolov8n.pt       | 2D / realistic hand   | 0.767                     | 0.505                     |
+  | person_yolov8n-seg.pt | 2D / realistic person | 0.782 (bbox) 0.761 (mask) | 0.555 (bbox) 0.460 (mask) |
+  | person_yolov8s-seg.pt | 2D / realistic person | 0.824 (bbox) 0.809 (mask) | 0.605 (bbox) 0.508 (mask) |
+
+  The yolo models can be found on huggingface [Bingsu/adetailer](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2FBingsu%2Fadetailer).
+
+  ### User Model
+
+  Put your [ultralytics](https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fultralytics%2Fultralytics) model in `webui/models/adetailer`. The model name should end with `.pt` or `.pth`.
+
+  It must be a bbox detection or segment model and use all label.
+
+  ### Dataset
+
+  Datasets used for training the yolo models are:
+
+  #### Face
+
+  - [Anime Face CreateML](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fmy-workspace-mph8o%2Fanime-face-createml)
+  - [xml2txt](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2F0oooooo0%2Fxml2txt-njqx1)
+  - [AN](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fsed-b8vkf%2Fan-lfg5i)
+  - [wider face](https://gitee.com/link?target=http%3A%2F%2Fshuoyang1213.me%2FWIDERFACE%2Findex.html)
+
+  #### Hand
+
+  - [AnHDet](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2F1-yshhi%2Fanhdet)
+  - [hand-detection-fuao9](https://gitee.com/link?target=https%3A%2F%2Funiverse.roboflow.com%2Fcatwithawand%2Fhand-detection-fuao9)
+
+  #### Person
+
+  - [coco2017](https://gitee.com/link?target=https%3A%2F%2Fcocodataset.org%2F%23home) (only person)
+  - [AniSeg](https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fjerryli27%2FAniSeg)
+  - [skytnt/anime-segmentation](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2Fdatasets%2Fskytnt%2Fanime-segmentation)
 
 
 -------------------
