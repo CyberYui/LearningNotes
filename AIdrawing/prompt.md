@@ -19,7 +19,7 @@
 
 #### 女孩折线图 
 
-![img](./images/v2-231a9389f248fcb46310f82d4b8196cd_720w.webp)
+![img](./images/1684117674354-tCLvx8YEbi.png)
 
 ```
 Girls Line Chart
@@ -27,7 +27,7 @@ Girls Line Chart
 
 #### 女孩转换图表
 
-![img](./images/v2-3aa5f6d7cef552f771761f754a2826ac_720w.webp)
+![img](./images/1684118679921-CbPV6rlvZs.png)
 
 ```
 Girls Conversion Chart
@@ -35,7 +35,7 @@ Girls Conversion Chart
 
 #### 女孩颜色图表
 
-![img](./images/v2-5baea52d4df56afce97881f05b4a056f_720w.webp)
+![img](./images/1684118996342-X9RJKUKWfv.png)
 
 ```
 Girls Color Chart
@@ -43,7 +43,7 @@ Girls Color Chart
 
 #### 女孩体重表
 
-![img](./images/v2-28b4fbe8ee062cd630c790018d6903e0_720w.webp)
+![img](./images/1684119204983-u5tkxXrUYJ.png)
 
 ```
 Girls Weight Chart
@@ -51,7 +51,7 @@ Girls Weight Chart
 
 #### 女孩控制图表
 
-![img](./images/v2-ba5ccf0e288f30c165e9eed8f544de63_720w.webp)
+![img](./images/1684119315285-lM8PWwbVgA.png)
 
 ```
 Girls Control Chart
@@ -59,7 +59,7 @@ Girls Control Chart
 
 #### 女孩深度图表
 
-![img](./images/v2-98e7c7a73b8122a0fa1b347e0aafebde_720w.webp)
+![img](./images/1684119422108-uaBkgS8Ca8.png)
 
 ```
 Girls Depth Chart
@@ -67,7 +67,7 @@ Girls Depth Chart
 
 #### 女孩情绪图表
 
-![img](./images/v2-b42f22344bf7063dea59cfe948bf2101_720w.webp)
+![img](./images/1684119660645-UgBrJI4oc7.png)
 
 ```
 Girls Mood Chart
@@ -75,7 +75,7 @@ Girls Mood Chart
 
 #### 情绪图表
 
-![img](./images/v2-a32af054771bb51bcd19f759884d037d_720w.webp)
+![img](./images/1684120242750-Z6PYyZIDPy.png)
 
 ```
 Mood Chart
@@ -83,7 +83,7 @@ Mood Chart
 
 #### 情绪板
 
-![img](./images/v2-2e4e545084d1bc3de8ec65fdaa126119_720w.webp)
+![img](./images/1684120433076-xcUSu0lxjK.png)
 
 ```
 Mood Board
@@ -91,7 +91,7 @@ Mood Board
 
 #### 尺码表
 
-![img](./images/v2-e2a3a70a3cfc0c23ac1ee178f0ab9ec6_720w.webp)
+![img](./images/1684120593494-UraNrdg3Ot.png)
 
 ```
 Size Chart
@@ -99,7 +99,7 @@ Size Chart
 
 #### 插图风格图表
 
-![img](./images/v2-f829e61d1c19ed70431f31beb0371e65_720w.webp)
+![img](./images/1684120863641-6bVu09QdSc.png)
 
 ```
 Illustration Style Chart
@@ -107,7 +107,7 @@ Illustration Style Chart
 
 #### 草图图表
 
-![img](./images/v2-dc75f597e5264ddbb4ae8541f22ee8e1_720w.webp)
+![img](./images/1684120949387-DocxClGDl3.png)
 
 ```
 Sketch Chart
@@ -115,7 +115,7 @@ Sketch Chart
 
 #### 女孩渐变图表
 
-![img](./images/v2-a9ac0a7271f371aa44db067fdac4c268_720w.webp)
+![img](./images/1684121158022-pWu6sZHkLT.png)
 
 ```
 Girls Gradient Chart
@@ -123,7 +123,7 @@ Girls Gradient Chart
 
 #### 女孩尺码表
 
-![img](./images/v2-7a554e6fbf5c6d32f406ed33eaaf9209_720w.webp)
+![img](./images/1684121297344-y7R3niUydL.png)
 
 ```
 Girls Scale Chart
@@ -131,7 +131,7 @@ Girls Scale Chart
 
 #### 纹理图表
 
-![img](./images/v2-95aa97b6d8ce0a82ec33672ee9a12ea4_720w.webp)
+![img](./images/1684121446859-JkjHnFcmDf.png)
 
 ```
 Texture Chart
@@ -139,7 +139,7 @@ Texture Chart
 
 #### 对齐图表
 
-![img](./images/v2-d63ff54c92ab1479f178534050ab4b74_720w.webp)
+![img](./images/1684121675828-dKhR6iuGIH.png)
 
 ```text
 Alignment Chart
@@ -147,7 +147,7 @@ Alignment Chart
 
 #### 迷你图标图表
 
-![img](./images/v2-d8f3b68430fecff3e4ffde53a0be4d82_720w.webp)
+![img](./images/1684122131408-ANjW4y37BJ.png)
 
 ```text
 Chibi icon chart
@@ -155,7 +155,7 @@ Chibi icon chart
 
 #### 女孩雷达图
 
-![img](./images/v2-9242e1a3705bb6d7742236b4e4b37f00_720w.webp)
+![img](./images/1684122421173-wYvN8F5HqR.png)
 
 ```text
 Girls Radar Chart
