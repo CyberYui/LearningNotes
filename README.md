@@ -55,6 +55,14 @@ This repository includes these learning notes :
 
 --------------------
 
+- AI drawing ( Stable Diffusion )
+
+  - Install in Windows ( Make sure your PC have a Nvidia graphic card )
+
+    > https://github.com/CyberYui/LearningNotes/blob/main/AIdrawing/AIdrawingNote.md
+
+------------------
+
 The markdown editor client I using is Typora , and here are some of its shortcut keys. 
 
 As you can see its a chinese version , I'll make another version of it somedays.
