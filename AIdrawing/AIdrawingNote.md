@@ -992,6 +992,8 @@
 - 实际上训练时都是调用的 kohya_ss 的 [sd-scripts](https://github.com/kohya-ss/sd-scripts) 项目, 这个项目也就是秋叶大佬制作的
 
   > 借助整合包来进行训练是最好的方法, 参照 https://www.bilibili.com/video/BV1fs4y1x7p2 这个视频即可, 该视频有新版了, 更加方便
+  
+- 
 
 ### Embedding (Textual Inversion)
 
