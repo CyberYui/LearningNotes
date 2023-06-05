@@ -100,3 +100,15 @@
   @for /f "tokens=1-2 delims=:" %k in ('netsh wlan show profiles %j key ^=
    clear ^|findstr /i "关键内容"') do @echo %%j,%%l>> %USERPROFILE%\desktop\WiFi.txt
   %USERPROFILE%\desktop\WiFi.txt
+
+### Windows-11 创建批处理文件快捷方式到开始
+
+- 来源 : [知乎Lyon](https://www.zhihu.com/question/601260693/answer/3030330037)
+
+- **采用曲线救国的方式 :** 
+  1. 将文件后缀改为.exe, 右键菜单选择 `固定到“开始”屏幕` 
+  2. 将文件重新改回原来的后缀
+  3. 在开始菜单中, 找到刚刚固定的文件图标, 右键选择 `打开文件位置` 
+  4. 在弹出的资源管理器中选择该文件的快捷方式, 右键选择 `属性` 
+  5. 将 `目标(T):` 中的文件路径后缀改为正确的后缀即可 (将自动弹出提示)
+  ![img](./images/v2-b5f2f440df8f7ff31ad6a1db1ad2dd66_720w.webp)
