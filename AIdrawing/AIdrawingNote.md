@@ -989,11 +989,11 @@
 
 - 一般就用到[bmaltais/kohya_ss](https://github.com/bmaltais/kohya_ss)作为图形化界面, [Akegarasu/lora-scripts](https://github.com/Akegarasu/lora-scripts)作为编辑参数脚本这两个工具来训练
 
-- 实际上训练时都是调用的 kohya_ss 的 [sd-scripts](https://github.com/kohya-ss/sd-scripts) 项目, 这个项目也就是秋叶大佬制作的
+- 实际上训练时都是调用的 kohya_ss 的 [sd-scripts](https://github.com/kohya-ss/sd-scripts) 项目, 这个项目也就是秋叶大佬制作的, 我们仅仅直接使用AI工具, 所以相关项目的部署使用就跳过, 直接借助秋叶大佬的最新整合端进行之后的操作
 
-  > 借助整合包来进行训练是最好的方法, 参照秋叶大佬的 [[AI绘画]简单又不失专业的LoRA模型训练一键包](https://www.bilibili.com/video/BV1AL411q7Ub) 这个视频即可, 将相关的训练包下载到本地, 使用方式和 StableDiffusion整合包 一样即开即用
-  
-- 
+- 借助整合包来进行训练是最好的方法, 参照秋叶大佬的 [[AI绘画]简单又不失专业的LoRA模型训练一键包](https://www.bilibili.com/video/BV1AL411q7Ub) 这个视频即可, 将相关的训练包下载到本地, 使用方式和 StableDiffusion整合包 一样, 即开即用
+
+- (待施工参数设置和使用方法)
 
 ### Embedding (Textual Inversion)
 
