@@ -67,7 +67,7 @@
 
 - 网上相关UP有制作一键启动的傻瓜客户端, 只要保证电脑上内存大于64GB, N系显卡, 且显存>8GB, 就可以正常使用了, 好一些的显卡, 例如强于3080的, 可以直接训练相关的AI模型
 
-# 相关的学习内容
+# SD相关学习内容
 
 - Stable Diffusion 直译为稳定扩散, 原是指潜扩散模型 (即 Latent Diffusion Model, LDM), 现阶段大家使用它的时候都是利用 Stable-Diffusion WEB UI (仓库地址:[stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui))
 
@@ -1134,7 +1134,7 @@
 
 - 总之优先用 ”没有混合太多次“ 的基础模型, 这样适应性强一些
 
-### 模型简易训练教程(未学习)
+### 模型简易训练教程(待施工)
 
 > 基于秋叶大佬相关介绍进行学习
 
