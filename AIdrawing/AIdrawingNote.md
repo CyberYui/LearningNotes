@@ -971,9 +971,11 @@
   - `xxyyzz` : 是具体的模型简称
   - `8` : 是里面每张图片训练的次数, 这里我看到两种说法, 一种是设为6-8, 一种是根据图片数量至少设置100, 这个次数会乘以后面设置的训练参数的epoch数, 最后会训练大概几千次吧
 
-  > [注] 最好不要用数字`100`, 而是使用`6`-`8`这样的小数字乘多个epoch, 便于对比成果
+  > [注] 最好不要用数字`100`, 而是使用`6`-`8`这样的小数字乘多个 epoch<sup>[1]</sup> 
   >
-  > 目录结构并不是在`\xxyyzz\`下只能有一个`\8_xxyyzz\`, 我们可以把大头照/半身照/全身照分别放入3个子目录, 比如 `5_xxyyzz` 放大头照, 大头少学习, `6_xxyyzz` 放全身照, `8_xxyyzz` 放半身照, 半身主要学习
+  > 另外, 目录结构并不是在`\xxyyzz\`下只能有一个`\8_xxyyzz\`, 我们可以把大头照/半身照/全身照分别放入3个子目录, 比如 `5_xxyyzz` 放大头照, 大头少学习, `6_xxyyzz` 放全身照, `8_xxyyzz` 放半身照, 半身主要学习
+
+  > [1]: 在 AI 训练中, "epoch" 通常指的是一个完整的训练周期, 即模型使用整个训练数据集进行一次训练; 在每个 epoch 中, 模型将会对整个数据集进行一次正向传播和反向传播, 然后更新模型的权重和偏置; 通过多次 epoch 的训练, 模型可以逐渐优化其性能, 提高预测准确率和泛化能力; 在训练过程中, 我们可以根据模型在每个 epoch 中的表现来调整超参数, 修改模型结构或者更改优化算法, 以达到更好的训练效果; 因此, epoch 是评估训练过程中模型性能的重要指标之一
 
 - 将宽高设置为上一步设置好的统一分辨率
 
@@ -993,7 +995,95 @@
 
 - 借助整合包来进行训练是最好的方法, 参照秋叶大佬的 [[AI绘画]简单又不失专业的LoRA模型训练一键包](https://www.bilibili.com/video/BV1AL411q7Ub) 这个视频即可, 将相关的训练包下载到本地, 使用方式和 StableDiffusion整合包 一样, 即开即用
 
-- (待施工参数设置和使用方法)
+- 无论使用整合包还是脚本, 训练参数基本大差不差, **lora-scripts** 里面的训练脚本 `train.ps1` 的完整参数介绍如下 :
+
+  > 该脚本在设置完毕之后直接就能在 powershell 中运行了
+
+  ```python
+  # LoRA train script by @Akegarasu
+  
+  # Train data path | 设置训练用模型、图片
+  $pretrained_model = "./sd-models/model.ckpt" # base model path | 底模路径
+  $is_v2_model = 0 # SD2.0 model | SD2.0模型 2.0模型下 clip_skip 默认无效
+  $parameterization = 0 # parameterization | 参数化 本参数需要和 V2 参数同步使用 实验性功能
+  $train_data_dir = "./train/aki" # train dataset path | 训练数据集路径
+  $reg_data_dir = "" # directory for regularization images | 正则化数据集路径，默认不使用正则化图像。
+  
+  # Network settings | 网络设置
+  $network_module = "networks.lora" # 在这里将会设置训练的网络种类，默认为 networks.lora 也就是 LoRA 训练。如果你想训练 LyCORIS（LoCon、LoHa） 等，则修改这个值为 lycoris.kohya
+  $network_weights = "" # pretrained weights for LoRA network | 若需要从已有的 LoRA 模型上继续训练，请填写 LoRA 模型路径。
+  $network_dim = 32 # network dim | 常用 4~128，不是越大越好
+  $network_alpha = 32 # network alpha | 常用与 network_dim 相同的值或者采用较小的值，如 network_dim的一半 防止下溢。默认值为 1，使用较小的 alpha 需要提升学习率。
+  
+  # Train related params | 训练相关参数
+  $resolution = "512,512" # image resolution w,h. 图片分辨率，宽,高。支持非正方形，但必须是 64 倍数。
+  $batch_size = 1 # batch size
+  $max_train_epoches = 10 # max train epoches | 最大训练 epoch
+  $save_every_n_epochs = 2 # save every n epochs | 每 N 个 epoch 保存一次
+  
+  $train_unet_only = 0 # train U-Net only | 仅训练 U-Net，开启这个会牺牲效果大幅减少显存使用。6G显存可以开启
+  $train_text_encoder_only = 0 # train Text Encoder only | 仅训练 文本编码器
+  $stop_text_encoder_training = 0 # stop text encoder training | 在第N步时停止训练文本编码器
+  
+  $noise_offset = 0 # noise offset | 在训练中添加噪声偏移来改良生成非常暗或者非常亮的图像，如果启用，推荐参数为 0.1
+  $keep_tokens = 0 # keep heading N tokens when shuffling caption tokens | 在随机打乱 tokens 时，保留前 N 个不变。
+  $min_snr_gamma = 0 # minimum signal-to-noise ratio (SNR) value for gamma-ray | 伽马射线事件的最小信噪比（SNR）值  默认为 0
+  
+  # Learning rate | 学习率
+  $lr = "1e-4"
+  $unet_lr = "1e-4"
+  $text_encoder_lr = "1e-5"
+  $lr_scheduler = "cosine_with_restarts" # "linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"
+  $lr_warmup_steps = 0 # warmup steps | 学习率预热步数，lr_scheduler 为 constant 或 adafactor 时该值需要设为0。
+  $lr_restart_cycles = 1 # cosine_with_restarts restart cycles | 余弦退火重启次数，仅在 lr_scheduler 为 cosine_with_restarts 时起效。
+  
+  # Output settings | 输出设置
+  $output_name = "aki" # output model name | 模型保存名称
+  $save_model_as = "safetensors" # model save ext | 模型保存格式 ckpt, pt, safetensors
+  
+  # Resume training state | 恢复训练设置  
+  $save_state = 0 # save training state | 保存训练状态 名称类似于 <output_name>-??????-state ?????? 表示 epoch 数
+  $resume = "" # resume from state | 从某个状态文件夹中恢复训练 需配合上方参数同时使用 由于规范文件限制 epoch 数和全局步数不会保存 即使恢复时它们也从 1 开始 与 network_weights 的具体实现操作并不一致
+  
+  # 其他设置
+  $min_bucket_reso = 256 # arb min resolution | arb 最小分辨率
+  $max_bucket_reso = 1024 # arb max resolution | arb 最大分辨率
+  $persistent_data_loader_workers = 0 # persistent dataloader workers | 容易爆内存，保留加载训练集的worker，减少每个 epoch 之间的停顿
+  $clip_skip = 2 # clip skip | 玄学 一般用 2
+  $multi_gpu = 0 # multi gpu | 多显卡训练 该参数仅限在显卡数 >= 2 使用
+  $lowram = 0 # lowram mode | 低内存模式 该模式下会将 U-net 文本编码器 VAE 转移到 GPU 显存中 启用该模式可能会对显存有一定影响
+  
+  # 优化器设置
+  $optimizer_type = "AdamW8bit" # Optimizer type | 优化器类型 默认为 8bitadam，可选：AdamW AdamW8bit Lion SGDNesterov SGDNesterov8bit DAdaptation AdaFactor
+  
+  # LyCORIS 训练设置
+  $algo = "lora" # LyCORIS network algo | LyCORIS 网络算法 可选 lora、loha、lokr、ia3、dylora。lora即为locon
+  $conv_dim = 4 # conv dim | 类似于 network_dim，推荐为 4
+  $conv_alpha = 4 # conv alpha | 类似于 network_alpha，可以采用与 conv_dim 一致或者更小的值
+  $dropout = "0"  # dropout | dropout 概率, 0 为不使用 dropout, 越大则 dropout 越多，推荐 0~0.5， LoHa/LoKr/(IA)^3暂时不支持
+  ```
+
+- 如果使用的是整合包的话, 直接在 LoRA训练 标签页中选择新手方式, 按实际情况把相关参数填好就可以了
+
+- 一般一个 LoRA模型 的训练在 4090显卡 加持下能在几分钟内完成, 速度是很快的
+
+- **训练日志和结果**
+
+- 在多次训练后, 我们一般需要对比多次训练的结果, 查看训练阶段的loss情况
+
+- 对比也比较简单, 在 SD-Trainer 的 WebUI 界面中, 点开 `Tensorboard` 标签即可正常查看相关图表, 主要看每个epoch的loss值, 看看有没有那种训练很久不降反升的
+
+- 从这些图表中就可以看出来之前为什么目录不要 `100_xxyyzz` 的原因了, 即由于100过高会导致只有一个 epoch, 从而无法对比哪个更好, 即使你能做到100乘以多个epoch, 结果肯定也是过拟合的
+
+- 所以对于训练的结果, 仅通过日志查看loss肯定是不够的, 因为你需要避免其 **欠拟合** 和 **过拟合** , 这时候需要使用 `可选附加网络(LoRA插件)` 来进行对比多个epoch生成的模型情况
+
+- 对于一个生成人像的 LoRA, 其结果不像当然就是欠拟合, 如果只能画大头照就是过拟合, 对比各个epoch的目的即是看该生成模型是否能生成和目标长得像, 并且能有效的使用提示词改变图像 (特别是大头照, 半身, 全身一类) 
+
+- **各epoch模型对比**
+
+- 如果训练参数设置都比较正常, 每1, 2次epoch保存了模型
+
+- 那么在output目录里面就会有一堆模型 (除了最后一个, 其它都有长长的数字后缀), 此时就可以借助 `可选附加网络(LoRA插件)` 来进行多个epoch/权重的模型对比了
 
 ### Embedding (Textual Inversion)
 
