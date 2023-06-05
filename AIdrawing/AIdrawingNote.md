@@ -1089,7 +1089,15 @@
 
 > 由于本节涉及插件安装, 故在此处将其标题高亮, 使其能正常显示在本笔记的目录中
 
-- 
+- 在新版的秋叶大佬的整合包中已经默认安装了这个插件了, 即在 `文生图` 标签页的 `随机数种子` 下面可以下拉的插件中, `Additional Networks` 就是这里需要的插件了, 如果没有的话可能需要手动安装下
+
+  > 插件的安装也很简单, 在插件标签页中, 选择可下载标签页, 搜索 `additional` 即可看到 [Kohya-ss Additional Networks](https://ghproxy.com/https://github.com/kohya-ss/sd-webui-additional-networks.git) 扩展, 安装之后更新一次 WebUI, 然后重启整个整合包即可
+
+- 需要注意的是, 插件是不直接识别 SD 里面的 LoRA模型 的, 你需要将需要拿来做对比的模型放到插件的相关目录中, 一般是 `根目录\extensions\sd-webui-additional-networks\models\lora` 这个路径下
+
+- 一般在使用的时候为了控制变量, 仅修改界面中的不同行模型即可, 像下面这样 :
+
+  
 
 ### Embedding (Textual Inversion)
 
