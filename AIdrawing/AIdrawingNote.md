@@ -902,7 +902,10 @@
   
   > 下载拓展之后, 你不需要额外再去下载对应的模型了, 你会在下一次启动 SD 的时候看到对应的插件内容和模型
   
+
 #### ControlNet Inpainting
+
+- ADetail 可以配合 ControlNet 使用, 这时可能还需要你下载一些 ControlNet Inpainting 模型来使用 ADetail
 
 - 如果你已经安装了ControlNet并且拥有ControlNet inpaint模型, 你可以使用ControlNet inpaint扩展
 
