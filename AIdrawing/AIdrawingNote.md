@@ -647,6 +647,21 @@
 
 ### ControlNet(待施工)
 
+- 同其他AI插件相比较, ControlNet 算是最为简单的插件了, 其作用就是用模型进一步 (精确) 控制生成的图片内容 (主要是人像，也包括建筑风景等), 可用多种算法检测已有图片的边缘, 深度, 身体手部姿态
+
+- 秋叶大佬的整合包中默认就带有ControlNet相关插件内容, 最近更新了 ControlNet 1.1 之后, 多了很多预处理器, 并且模型也都更新了, ControlNet的相关模型也要放置在对应位置
+
+  > 旧的模型放在 : `xxxx\SDWEBUI\models\ControlNet\` 目录中
+  > 新的模型放在 : `xxxx\SDWEBUI\extensions\sd-webui-controlnet\models\` 目录中
+  >
+  > 如果没有对应的模型, 可以在 [openai](https://openai.wiki/controlnet-v11-up.html) 网站寻找相应的模型整合包
+
+- 由于 ControlNet 更新 1.1 版本后和之前的版本区别很大, 故此处仅针对 1.1 版本进行相关笔记记录
+
+- 秋叶大佬的整合包中一般并不包括大型的 ControlNet 模型, 故需要特别下载上述的模型整合包来覆盖已有内容
+
+  > 关于ControlNet的模型不止以上那部分, 在使用期间, 也会自动下载一些其它模型, 这些模型的目录可能位于 `.\stable-diffusion-webui\extensions\sd-webui-controlnet\annotator\clip_vision` , 又或者 `.\stable-diffusion-webui\extensions\sd-webui-controlnet\annotator\downloads` 之类的目录下
+
 - 
 
 ### 图像放大算法(Upscaler)
