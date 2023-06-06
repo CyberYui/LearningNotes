@@ -662,6 +662,82 @@
 
   > 关于ControlNet的模型不止以上那部分, 在使用期间, 也会自动下载一些其它模型, 这些模型的目录可能位于 `.\stable-diffusion-webui\extensions\sd-webui-controlnet\annotator\clip_vision` , 又或者 `.\stable-diffusion-webui\extensions\sd-webui-controlnet\annotator\downloads` 之类的目录下
 
+#### ControlNet模型名称含义
+
+- 以Canny模型为例, 其模型名称中各个部分的具体含义如下 :
+
+  > 文件名 : control_v11 p_sd15_canny.pth
+  >
+  > - control : ControlNet 官方模型均以 Control 开头, 用与于其它模型区分
+  > - v11 : 代表模型对应的 ControlNet 版本为V1.1
+  > - p : 该部分除了P之外, 还有E, U共计三种标识
+  >   - 此处为P代表已可以用于生产环境, 可正常使用
+  >   - 此处为E代表为实验性阶段模型, 可能存在BUG
+  >   - 此处为U代表这是未完成的, 半成品, 不建议使用
+  > - sd15 : 模型适合的 StableDiffusion 基础模型版本, 除了SD15代表SD1.5之外, 还有下列内容 :
+  >   - SD15 = Stable Diffusion 1.5
+  >   - SD15s2 = Stable Diffusion 1.5 With Clip Skip 2
+  >   - SD21 = Stable Diffusion 2.1
+  >   - SD21v = Stable Diffusion 2.1v-768
+  > - Canny : 模型所对应的预处理器名称
+  > - .pth : 文件后缀名, 代表这个文件是一个模型文件
+  >   - 后缀除了.pth 之外, 还会有一个与该模型名称完全一致, 但后缀为.yaml的配置文件
+  >   - 如果你的PTH与Yaml文件名称不一致, 可手动修改为对应的名称
+
+- 一般来说模型的对应情况速查见下表, 以下为模型专有功能描述, 表中仅做一个介绍
+
+  | 模型名称                           | 预处理名称                         | 类型                 | 模型描述                                                     |
+  | ---------------------------------- | ---------------------------------- | -------------------- | ------------------------------------------------------------ |
+  |                                    | invert(from white bg & black line) | 线稿反转             | 白色背景上有黑色线条的图像进行反转（黑色线稿图）             |
+  | control_v11 e_sd15_ip2p            | 无                                 | 指令模型             | 无需预处理器，直接输入指令提示 ，例如“变成“ ”冬天”，画面就会在原来的基础上变成冬天，tag位置输入的是指令 “变成”，而不是纯粹的描述。 |
+  | control_v11 e_sd15_shuffle         | shuffle                            | 随机洗牌             | 将上传的图片打乱，重新组合。                                 |
+  | control_v11 f1p_sd15_depth         |                                    | 深度图计算           | 对图像中的各物体深度计算。                                   |
+  |                                    | depth_leres                        |                      | 采用卷积神经网络(CNN)架构，LeRes可以直接从单张图像中估算出深度信息。 |
+  |                                    | depth_midas                        |                      | 采用了自监督学习的方法，通过学习单张图像与相邻图像之间的关系来预测每个像素点的深度。 |
+  |                                    | depth_zoe                          |                      | 采用基于视差的方法进来深度计算，利用了左右两张图像之间的视差信息来推测物体的距离。 |
+  | control_v11 p_sd15_canny           | canny                              | 边缘检测             | 与旧版相比，进行了优化。                                     |
+  | control_v11 p_sd15_inpaint         | inpaint_global_harmonious          | 图像修补             | 支持修复应用，视频光流扭曲。                                 |
+  | control_v11 p_sd15_lineart         |                                    | 线性图               | 该模型对线稿的处理十分优秀，canny处理不好的可以用这个。      |
+  |                                    | lineart_coarse                     |                      | 粗略线稿提取                                                 |
+  |                                    | lineart_realistic                  |                      | 写实线稿提取                                                 |
+  |                                    | lineart_standard                   |                      | 反色线稿提取                                                 |
+  | control_v11 p_sd15_mlsd            | mlsd                               | 直线条检测           | 可以识别建筑、室内设计。                                     |
+  | control_v11 p_sd15_normalbae       |                                    | 法线图               | 根据图像生成法线贴图，适合CG建模师。                         |
+  |                                    | normal_bae                         | bae                  | 效果优于midas，特别是在真实图像上，bae预处理后的图像更趋近于真实照片。 尝试学习的算法，它可以直接从一张普通的RGB彩色图像中估算出每个像素点的表面法线。 |
+  |                                    | normal_midas                       | midas                | midas有时候出来的抽象效果也很惊艳，更适合一些平面图画。 该算法是一种基于视觉图像的模型，在图像中评估尝试和光流。 |
+  | control_v11 p_sd15_openpose        | openpose                           | 姿态识别             | 适用于人物当前动作姿态提取                                   |
+  |                                    | openpose_face                      |                      | 适用人物姿态+面部表情提取                                    |
+  |                                    | openpose_faceonly                  |                      | 仅适用于人物面部识别提取                                     |
+  |                                    | openpose_full                      |                      | 适用于人物姿态+手+面部提取                                   |
+  |                                    | openpose_hand                      |                      | 适用于人物当前姿态+手部提取                                  |
+  | 存疑                               | mediapipe_face                     | 人脸轮廓图           | 使用该模型可以提取人脸轮廓。                                 |
+  | control_v11 p_sd15_scribble        | scribble_hed                       | 涂鸦-合成            | 目前可以识别1像素以上的线条 ，对粗线条也有了较好的识别。     |
+  |                                    | scribble_pidinet                   | 涂鸦-手绘            | 目前可以识别1像素以上的线条 ，对粗线条也有了较好的识别。     |
+  |                                    | scribble_xdog                      | 涂鸦-强化边缘        | 目前可以识别1像素以上的线条 ，对粗线条也有了较好的识别。     |
+  | control_v11 p_sd15_seg             | seg_ofade20k                       | 语义分割 OpenEDS 2.0 | 基于OpenEDS 2.0数据集的图像语义分割算法，可以有效的对图像中不同物体进行分割，并且能够识别和分类出多个物体实例。 |
+  |                                    | seg_ofcoco                         | 语义分割 COCO        | 【推荐】基于COCO数据集的图像分割算法，可以快速、精准的检测和分割出复杂的物体实例。 |
+  |                                    | seg_ufade20k                       | 语义分割 UFADE20K    | 结合了自注意力机制、动态卷积和SPADE等技术，能够更好的处理图像中物体的空间变化。 |
+  | control_v11 p_sd15_softedge        | softedge_hed                       | 软边缘检测           | 和其余的软件边缘检测相比，更加灵活适配。                     |
+  |                                    | softedge_hedsafe                   |                      | Conda的优化版本，提高了精度和稳定性。                        |
+  |                                    | softedge_pidinet                   |                      | 【推荐】Deep Learning的边缘检测法，使用了特定的微调方法，使算法在实时和精度上都有很好的表现。 |
+  |                                    | softedge_pidisafe                  |                      | 与softedge_pidinet相似，但其更加稳定，能针对一些特定问题提供更为精确的边缘检测结果。 |
+  | control_v11 p_sd15s2_lineart_anime | lineart_anime                      | 动漫线性图           | 动漫线稿，单独列出来训练了模型，更适合动漫图的生成！         |
+  | control_v11 u_sd15_tile            | tile_gaussian                      | 瓦片式处理           | 将图像拆分成一个一个小瓦片单位，高斯处理之后再重组，可以提高图像处理效率，同时产生出更加平滑、清晰的图像。 |
+  |                                    | threshold                          | 阈值                 |                                                              |
+  | t2ia                               | t2ia_color_grid                    |                      | 用于图像色彩增强的算法，主要适用于增强qcse鲜艳的图像。       |
+  |                                    | t2ia_sketch_pidi                   |                      | 针对手绘素描的算法，适用于将手绘素描转换成真实照片。         |
+  |                                    | t2ia_style_clipvision              |                      | 风格化图像处理算法，适用于将图像转换成指定的特定风格。       |
+
+- 借用 [ControlNet V1.1教程](https://openai.wiki/controlnet-v11-up.html) 的相关内容
+
+  ```text
+  (extremely detailed CG unity 8k wallpaper), (masterpiece), (best quality), (ultra-detailed), (best illustration), (best shadow), (photorealistic:1.4), 1girl on street, Kpop idol, ((very oversize sweater, buttoned sweater, open sweater)), (grey hair:1.1), collarbone, (midel breasts:1.3), looking at viewer, smile, full body, <lora:HinaIAmYoung22_zny10:1>
+  Negative prompt: paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), low res, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans, bad legs, error legs, bad feet, malformed limbs, extra limbs
+  Steps: 20, Sampler: DPM++ SDE Karras, CFG scale: 7, Seed: 4224168521, Size: 320x520, Model hash: 7234b76e42, Model: chilloutmix_Ni, Denoising strength: 0.25, Hires upscale: 2, Hires upscaler: R-ESRGAN 4x+ Anime6B
+  ```
+
+  > 这里着重注意一下使用的 lora, embedding, 以及大模型和放大算法, 如果你的 StableDiffusion 中没有那就需要去自行下载了
+
 - 
 
 ### 图像放大算法(Upscaler)
