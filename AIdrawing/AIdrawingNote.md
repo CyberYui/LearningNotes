@@ -645,7 +645,7 @@
   3. **Hypernetwork 有触发词时一定要使用触发词** 
   4. **新手/第一次使用 Hypernetwork 模型时尽量不要混用** 
 
-### ControlNet(待施工)
+### ControlNet(未完工)
 
 > 本节参照 openai.wiki 的相关内容, 链接为 [SD WebUI ControlNet V1.1最新模型使用教程-openAI](https://openai.wiki/controlnet-v11-up.html) 
 
@@ -738,9 +738,9 @@
   Steps: 20, Sampler: DPM++ SDE Karras, CFG scale: 7, Seed: 4224168521, Size: 320x520, Model hash: 7234b76e42, Model: chilloutmix_Ni, Denoising strength: 0.25, Hires upscale: 2, Hires upscaler: R-ESRGAN 4x+ Anime6B
   ```
 
-  > 这里着重注意一下使用的 lora, embedding, 以及大模型和放大算法, 如果你的 StableDiffusion 中没有那就需要去自行下载了
+  > 这里着重注意一下使用的 lora, embedding, 以及大模型和放大算法, 如果你的 StableDiffusion 中没有那就需要去自行下载了, 另外这里的预览图较难复现, 因为在学习时模型的版本就已经不一样了
   >
-  > 其实远不用这么麻烦, 通过借助 chilloutmix 模型生成一张半身图即可, 对此图进行相关调整即可
+  > 其实远不用这么麻烦, 通过借助 chilloutmix 模型生成一张半身图即可, 对此图进行相关调整即可, 后文的图可能有些不同, 但是只要理解意思即可
 
 - 在 ControlNet 插件中, 只需要知道基础的这些内容即可, 图中是翻译后的插件
 
@@ -817,7 +817,7 @@
 
 - 我们选择预处理器后, 对图片做出一次预处理, 结果如图 :
 
-- [图片|预处理结果]
+  ![image-20230608201239034](./images/image-20230608201239034.png)
 
   > 可以看到是一副十分粗糙的线稿, 但是我们在后续就可以根据这个结果来引导图像的生成了
 
@@ -886,7 +886,103 @@
 
 #### 图像修补(Inpaint_global_harmonious)
 
-- 
+- 先用局部蒙版绘制要修改的部分, 重绘幅度调到1, 然后在控制网络选择inpaint型和预处理器
+
+- 最后在控制网络蒙版和局部蒙版相同的区域, 点击 `生成`, 可以支持修复应用, 还可以处理视频光流扭曲
+
+- 该模型在`图生图`内的设置和预处理器如下图所示 :
+
+  ![image-20230608210400775](./images/image-20230608210400775.png)
+
+- 在多次实践后可以发现即使不换角色, 不做任何参数的修改, 只是涂抹之后重新生成, 也将会导致色差出现改变, 而更改角色之后, 色差的区别更大了, 可见该模型的更改范围仅限于涂抹区域, 但是色差将会影响全图
+
+#### 动漫线形图(lineart_anime)
+
+- 我们重新使用一张示例图 :
+
+  ```text
+  (extremely detailed CG unity 8k wallpaper), (masterpiece), (best quality), (ultra-detailed), (best illustration), (best shadow), (photorealistic:1.4), 1girl on street, Kpop idol, ((very oversize sweater, buttoned sweater, open sweater)), (grey hair:1.1), collarbone, (midel breasts:1.3), looking at viewer,long hair,<lora:HinaIAmYoung22_zny10:1>
+  Negative prompt: paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), low res, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, glans, bad legs, error legs, bad feet, malformed limbs, extra limbs
+  Steps: 20, Sampler: DPM++ SDE Karras, CFG scale: 7, Seed: 2557016082, Size: 320x520, Model hash: 7234b76e42, Model: chilloutmix_Ni, Denoising strength: 0.25, Hires upscale: 2, Hires upscaler: R-ESRGAN 4x+ Anime6B
+  ```
+
+  <img src="./images/00040-2557016082.png" alt="00040-2557016082.png" style="zoom:50%;" />
+
+- 该预处理器所对应的模型应该是 `control_v11p_sd15s2_lineart_anime` , 直接按照如下配置生成即可
+
+  ![image-20230608212028444](./images/image-20230608212028444.png)
+
+- 虽然此模型和算法更适合动漫效果, 但是我们为了严谨的测试, 我们依然使用真人测试一下效果, 线稿的效果并不是很好, 但是通过该线稿引导生成的姿势状态还不错
+
+  ![image-20230608213010439](./images/image-20230608213010439.png)
+
+- 实际上该模型用于动漫风图片引导, 下面我们测试一下, 根据以下配置得到了这样一张图 :
+
+  ```text
+  1girl, beautiful face, ((white eyes)), sexy pose, Red moon in the background, stars, space, (lightroom:1.13), soft light, (natural skin texture:1.2), (hyperrealism:1.2), sharp focus, focused
+  Negative prompt: (low quality:1.3), (worst quality:1.3),(monochrome:0.8),(deformed:1.3),(malformed hands:1.4),(poorly drawn hands:1.4),(mutated fingers:1.4),(bad anatomy:1.3),(extra limbs:1.35),(poorly drawn face:1.4),(signature:1.2),(artist name:1.2),(watermark:1.2)
+  ENSD: 31337, Size: 512x768, Seed: 314482871, Model: Yesmix-v1-6-original, Steps: 30, Sampler: DPM++ 2M Karras, CFG scale: 8, Clip skip: 2, Model hash: 3e9211917c, Hires steps: 25, Hires upscale: 1.7, Hires upscaler: Latent, Denoising strength: 0.6
+  ```
+
+  <img src="./images/00044-314482871.png" alt="00044-314482871.png" style="zoom:25%;" /><img src="./images/image.png" alt="image" style="zoom: 42%;" /><img src="./images/00045-341521321421.png" alt="image" style="zoom: 25%;" />
+
+- 直接抽取其动漫风线形图, 为了防止预览图有噪点, 选用了去噪预处理器, 接下来以此为基础进行新图的生成, 效果如下, 可以看到姿势基本被保留了出来, 但是由于更改了 prompt 以及随机数种子, 所以观察方向变了
+
+- 可以看到 `control_v11p_sd15_lineart` 模型和 `control_v11p_sd15s2_lineart_anime` 效果都还可以, 具体的区别还是要在实际生成图片时进行区分
+
+#### 线形图(lineart)
+
+> 本节对 `lineart_coarse`｜`lineart_realistic`｜`lineart_standard` 这三个线性图预处理器一起对比
+
+- `lineart_coarse`｜`lineart_realistic`｜`lineart_standard`, 这三个预处理器的模型全部使用同一模型, 模型都为 `control_v11p_sd15_lineart` 
+
+- 参数设置等其他步骤按照之前的操作照猫画虎即可, 略过, 直接上效果图 :
+
+  ![image-20230608215342741](./images/image-20230608215342741.png)
+
+- 在实际使用时, 三个预处理器最后达到的效果可以看出 :
+
+  - lineart_coarse
+    - 线稿比较简洁, 线条相比较于其它预处理器, 的确更粗一些, 效果也很不错, 生成的图像各趋于真实
+  - lineart_realistic
+    - 该预处理的名称虽为写实线稿提取, 但是生成的图像看起来却比较梦幻一些, 可能是个例效果
+  - lineart_standard
+    - 该预处理的线稿提取很糟糕, 但其生成的图像光影效果却很真实
+
+#### 人脸轮廓(mediapipe_face)
+
+- 使用 `mediapipe_face` 处理器可以提取图像中的人脸轮廓, 但是并没有相对应的模型, 不过可以暂时使用`control_v11p_sd15_openpose` 模型
+
+- 参数设置等其他步骤按照之前的操作照猫画虎即可, 略过, 直接上效果图 :
+
+  ![image-20230608220253811](./images/image-20230608220253811.png)
+
+#### 直线条检测(mlsd)
+
+- 该预处理器一般用于识别建筑, 室内设计, 对建筑行业非常友好
+
+  > [注] 该预处理器对人物没有效果, 不要在角色图像上使用
+
+- 参数设置等其他步骤按照之前的操作照猫画虎即可, 略过, 直接上效果图 :
+
+  ![image-20230608220427240](./images/image-20230608220427240.png)
+
+#### 法线图(normal_bae|normal_midas)
+
+- `normal_bae` | `normal_midas` 这两个法线图预处理器一样, 根据图像生成法线贴图, 适合CG建模师, 模型全部使用同一模型, 即 `control_v11p_sd15_normalbae` 
+
+- 参数设置等其他步骤按照之前的操作照猫画虎即可, 略过, 直接上效果图 :
+
+  ![image-20230608220605187](./images/image-20230608220605187.png)
+
+  ![image-20230608220628365](./images/image-20230608220628365.png)
+
+- normal_bae算法所提取的法线更加贴近于原图, 但是normal_bae曝光过高
+
+#### 身体姿态识别
+
+- `openpose`｜`openpose_face`｜`openpose_full`｜`openpose_hand`这几个处理器都支持识别身体姿态
+- 有一些支持面部识别, 这里先统一测试支持身体姿态识别的预处理器, 后续再统一测试其它功能
 
 ------------------------------
 
