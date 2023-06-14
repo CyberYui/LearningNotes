@@ -69,6 +69,12 @@
 
 # SD相关学习内容
 
+> 在学习时参照了很多大佬的教程, 相关链接如下 :
+>
+> [(6条消息) 探索【Stable-Diffusion WEBUI】的插件：画布扩绘（Outpaint）_若苗瞬的博客-CSDN博客](https://blog.csdn.net/ddrfan/article/details/130316244)
+>
+> [Stable Diffusion - openAI](https://openai.wiki/painting/sd)
+
 - Stable Diffusion 直译为稳定扩散, 原是指潜扩散模型 (即 Latent Diffusion Model, LDM), 现阶段大家使用它的时候都是利用 Stable-Diffusion WEB UI (仓库地址:[stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui))
 
 - 相对的, Windows 系统现在大家使用的都是由大神 ( [**秋葉aaak**][https://space.bilibili.com/12566101] ) 制作的统一启动包, 基本是下载解压后一键启动即可开始使用
@@ -1281,9 +1287,18 @@
 - Deepdanbooru 默认已经自带了, 可以在图生图页面找到
 - Tagger是一个插件, 在新版的整合包内也帮你装好了, 可以在顶栏找到
 
-### 局部重绘(Inpaint)
+### 图生图相关操作
 
-- 
+#### 局部重绘(Inpaint)
+
+- 图生图中可以使用局部重绘功能来修改图片, 用相应的蒙版来修改或删除图片中的某一部分内容, 而不改变其他部分, 同时有个 pix2pix 的模型, 可以用文字描述来改变图片的某部分内容, 类似的操作都可以称为局部重绘
+
+  > pix2pix模型可以在 [pix2pix]([timbrooks/instruct-pix2pix at main (huggingface.co)](https://huggingface.co/timbrooks/instruct-pix2pix/tree/main)) 进行下载, 相关模型也在文件库中(未完成)
+
+#### 画布扩绘(未完成)
+
+- 既然可以 Inpaint, 当然也可以 Outpaint(画布扩绘), 对应的插件为 **[OpenOutpaint](https://github.com/zero01101/openOutpaint-webUI-extension)** , 插件也可以从 SDwebUI 中直接安装, 相关插件安装方法参照后文拓展安装处
+- 安装完成后
 
 ### 调参对比图片
 
@@ -1407,6 +1422,18 @@
   | person_yolov8s-seg.pt | 2D / realistic person | 0.824 (bbox) 0.809 (mask) | 0.605 (bbox) 0.508 (mask) |
   
   > yolo 模型可以在 huggingface 的相关页面找到, 链接: [Bingsu/adetailer](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2FBingsu%2Fadetailer) 
+
+#### OpenOutpaint(未完成)
+
+- 对于将图片画布扩大的情况, 我们可以使用 OpenOutpaint 来进行画布扩绘操作
+
+#### 自动补全翻译
+
+- 在输入提示词的时候, 可以借助翻译插件来进行提示词添加, 即需要加个中文库, 例如我们下载了一个 10wtag 的中文库, 需要将其添加到自动补全插件中
+
+  > 中文库文件在文件库的 plugin 文件夹中(未完成)
+
+- 将我们下载好的 csv 文件, 如 `danbooru-10w-zh_cn.csv` 放到 `根目录\extensions\a1111-sd-webui-tagcomplete\tags` 这个文件夹下, 然后重启整合包, 选择设置标签页中的 `标签自动补全` 选项, 在 `翻译文件名` 中选择放好的 `danbooru-10w-zh_cn.csv` 文件, 然后重启 UI 即可
 
 
 -------------------
