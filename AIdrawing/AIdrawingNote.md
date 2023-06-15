@@ -88,7 +88,7 @@
 
 > 在学习时参照了很多大佬的教程, 相关链接如下 :
 >
-> [(6条消息) 探索【Stable-Diffusion WEBUI】的插件：画布扩绘（Outpaint）_若苗瞬的博客-CSDN博客](https://blog.csdn.net/ddrfan/article/details/130316244)
+> [关于【Stable-Diffusion WEBUI】方方面面研究（内容索引）_若苗瞬的博客-CSDN博客](https://blog.csdn.net/ddrfan/article/details/130194562)
 >
 > [Stable Diffusion - openAI](https://openai.wiki/painting/sd)
 
@@ -153,7 +153,19 @@
 
 ## 模型下载和分类
 
-- 大模型, 一般指大小超过2GB的模型, 一般放在 `根目录\models\Stable-Diffusion` 文件夹下
+### 模型仓库
+
+- 常见的模型下载仓库为以下几个 :
+  - [HuggingFace](https://huggingface.co/) : Stable Diffusion, ControlNet的官方仓库, 俗称抱脸网
+  - [Civitai](https://civitai.com/) : 里面多是Lora或其它NSFW等模型的仓库
+  - Discord : 公共聊天软件, 如果有需要可行前往搜索相应频道
+  - TG(电报) : 公共聊天软件, 如果有需要可行前往搜索相应频道
+  - Reddit : 公共交流社区, 如果有需要可行前往搜索相应频道
+- 在HuggingFace仓库中下载所需的模型时, 将会看到各种各样格式的文件, 对于一般的使用者来说, 仅下载Stable Diffusion的常用ckpt格式即可, 在后续经过整改后, 为了安全起见下载safetensor格式模型文件即可
+
+### 模型种类
+
+- **大模型**特指标准的`latent-diffusion`模型, 一般拥有完整的`TextEncoder`, `U-Net`, `VAE`, CKPT格式的全称为`CheckPoint`(检查点), 是完整模型的常见格式, 这类模型体积较大, 一般单个模型的大小在7GB左右, 下载下来后一般放在 `根目录\models\Stable-Diffusion` 文件夹下
 
   > 模型的下载可以有多种方法, 可以找相关的大佬去要, 也可以自己训练, 一般都用下面两种方法下载
   >
@@ -163,7 +175,29 @@
   >
   > [PS] 如果对别人生成的图片很好奇, 可以点击对应图片右下角的 `!` 标志, 可以看到对应的正负面词, 但是具体用了那些额外插件就不知道了
 
-- 在 C站 筛选模型的时候, 可以看到有不同的 **Model types**, 比如 `Checkpoint`, 它们的意义和作用都不一样, 简要介绍如下 :
+- **小模型**一般都是截取大模型的某一特定部分, 虽然不如大模型能力那样完整, 但是小而精, 因为训练的方向各为明确, 所以在生成特定内容的情况下, 效果更佳, 常见的有`Textual inversion (Embedding)`, `Hypernetwork`, `VAE`, `LoRA`等
+
+- **VAE**全称`Variational autoencoder`, 即变分自编码器, 功能类似于滤镜一样, 它会影响出图的画面色彩和某些极其微小的细节, 一般大模型本身里面自带 VAE , 但是并不是所有大模型都适合使用VAE, VAE最好搭配指定的模型, 避免出现反效果, 降低生成质量
+
+- **Embedding**是风格词限定模型, 即只针对一个风格或一个主题, 并将其作为一个模块在生成画作时使用对应TAG在Prompt中进行调用, 例如如果用数百张海绵宝宝训练了一个Embedding模型, 然后将该模型命名为`HMBaby`, 在使用AI绘图时加载名称为`HMBaby`的Embedding模型, 在使用Promat时加入`HMBaby`的Tag关键字, SD将会自动调用该模型参与AI创作
+
+- **Hypernetwork**模型的可自定义参数很多, 一般仅作用于图片风格修改, 即阳光, 像素风, 油画风等效果
+
+- **LoRA**模型分为基础模型和变体, **基础模型**一般用`chilloutmix**`作为名称, 该类模型可以直接被用作底模, **变体模型**一般小于1GB, 作为辅助底模生成不同风格和样式的图片, 俗称的LoRA就是这种变体模型
+
+### 模型名称
+
+- 在实际使用时, 不同模型的命名内容可能直接提示了该模型的使用方式等信息, 以下为简单的整理 :
+  - instruct-pix2pix : 在 stable-diffusion-webui 中的img2img专用模型, 使用自然语言指导图像编辑, 生成速度极快, 一般仅需要几秒的时间
+  - FP16,FP32 : 代表着精度不同, 精度越高所需显存越大, 效果也会有所提升
+  - 512|768 : 代表着推荐的默认训练分辨率是512X512还是768X768
+  - inpaint : 代表着是专门为imgtoimg中的inpaint功能训练的模型
+  - depth : 代表此模型是能包含处理图片深度信息并进行inpainting和img2img的
+  - EMA : 意味着这是个用来继续训练的模型, 文件大小相对较大, 小模型实际上有EMA权重, 而大模型是一个 “完整版”, 既有EMA权重, 也有标准权重, 因此, 如果你想训练这个模型, 你应该加载完整的模型, 并使用`use_ema=False` 命令
+
+### 模型下载
+
+- 以C站为例, 在C站筛选模型的时候, 可以看到有不同的 **Model types**, 比如 `Checkpoint`, 它们的意义和作用都不一样, 简要介绍如下 :
 
   > - Checkpoint : 一般是指大模型
   > - Textual Inversion : 即 Embedding, 指一部分提示词整合的限定提示词
@@ -175,7 +209,7 @@
   > - Poses :
   > - Wildcards : 
   > - Other : 
-  
+
 - 同样的插件也尽量在启动器中下载 , 在下载之前记得关闭 webUI 界面 , 因为添加插件之后一般也会需要重启 webUI 界面
 
 ## 一些专有名词解释
@@ -371,6 +405,8 @@
 - 此处的 `嵌入式(T.I. Embedding)` 标签页中会显示对应的 Embedding 模型, 点击一个, 即可将相应的关键词放入正相关提示词中
 
 ### LoRA
+
+> [LORA模型使用教程及模型下载 Stable Diffusion WebUI - openAI](https://openai.wiki/lora.html)
 
 - LoRA, 全称 Low-Rank Adaptation of Large Language Models, 直译为大语言模型低阶适应
 
@@ -587,7 +623,9 @@
   >
   > 并不需要特意去了解 lora 的各个参数是何意, 在使用时直接使用不同的权重设置, 生成X/Y/Z图表后, 在生成的图片中查看其区别会更直观
 
-#### LoRA Block Weight(LoRA 分层)
+#### LoRA Block Weight(LoRA 分层)(未完成)
+
+> [你真的会用LORA吗？超详细讲解LORA分层控制 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/621260240)
 
 - 我们可以通过使用 LoRA 轻松画出特定的人物, 物品, 画风, 风格等, 即 LoRA 是一种特殊训练的子集
 
@@ -1285,6 +1323,8 @@
 
 ### 图像放大算法(Upscaler)
 
+> 由于放大算法在图像生成中较为重要, 故单独列出一节来进行笔记记录
+
 - 与传统的放大算法不同, AI 放大算法是通过大量数据训练的模型
 
 - 其原理是首先对高质量图像进行人工破坏, 以模拟现实世界中的图像损失, 然后, 将损坏的图像缩小到较小尺寸, 接着训练一个神经网络模型来恢复原始图像
@@ -1444,10 +1484,46 @@
 
   > pix2pix模型可以在 [pix2pix]([timbrooks/instruct-pix2pix at main (huggingface.co)](https://huggingface.co/timbrooks/instruct-pix2pix/tree/main)) 进行下载, 相关模型也在文件库中(未完成)
 
-#### 画布扩绘(未完成)
+#### 画布扩绘(OpenOutpaint)
 
 - 既然可以 Inpaint, 当然也可以 Outpaint(画布扩绘), 对应的插件为 **[OpenOutpaint](https://github.com/zero01101/openOutpaint-webUI-extension)** , 插件也可以从 SDwebUI 中直接安装, 相关插件安装方法参照后文拓展安装处
-- 安装完成后
+
+- 安装完成后, 首先进入相关插件选项卡中, 点击此处的 ![image-20230615153506817](./images/image-20230615153506817.png)按钮, 上传好需要扩绘的图片, 一般这类图片尽量不要选择高清的图片, 不然会使得你的扩绘画布很大, 上传完毕后将其贴在画面上, 然后点击工具栏的 `Dream` 或者是 `img2img` 工具, 设计出一个较大的扩绘区域, 此时先不要点击, 需要提前设置一些内容 :
+
+  - 大小和位置, 一般就和原图有部门重叠即可
+  - 在左侧工具的 `Prompts` 中输入适当的提示词, 并设置好其它内容的参数
+
+- 所有数据设置完毕后, 将扩绘区域确定好, 点击后即会自动开始扩绘, 最后如果满意的话可以直接把整幅作品保存成新的图片
+
+  > 在图生图界面上传图片后, 点击发送到openOutpaint按钮是无效的, 需要在 OpenOutpaint 插件中单独上传才行 
+
+### 图片缩放&抠图(未完成)
+
+- 在文生图, 图生图以外, 还有对图片处理的其他附加功能, 在SD-webUI中即`后期处理`选项卡中的内容
+
+- 在没有安装更多插件的时候, 附加功能只有图片缩放
+
+  **处理对象(Source)**
+
+- 单张处理 : 相应的选项卡中, 拖入单张图片进行处理
+
+- 批量处理 : 相应的选项卡中, 拖入多张图片进行处理
+
+- 批量处理文件夹 : 不打开图片, 直接选择目录, 处理目录下的全部图片
+
+  > 如果以文件夹为准批量处理, 则可以在设置中选择保留原来的文件名, 但是文件的tag信息不保留
+
+#### 缩放(Scale)(未完成)
+
+> [(6条消息) 探索【Stable-Diffusion WEBUI】的附加功能：图片缩放&抠图_若苗瞬的博客-CSDN博客](https://blog.csdn.net/ddrfan/article/details/130341905)
+
+- 在选定好需要处理的图片后, 可以使用缩放功能进行 等比/指定 分辨率进行缩放, 我们一般生成图片时, 直接生成高分辨率图片开销过大, 所以一般都是通过生成低分辨率, 然后借助放大算法放大来实现高清的, 关于放大算法的内容参照 `图像放大算法` 一节
+
+### 反向推理
+
+> [Stable Diffusion WebUI图生图CLIP和DeepBooru反向推理涂鸦重绘蒙版教程 - openAI](https://openai.wiki/stable-diffusion-img2img.html)
+
+----------------------
 
 ### 调参对比图片
 
@@ -1507,6 +1583,18 @@
   - `darkness, "light, green", heat` - 错误示例 - 4 items - `darkness`, `"light`, `green"`, `heat`
   - `darkness,"light, green",heat` - 正确示例 - 3 items - `darkness`, `light, green`, `heat`
 
+### 视频动画|风格转换(未完成)
+
+> [Stable Diffusion WebUI + ControlNet 视频转动画风格化技术教程 - openAI](https://openai.wiki/stable-diffusion-video-stylization.html)
+
+- 
+
+### 视频动画|无限缩放(未完成)
+
+> [Stable Diffusion WebUI + Infinite Zoom = 视频画面无限缩放插件 - openAI](https://openai.wiki/stable-diffusion-infinite-zoom.html)
+
+- 
+
 ### 拓展安装
 
 - 在安装拓展之前请注意, 有的拓展安装完成之后, 可能只会在其安装时的语言中显示, 例如我之前安装的After Detailer就是在英文界面中安装的, 但是转换为中文界面就不显示这个插件, 其实尽量使用英文界面就好
@@ -1523,12 +1611,14 @@
 
   1. 打开webUI的 `拓展` 标签页
   
-     > 为了以防万一, 这里尽量直接开启全局代理, 并在整合包中设置好代理服务器设置, 比如这样: 
+     > 在下载之前尽量将所有相关应用的下载源都换成国内镜像源, 方便下载
+     >
+     > 为了以防万一, 你可以直接借助自己的梯子来操作, 使用时尽量直接开启全局代理, 并在整合包中设置好代理服务器设置, 比如这样: 
      >
      > <img src="./images/image-20230526114915246.png" alt="image-20230526114915246" style="zoom:85%;" />
      >
      > [注] 这个操作需要重启整合包的整体客户端
-  
+
   2. 点击 `可下载` 标签 , 首先点击 `加载扩展列表` 加载一次扩展列表
 
   3. 当下发插件列表正常显示后, 在搜索框中直接搜索detailer, 即可看到 !After Detailer 拓展, 我这里是安装好的显示
@@ -1538,7 +1628,7 @@
      > 一般来说通过 `从网址安装` 标签页里将 `https://github.com/Bing-su/adetailer.git` 输入到扩展的 git 仓库网址对应的空格处来下载 , 但是能直接下就不用这样麻烦了
 
   4. 点击拓展后面对应的操作列的 `安装` 按钮
-
+  
   5. 等待几秒钟之后你会看到安装完成的提示, 并且此处重新刷新拓展列表后搜索该拓展会显示成已安装状态
   
   6. 返回 `已安装` 标签页, 点击 `检查更新` 按钮, 系统自动刷新安装插件列表, 然后点击 `应用更改并重载前端` 按钮
@@ -1572,9 +1662,13 @@
   
   > yolo 模型可以在 huggingface 的相关页面找到, 链接: [Bingsu/adetailer](https://gitee.com/link?target=https%3A%2F%2Fhuggingface.co%2FBingsu%2Fadetailer) 
 
-#### OpenOutpaint(未完成)
+#### OpenOutpaint
 
-- 对于将图片画布扩大的情况, 我们可以使用 OpenOutpaint 来进行画布扩绘操作
+- 对于将图片画布扩大的情况, 我们可以使用 OpenOutpaint 来进行画布扩绘操作, 同样, 打开webUI的 `拓展` 标签页, 在`可下载`标签页中搜索 `outpaint` ,下载安装 `openOutpaint` 拓展即可
+
+  ![image-20230615152621872](./images/image-20230615152621872.png)
+
+- 安装完毕后, 完整退出并启动一次整合包客户端即可在选项卡中看到对应的插件选项卡
 
 #### 自动补全翻译
 
@@ -1583,6 +1677,16 @@
   > 中文库文件在文件库的 plugin 文件夹中
 
 - 将我们下载好的 csv 文件, 如 `danbooru-10w-zh_cn.csv` 放到 `根目录\extensions\a1111-sd-webui-tagcomplete\tags` 这个文件夹下, 然后重启整合包, 选择设置标签页中的 `标签自动补全` 选项, 在 `翻译文件名` 中选择放好的 `danbooru-10w-zh_cn.csv` 文件, 然后重启 UI 即可
+
+#### 抠图(Remove background)(未完成)
+
+- 
+
+#### SD自动获取模型封面(Civitai Helper)(待施工)
+
+> [Stable DiffusionAI绘画助手Civitai Helper2自动获取C站模型封面信息教程 - openAI](https://openai.wiki/civitai-helpersd2.html)
+
+- 
 
 
 -------------------
@@ -1799,6 +1903,8 @@
 ### 模型简易训练教程(待施工)
 
 > 基于秋叶大佬相关介绍进行学习
+>
+> [Stable Diffusion｜LoRA模型训练AI绘画快速入门学习教程指南极速版 - openAI](https://openai.wiki/sd-lora-quick-train.html)
 
 - 
 
@@ -1813,6 +1919,10 @@
 
 - 超网络是一种在不接触任何权重的情况下微调模型的概念 , 简单说就是用一个网络来生成另一个网络的参数 , 多个网络逐步迭代演变 , 最后形成由多个网络复合或进化成的超网络
 - 其工作原理是 : 用一个 Hypernetwork 输入训练集数据 , 然后输出对应模型的参数 , 最好的输出就是这些参数能够使得在测试数据集上取得更加好的效果 , 也就是说 , Hypernetwork 会对整个模型微调 , 使得无论什么 tag 都能起作用
+
+## 模型合并(未完成)
+
+> [Stable Diffusion WebUI的图片信息提取以及模型合并融合生成新模型功能教学详细 - openAI](https://openai.wiki/stable-diffusion-model-merge.html)
 
 ---------------
 
@@ -1829,6 +1939,14 @@
   > 关于Pickle的安全风险, 自行百度 *pickle反序列化攻击* 
 
 - .safetensors 是一种新型模型, 其出现正是为了解决之前提到的三种模型的安全风险而推出的, safetensors 格式与 pytorch 的模型可以通过工具进行相互转换, 其内容数据没有任何区别, 仅是保存数据的方式不同而已
+
+  | 格式         | 描述                                                         |
+  | ------------ | ------------------------------------------------------------ |
+  | .ckpt        | Pytorch的标准模型保存格式，容易遭受Pickle反序列化攻击。      |
+  | .pt          | Pytorch的标准模型保存格式，容易遭受Pickle反序列化攻击。      |
+  | .pth         | Pytorch的标准模型保存格式，容易遭受Pickle反序列化攻击。      |
+  | .safetensors | safetensors格式可与Pytorch的模型相互格式转换，内容数据无区别。 |
+  | 其它         | webui 特殊模型保存方法：PNG、WEBP图片格式。                  |
 
 ### 正负相关词示例(未完成)
 
