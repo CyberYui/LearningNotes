@@ -112,3 +112,19 @@
   4. 在弹出的资源管理器中选择该文件的快捷方式, 右键选择 `属性` 
   5. 将 `目标(T):` 中的文件路径后缀改为正确的后缀即可 (将自动弹出提示)
   ![img](./images/v2-b5f2f440df8f7ff31ad6a1db1ad2dd66_720w.webp)
+
+### 检查笔记本电脑电池报告
+
+- 通过在命令行中输入以下命令, 然后在对应的路径查看相关报告即可
+
+  ```shell
+  powercfg /batteryreport
+  ```
+
+  一般路径应该为如下类似的文件:
+
+  ```shell
+  C:\Users\YuiNo\battery-report.html
+  ```
+
+  
