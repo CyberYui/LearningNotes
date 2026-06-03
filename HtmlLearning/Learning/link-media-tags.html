@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>链接与媒体标签示例</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .demo-link {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background: #f5f5f5;
+      text-decoration: none;
+      color: #0066cc;
+      border-radius: 4px;
+    }
+    .demo-link:hover {
+      background: #e0e0e0;
+    }
+    img, video, audio {
+      max-width: 100%;
+      margin: 10px 0;
+    }
+    .demo-img {
+      border: 1px solid #ddd;
+      padding: 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>链接与媒体标签示例</h1>
+
+  <section>
+    <h2>链接标签 &lt;a&gt;</h2>
+
+    <h3>1. 基本链接</h3>
+    <a href="https://www.example.com" class="demo-link">外部链接 - Example.com</a>
+    <a href="https://www.baidu.com" class="demo-link" target="_blank">新窗口打开 - 百度</a>
+
+    <h3>2. 锚点链接</h3>
+    <a href="#section-anchor" class="demo-link">跳转到锚点区域</a>
+    <div id="section-anchor" style="background: #e8f5e9; padding: 20px; margin: 20px 0; border-radius: 4px;">
+      <h3>这是锚点区域</h3>
+      <p>页面滚动到这里了！</p>
+    </div>
+
+    <h3>3. 下载链接</h3>
+    <a href="file.pdf" download class="demo-link">下载 PDF 文件</a>
+
+    <h3>4. 邮件链接</h3>
+    <a href="mailto:test@example.com" class="demo-link">发送邮件</a>
+    <a href="mailto:test@example.com?subject=Hello&body=你好" class="demo-link">带主题的邮件</a>
+
+    <h3>5. 电话链接</h3>
+    <a href="tel:+8613800138000" class="demo-link">拨打电话</a>
+  </section>
+
+  <section>
+    <h2>图片标签 &lt;img&gt;</h2>
+
+    <h3>1. 基本图片</h3>
+    <img src="https://via.placeholder.com/300x200" alt="示例图片" class="demo-img">
+
+    <h3>2. 带尺寸的图片</h3>
+    <img src="https://via.placeholder.com/300x200" alt="示例图片" width="200" height="133" class="demo-img">
+
+    <h3>3. 懒加载图片</h3>
+    <img src="https://via.placeholder.com/300x200" alt="懒加载图片" loading="lazy" class="demo-img">
+  </section>
+
+  <section>
+    <h2>视频标签 &lt;video&gt;</h2>
+
+    <h3>1. 基本视频播放器</h3>
+    <video controls width="100%">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+      您的浏览器不支持视频播放。
+    </video>
+  </section>
+
+  <section>
+    <h2>音频标签 &lt;audio&gt;</h2>
+
+    <h3>1. 基本音频播放器</h3>
+    <audio controls>
+      <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+      <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+      您的浏览器不支持音频播放。
+    </audio>
+  </section>
+
+  <section>
+    <h2>iframe 标签</h2>
+
+    <h3>1. 嵌入外部页面</h3>
+    <iframe src="https://www.example.com" width="100%" height="300" style="border: 1px solid #ddd; border-radius: 4px;"></iframe>
+  </section>
+
+  <section>
+    <h2>图片热区 &lt;map&gt; + &lt;area&gt;</h2>
+
+    <h3>1. 创建可点击区域</h3>
+    <img src="https://via.placeholder.com/400x200" alt="示例图片" usemap="#demo-map" class="demo-img">
+    <map name="demo-map">
+      <area shape="rect" coords="0,0,200,200" href="https://www.example.com" alt="左侧区域">
+      <area shape="circle" coords="300,100,50" href="https://www.baidu.com" alt="右侧圆形区域">
+    </map>
+  </section>
+</body>
+</html>
