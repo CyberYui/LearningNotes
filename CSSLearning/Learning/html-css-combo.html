@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML + CSS 联动综合示例</title>
+  <style>
+    /* CSS 变量 (主题配置) */
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #6c757d;
+      --bg-color: #f8f9fa;
+      --text-color: #333;
+      --card-bg: white;
+      --border-color: #dee2e6;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --radius: 8px;
+      --transition: 0.3s ease;
+      --font-main: "Microsoft YaHei", Arial, sans-serif;
+      --spacing: 16px;
+    }
+
+    /* 暗色主题 */
+    [data-theme="dark"] {
+      --bg-color: #1a1a2e;
+      --text-color: #e0e0e0;
+      --card-bg: #16213e;
+      --border-color: #0f3460;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 全局样式 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    a { color: var(--primary-color); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== 头部导航 ===== */
+    .site-header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: var(--spacing) 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    .main-nav a {
+      color: white;
+      opacity: 0.9;
+      transition: opacity var(--transition);
+    }
+
+    .main-nav a:hover {
+      opacity: 1;
+      text-decoration: none;
+    }
+
+    .theme-toggle {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.9em;
+      transition: background var(--transition);
+    }
+
+    .theme-toggle:hover { background: rgba(255, 255, 255, 0.3); }
+
+    /* ===== 主体布局 (Grid) ===== */
+    .page-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing);
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
+    }
+
+    /* ===== 主内容区域 ===== */
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* 文章卡片 */
+    .article-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .article-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .article-card h2 {
+      margin-bottom: 12px;
+      color: var(--primary-color);
+    }
+
+    .article-meta {
+      font-size: 0.85em;
+      color: var(--secondary-color);
+      margin-bottom: 12px;
+    }
+
+    .article-tags {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8em;
+    }
+
+    /* ===== 侧边栏 ===== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-widget {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .sidebar-widget h3 {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .sidebar-widget ul { list-style: none; }
+    .sidebar-widget li { padding: 6px 0; border-bottom: 1px solid var(--border-color); }
+    .sidebar-widget li:last-child { border-bottom: none; }
+
+    /* 搜索框 */
+    .search-box {
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .search-box button {
+      padding: 8px 16px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: opacity var(--transition);
+    }
+
+    .search-box button:hover { opacity: 0.8; }
+
+    /* ===== 页脚 ===== */
+    .site-footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 24px 0;
+      margin-top: 40px;
+    }
+
+    /* ===== 响应式设计 ===== */
+    @media (max-width: 768px) {
+      .page-body {
+        grid-template-columns: 1fr;
+      }
+
+      .main-nav ul { gap: 16px; }
+      .header-container { flex-wrap: wrap; gap: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .main-nav ul { gap: 12px; font-size: 0.9em; }
+      .header-container { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 头部导航 -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="site-logo">我的博客</div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#">首页</a></li>
+          <li><a href="#">文章</a></li>
+          <li><a href="#">分类</a></li>
+          <li><a href="#">关于</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 切换主题</button>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <div class="page-body">
+    <main class="content-area">
+      <article class="article-card">
+        <h2>HTML + CSS 联动示例</h2>
+        <div class="article-meta">
+          <time datetime="2024-06-05">2024-06-05</time> · 前端开发
+        </div>
+        <p>
+          这是一个完整的 HTML + CSS 联动示例, 展示了如何使用:
+        </p>
+        <ul style="margin: 16px 0; padding-left: 24px;">
+          <li>HTML 语义化标签构建页面结构</li>
+          <li>CSS Flex 布局实现导航栏</li>
+          <li>CSS Grid 布局实现页面主体</li>
+          <li>CSS 变量实现主题切换</li>
+          <li>媒体查询实现响应式设计</li>
+          <li>Transition 实现悬停效果</li>
+        </ul>
+        <div class="article-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">布局</span>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <h2>CSS 变量与主题切换</h2>
+        <div class="article-meta">
+          <time datetime="2024-06-05">2024-06-05</time> · CSS 技巧
+        </div>
+        <p>
+          CSS 变量 (Custom Properties) 允许在 <code>:root</code> 中定义全局变量,
+          然后在整个页面中使用 <code>var(--variable-name)</code> 引用。
+          通过 JavaScript 切换 <code>data-theme</code> 属性, 可以实现主题切换。
+        </p>
+        <p style="margin-top: 12px;">
+          点击右上角的 "切换主题" 按钮试试!
+        </p>
+        <div class="article-tags">
+          <span class="tag">CSS 变量</span>
+          <span class="tag">主题</span>
+        </div>
+      </article>
+
+      <article class="article-card">
+        <h2>响应式设计</h2>
+        <div class="article-meta">
+          <time datetime="2024-06-05">2024-06-05</time> · 响应式
+        </div>
+        <p>
+          本页面使用了移动优先的响应式设计策略:
+        </p>
+        <ul style="margin: 16px 0; padding-left: 24px;">
+          <li>桌面: Grid 两栏布局 (主内容 + 侧边栏)</li>
+          <li>平板 (≤768px): 单栏布局, 侧边栏移到底部</li>
+          <li>手机 (≤480px): 导航栏垂直排列</li>
+        </ul>
+        <div class="article-tags">
+          <span class="tag">响应式</span>
+          <span class="tag">媒体查询</span>
+        </div>
+      </article>
+    </main>
+
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>搜索</h3>
+        <div class="search-box">
+          <input type="search" placeholder="搜索文章...">
+          <button>搜索</button>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>热门标签</h3>
+        <ul>
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+          <li><a href="#">布局</a></li>
+          <li><a href="#">响应式</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>最新评论</h3>
+        <ul>
+          <li>张三: 写得很详细!</li>
+          <li>李四: 学到了 Grid 布局</li>
+          <li>王五: Flex 示例很实用</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <p>© 2024 我的博客 · HTML + CSS 联动综合示例</p>
+    <p style="margin-top: 8px; opacity: 0.8; font-size: 0.9em;">
+      使用 HTML 语义化标签 + CSS Grid/Flex + CSS 变量 + 响应式设计构建
+    </p>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? '' : 'dark';
+      if (next) {
+        html.setAttribute('data-theme', next);
+        document.querySelector('.theme-toggle').textContent = '☀️ 切换主题';
+      } else {
+        html.removeAttribute('data-theme');
+        document.querySelector('.theme-toggle').textContent = '🌙 切换主题';
+      }
+    }
+  </script>
+</body>
+</html>

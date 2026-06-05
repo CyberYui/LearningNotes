@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid 布局示例</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+    h1 { color: #333; margin-bottom: 10px; }
+    h2 { color: #555; margin-bottom: 15px; font-size: 1.2em; }
+    section { margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+    /* 1. 基本网格 */
+    .basic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .basic-grid .item {
+      padding: 20px;
+      background: #2196F3;
+      color: white;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    /* 2. 不同列宽 */
+    .mixed-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr 150px;
+      gap: 12px;
+    }
+    .mixed-grid .item {
+      padding: 20px;
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    /* 3. 响应式网格 (auto-fill) */
+    .auto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .auto-grid .item {
+      padding: 20px;
+      background: #FF9800;
+      color: white;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    /* 4. 网格区域命名 */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-template-rows: 50px 1fr 50px;
+      grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+      gap: 8px;
+      min-height: 250px;
+    }
+    .layout-grid .header { grid-area: header; background: #333; color: white; display: flex; align-items: center; padding: 0 16px; border-radius: 4px; }
+    .layout-grid .sidebar { grid-area: sidebar; background: #f5f5f5; padding: 16px; border-radius: 4px; }
+    .layout-grid .main { grid-area: main; background: white; border: 1px solid #ddd; padding: 16px; border-radius: 4px; }
+    .layout-grid .footer { grid-area: footer; background: #333; color: white; display: flex; align-items: center; padding: 0 16px; border-radius: 4px; }
+
+    /* 5. 跨列跨行 */
+    .span-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .span-grid .item {
+      padding: 16px;
+      background: #9C27B0;
+      color: white;
+      text-align: center;
+      border-radius: 4px;
+    }
+    .span-grid .span-2-col { grid-column: span 2; }
+    .span-grid .span-2-row { grid-row: span 2; }
+    .span-grid .span-all { grid-column: 1 / -1; }
+
+    /* 6. 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .card-grid .card {
+      padding: 16px;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .card-grid .card h3 { margin-bottom: 8px; color: #333; }
+    .card-grid .card p { color: #666; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>Grid 布局示例</h1>
+
+  <section>
+    <h2>1. 基本网格 (3 等列)</h2>
+    <div class="basic-grid">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. 不同列宽</h2>
+    <div class="mixed-grid">
+      <div class="item">200px</div>
+      <div class="item">auto</div>
+      <div class="item">150px</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. 响应式网格 (auto-fill + minmax)</h2>
+    <div class="auto-grid">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <p style="margin-top: 8px; color: #666; font-size: 0.9em;">自动填充, 每列最小 180px</p>
+  </section>
+
+  <section>
+    <h2>4. 网格区域命名</h2>
+    <div class="layout-grid">
+      <div class="header">Header</div>
+      <div class="sidebar">Sidebar</div>
+      <div class="main">Main Content</div>
+      <div class="footer">Footer</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. 跨列跨行</h2>
+    <div class="span-grid">
+      <div class="item span-2-col">跨 2 列</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item span-2-row">跨 2 行</div>
+      <div class="item">7</div>
+      <div class="item span-all">跨所有列</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. 卡片网格 (auto-fit)</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>卡片 1</h3>
+        <p>Grid 布局示例卡片</p>
+      </div>
+      <div class="card">
+        <h3>卡片 2</h3>
+        <p>使用 auto-fit 自动适应容器宽度</p>
+      </div>
+      <div class="card">
+        <h3>卡片 3</h3>
+        <p>每个卡片最小宽度 200px</p>
+      </div>
+      <div class="card">
+        <h3>卡片 4</h3>
+        <p>容器宽度不足时自动换行</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

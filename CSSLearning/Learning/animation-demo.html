@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS 动画示例</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+    h1 { color: #333; margin-bottom: 10px; }
+    h2 { color: #555; margin-bottom: 15px; font-size: 1.2em; }
+    section { margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+    /* 1. Transition 示例 */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+    }
+
+    .card-hover {
+      width: 200px;
+      padding: 20px;
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      transform: translateY(-4px);
+      border-color: #007bff;
+    }
+
+    /* 2. Transform 示例 */
+    .transform-demo { display: flex; gap: 20px; flex-wrap: wrap; }
+    .transform-box {
+      width: 80px;
+      height: 80px;
+      background: #2196F3;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 0.8em;
+      text-align: center;
+    }
+    .translate { transform: translate(20px, 10px); background: #4CAF50; }
+    .rotate { transform: rotate(45deg); background: #FF9800; }
+    .scale { transform: scale(1.3); background: #9C27B0; }
+    .skew { transform: skew(10deg, 5deg); background: #f44336; }
+
+    /* 3. 卡片翻转 (Transform + Transition) */
+    .flip-card {
+      width: 150px;
+      height: 100px;
+      perspective: 1000px;
+    }
+    .flip-card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+    }
+    .flip-card-front { background: #007bff; }
+    .flip-card-back { background: #28a745; transform: rotateY(180deg); }
+
+    /* 4. 加载动画 (Animation) */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* 5. 弹跳动画 */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+    .bounce-ball {
+      width: 40px;
+      height: 40px;
+      background: #FF9800;
+      border-radius: 50%;
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    /* 6. 脉冲动画 */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .pulse-dot {
+      width: 30px;
+      height: 30px;
+      background: #f44336;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* 7. 淡入动画 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      padding: 20px;
+      background: #e7f3ff;
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    /* 8. 组合动画 */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(5deg); }
+      75% { transform: translateY(-5px) rotate(-5deg); }
+    }
+    .float-box {
+      width: 60px;
+      height: 60px;
+      background: #9C27B0;
+      border-radius: 12px;
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS 动画示例</h1>
+
+  <section>
+    <h2>1. Transition (过渡效果)</h2>
+    <button class="btn">悬停查看效果</button>
+    <div style="margin-top: 16px;" class="card-hover">悬停查看卡片效果</div>
+  </section>
+
+  <section>
+    <h2>2. Transform (变换)</h2>
+    <div class="transform-demo">
+      <div class="transform-box">原始</div>
+      <div class="transform-box translate">位移</div>
+      <div class="transform-box rotate">旋转</div>
+      <div class="transform-box scale">缩放</div>
+      <div class="transform-box skew">倾斜</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. 卡片翻转 (Transform + Transition)</h2>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">正面</div>
+        <div class="flip-card-back">背面</div>
+      </div>
+    </div>
+    <p style="margin-top: 8px; color: #666; font-size: 0.9em;">悬停查看翻转效果</p>
+  </section>
+
+  <section>
+    <h2>4. 加载动画 (Animation)</h2>
+    <div class="spinner"></div>
+  </section>
+
+  <section>
+    <h2>5. 弹跳动画</h2>
+    <div class="bounce-ball"></div>
+  </section>
+
+  <section>
+    <h2>6. 脉冲动画</h2>
+    <div class="pulse-dot"></div>
+  </section>
+
+  <section>
+    <h2>7. 淡入动画</h2>
+    <div class="fade-in">页面加载时的淡入效果</div>
+  </section>
+
+  <section>
+    <h2>8. 组合动画 (浮动)</h2>
+    <div class="float-box"></div>
+  </section>
+</body>
+</html>
