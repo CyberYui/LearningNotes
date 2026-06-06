@@ -340,7 +340,7 @@ p {
 
 ## 边框属性 (常用)
 
-即 (border properties), 已在 [[CSS盒模型]] 中详细介绍了 border 的基本用法, 这里补充一些高级用法。
+即 (border properties), 已在 [[css-box-model]] 中详细介绍了 border 的基本用法, 这里补充一些高级用法。
 
 ### border-radius (圆角)
 

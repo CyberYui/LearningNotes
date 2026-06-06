@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<!--
+  CSS 动画与交互 (css-animation) 示例
+  =============================================
+  涵盖知识点:
+  - Transition: 状态平滑过渡 (property/duration/timing-function/delay)
+  - Transform: translate/rotate/scale/skew (不触发重排)
+  - Transform + Transition: 卡片翻转效果 (perspective + rotateY + backface-visibility)
+  - @keyframes + Animation: 关键帧动画 (name/duration/iteration-count/direction)
+  - animation-fill-mode: forwards (保持结束状态)
+  - animation-direction: alternate (正反交替)
+  - 性能优化: transform/opacity 代替 top/left
+  应用场景:
+  - 按钮悬停反馈 (hover 缩放、颜色变化)
+  - 卡片悬停阴影提升
+  - 3D 翻转效果 (卡片正反面)
+  - 加载动画 (旋转 spinner)
+  - 弹跳/脉冲/淡入动画效果
+  关联笔记: [[css-animation]] | [[css-visual]]
+-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

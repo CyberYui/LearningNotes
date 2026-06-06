@@ -7,7 +7,7 @@
 ## CSS 简介
 
 - 即 **层叠样式表 (Cascading Style Sheets)**, 用于描述 HTML 文档的样式和布局, 实现网页内容与表现的分离
-- CSS 由 **W3C (万维网联盟)** 制定和维护, 当前主流版本为 CSS3, 采用模块化演进方式
+- CSS 由 **W3C (万维网联盟)** 制定和维护, 当前以模块化方式演进 (CSS3 泛指 CSS Level 3 及之后的模块)
 - CSS 不能独立存在, 必须依附于 HTML 文件, 通过选择器与 HTML 元素建立关联
 - 引入 CSS 的三种方式: **内联样式** (style 属性)、**内部样式表** (`<style>` 标签)、**外部样式表** (`<link>` 引用 .css 文件)
 
@@ -145,7 +145,7 @@ p { color: red !important; }  /* 强制最高 (不推荐) */
 
 ## CSS 分类导航
 
-### [[CSS选择器]]
+### CSS 选择器 (css-selectors) [[css-selectors]]
 
 **作用:** 指定要应用样式的 HTML 元素
 - 基础选择器: 通用、元素、类、ID
@@ -153,15 +153,15 @@ p { color: red !important; }  /* 强制最高 (不推荐) */
 - 伪类与伪元素: :hover、:nth-child()、::before 等
 - 优先级计算规则
 
-### [[CSS盒模型]]
+### CSS 盒模型 (css-box-model) [[css-box-model]]
 
 **作用:** 定义元素在页面中所占空间的大小和排列方式
 - 盒模型组成: content → padding → border → margin
 - box-sizing: content-box vs border-box
 - margin 合并 (外边距折叠)
-- → 搭配 [[HtmlLearning#表单标签]]、[[HtmlLearning#表格标签]] 使用
+- → 搭配 [[HtmlLearning#form-tags]]、[[HtmlLearning#table-tags]] 使用
 
-### [[CSS视觉表现]]
+### CSS 视觉表现 (css-visual) [[css-visual]]
 
 **作用:** 控制元素的颜色、字体、背景、边框等视觉效果
 - 颜色表示: hex、rgb、hsl
@@ -169,24 +169,24 @@ p { color: red !important; }  /* 强制最高 (不推荐) */
 - 背景图片与渐变
 - 边框圆角与阴影
 
-### [[CSS布局]]
+### CSS 布局 (css-layout) [[css-layout]]
 
 **作用:** 控制元素在页面中的位置和排列方式
 - Flex 布局 (最常用): 一维布局
 - Grid 布局 (常用): 二维布局
 - 定位: relative、absolute、fixed、sticky
 - 浮动: float 与清除浮动
-- → 搭配 [[HtmlLearning#语义化标签]] 构建页面结构
+- → 搭配 [[HtmlLearning#semantic-tags]] 构建页面结构
 
-### [[CSS响应式设计]]
+### CSS 响应式设计 (css-responsive) [[css-responsive]]
 
 **作用:** 使网页在不同设备和屏幕尺寸下都能良好显示
 - 媒体查询: @media 语法与断点设置
 - 响应式单位: rem、vw、vh、%
 - 移动优先设计策略
-- → 搭配 [[HtmlLearning#其他标签]] 中的 `<meta>` 标签使用
+- → 搭配 [[HtmlLearning#other-tags]] 中的 `<meta>` 标签使用
 
-### [[CSS动画与交互]]
+### CSS 动画与交互 (css-animation) [[css-animation]]
 
 **作用:** 为页面元素添加动态效果和交互反馈
 - Transition: 过渡效果
@@ -194,7 +194,7 @@ p { color: red !important; }  /* 强制最高 (不推荐) */
 - Animation: 关键帧动画
 - 性能优化建议
 
-### [[CSS工程化]]
+### CSS 工程化 (css-engineering) [[css-engineering]]
 
 **作用:** 在大型项目中组织和管理 CSS 代码
 - CSS 变量: 主题切换与全局配置

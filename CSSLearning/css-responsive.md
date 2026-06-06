@@ -10,7 +10,7 @@
 
 ## 视口 Meta 标签 (重要)
 
-即 (viewport meta tag), 与 [[HtmlLearning#基础标签]] 中的 `<meta>` 标签配合使用, 控制视口的宽度和缩放。
+即 (viewport meta tag), 与 [[HtmlLearning#basic-tags]] 中的 `<meta>` 标签配合使用, 控制视口的宽度和缩放。
 
 ```html
 <head>
@@ -221,7 +221,7 @@ p {
 
 ## 响应式图片 (中等)
 
-即 (responsive images), 与 [[HtmlLearning#链接与媒体标签]] 中的 `<img>` 和 `<picture>` 标签配合使用。
+即 (responsive images), 与 [[HtmlLearning#link-and-media-tags]] 中的 `<img>` 和 `<picture>` 标签配合使用。
 
 ### 基本响应式图片
 
