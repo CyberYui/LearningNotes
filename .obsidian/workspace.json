@@ -1,0 +1,189 @@
+{
+  "main": {
+    "id": "954e8cb107ae992e",
+    "type": "split",
+    "children": [
+      {
+        "id": "d8d5053473414f20",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7953853b58cbd667",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d20a6048d4aa46dd",
+    "type": "split",
+    "children": [
+      {
+        "id": "82ec5b3329d85c74",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6757c12c78adf128",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "2ba4d96ae969e8ac",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "45afe429ce0fe75e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ce9861a0c2a0ed52",
+    "type": "split",
+    "children": [
+      {
+        "id": "c15928bf849012cf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "66fef6b1e41b59f6",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "3a67d68728778672",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "HtmlLearning/基础标签.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "基础标签 的出链列表"
+            }
+          },
+          {
+            "id": "1c6189c43b38390a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "2ee51c3122a45cee",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "1e230cae0f61a9de",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "HtmlLearning/基础标签.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "基础标签 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "7953853b58cbd667",
+  "lastOpenFiles": [
+    "HtmlLearning/HtmlLearning.md",
+    "未命名.base",
+    "HtmlLearning/CSSLearning.md",
+    "CSSLearning/CSSLearning.md",
+    "HtmlLearning/基础标签.md",
+    "2026-06-05.md"
+  ]
+}
